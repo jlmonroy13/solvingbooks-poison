@@ -1,0 +1,52 @@
+.modal {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  &__content {
+    width: 370px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+  }
+  &__btn-close {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    cursor: pointer;
+    @include rem(18);
+    font-weight: 700;
+    color: #000;
+  }
+  &__header {
+    border-top-right-radius:: 4px;
+    border-top-left-radius:: 4px;
+    padding: 1em;
+    position: relative;
+    &-title {
+      color: #000;
+      @include rem(24);
+      margin: 0;
+      text-align: center;
+    }
+  }
+  &__body {
+    padding: $base-spacing-unit;
+    &-footer {
+      text-align: center;
+      @include rem(15);
+      @include rem(15, "margin-top");
+      margin-bottom: 0;
+      &-link {
+        text-decoration: underline;
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+  }
+}

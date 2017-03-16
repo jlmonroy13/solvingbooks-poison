@@ -55,3 +55,19 @@
     background-color: darken($dark-blue, 5%);
   }
 }
+
+.button--gray {
+  color: #fff;
+  background-color: rgba($gray-text, 0.7);
+  transition: 0.5s;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: darken($gray-text, 5%);
+    outline: none;
+  }
+}
+
+.button--mb10 {
+  margin-bottom: 5px;
+}
