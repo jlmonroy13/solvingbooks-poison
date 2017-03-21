@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import ReactModal from 'react-modal';
+import React, { Component, PropTypes } from 'react';
 import { TextFieldGroup } from './';
-import {ReactSelectize, SimpleSelect, MultiSelect} from 'react-selectize';
+import { SimpleSelect } from 'react-selectize';
 
 class SearchForm extends Component {
   constructor() {
@@ -24,7 +23,6 @@ class SearchForm extends Component {
   }
 
   onChangeSearchForm(e) {
-    const { state } = this;
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -36,10 +34,8 @@ class SearchForm extends Component {
         <div className="grid grid--bottom">
           <div className="grid__item one-third">
             <SimpleSelect placeholder="Select a fruit" onValueChange={value => alert(value)}>
-              {this.state.bookNames.map(bookName => <option value={bookName}>{bookName}</option>)}
+              {this.state.bookNames.map((bookName, index) => <option key={index} value={bookName}>{bookName}</option>)}
             </SimpleSelect>
-
-
           </div>
           <div className="grid__item one-sixth">
             <TextFieldGroup
@@ -82,5 +78,9 @@ class SearchForm extends Component {
     );
   }
 }
+
+SearchForm.propTypes = {
+  onSetModalState: PropTypes.func.isRequired,
+};
 
 export default SearchForm;

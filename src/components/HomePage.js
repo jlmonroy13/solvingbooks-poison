@@ -1,6 +1,5 @@
 import React from 'react';
 import { SearchFormContainer, AuthenticationModalContainer } from '../containers';
-import AuthenticationModal from './AuthenticationModal';
 
 const HomePage = () => (
   <div className="container">

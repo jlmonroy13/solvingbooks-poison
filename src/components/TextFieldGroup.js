@@ -27,7 +27,8 @@ TextFieldGroup.propTypes = {
 	error: PropTypes.string,
 	type: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,
-	onChange: PropTypes.func.isRequired
+	onChange: PropTypes.func.isRequired,
+	disabled: PropTypes.bool.isRequired,
 };
 
 TextFieldGroup.defaultProps = {

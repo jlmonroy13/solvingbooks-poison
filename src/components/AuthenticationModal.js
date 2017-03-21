@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactModal from 'react-modal';
 import { TextFieldGroup } from './';
 
@@ -63,10 +63,11 @@ class AuthenticationModal extends React.Component {
 
   render() {
     const { isSignUp } = this.state;
+    const { authentication } = this.props;
     const authenticationTitle = isSignUp ? 'registrarte' : 'iniciar sesión';
     return (
       <ReactModal
-        isOpen={this.props.authentication.isModalOpen}
+        isOpen={authentication.isModalOpen}
         contentLabel="onRequestClose Example"
         className="Modal"
         overlayClassName="modal"
@@ -136,5 +137,10 @@ class AuthenticationModal extends React.Component {
     );
   }
 }
+
+AuthenticationModal.propTypes = {
+  onSetModalState: PropTypes.func.isRequired,
+  authentication: PropTypes.object.isRequired,
+};
 
 export default AuthenticationModal;
