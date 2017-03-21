@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactModal from 'react-modal';
-import  { TextFieldGroup } from './';
+import { TextFieldGroup } from './';
+import {ReactSelectize, SimpleSelect, MultiSelect} from 'react-selectize';
 
-class SearchForm extends React.Component {
+class SearchForm extends Component {
   constructor() {
     super();
     this.state = {
-      bookName: '',
+      bookNames: ['libro 1', 'libro 2', 'libro 3'],
       chapter: '',
       subchapter: '',
       exercise: '',
     };
-
 
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
     this.onChangeSearchForm = this.onChangeSearchForm.bind(this);
@@ -35,14 +35,11 @@ class SearchForm extends React.Component {
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
         <div className="grid grid--bottom">
           <div className="grid__item one-third">
-            <TextFieldGroup
-              value={this.state.bookName}
-              onChange={this.onChangeSearchForm}
-              type="text"
-              field="bookName"
-              label="Libro"
-              placeholder="Nombre del Libro"
-            />
+            <SimpleSelect placeholder="Select a fruit" onValueChange={value => alert(value)}>
+              {this.state.bookNames.map(bookName => <option value={bookName}>{bookName}</option>)}
+            </SimpleSelect>
+
+
           </div>
           <div className="grid__item one-sixth">
             <TextFieldGroup
@@ -52,6 +49,7 @@ class SearchForm extends React.Component {
               field="chapter"
               label="Capitulo"
               placeholder="# del Capitulo"
+              disabled={false}
             />
           </div>
           <div className="grid__item one-sixth">
@@ -62,6 +60,7 @@ class SearchForm extends React.Component {
               field="subchapter"
               label="Subcapitulo"
               placeholder="# del Subcapitulo"
+              disabled={false}
             />
           </div>
           <div className="grid__item one-sixth">
@@ -72,6 +71,7 @@ class SearchForm extends React.Component {
               field="exercise"
               label="Ejercicio"
               placeholder="# del Ejercicio"
+              disabled={false}
             />
           </div>
           <div className="grid__item one-sixth">

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const TextFieldGroup = ({ field, value, label, error, type, placeholder, onChange }) => {
+const TextFieldGroup = ({ field, value, label, error, type, placeholder, onChange, disabled }) => {
 	return (
 		<div>
 			<label htmlFor={field} >{label}</label>
@@ -13,6 +13,7 @@ const TextFieldGroup = ({ field, value, label, error, type, placeholder, onChang
 				min="1"
 				className="main-form__input"
 				placeholder={placeholder}
+				disabled={disabled}
 			/>
 			{error && <span>{error}</span>}
 		</div>
