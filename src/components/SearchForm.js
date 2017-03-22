@@ -1,79 +1,65 @@
 import React, { Component, PropTypes } from 'react';
-import { TextFieldGroup } from './';
 import { SimpleSelect } from 'react-selectize';
+import BOOKS from '../constants/fakeData';
 
 class SearchForm extends Component {
   constructor() {
     super();
     this.state = {
-      bookNames: ['libro 1', 'libro 2', 'libro 3'],
       chapter: '',
       subchapter: '',
       exercise: '',
+      bookName: '',
+      chapters: [],
     };
 
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
-    this.onChangeSearchForm = this.onChangeSearchForm.bind(this);
+    this.onSelectedBook = this.onSelectedBook.bind(this);
+
   }
 
   onSubmitSearchForm(e) {
     e.preventDefault();
     this.props.onSetModalState(true);
-    console.log(this.state.searchForm);
+    console.log(this.state);
   }
 
-  onChangeSearchForm(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  onSelectedBook(value) {
+    const chapters = BOOKS.filter(book => book.name === value)[0].chapters;
+    this.setState({bookName: value, chapters});
   }
 
   render() {
+    const { bookName, chapters } = this.state; 
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
-        <div className="grid grid--bottom">
-          <div className="grid__item one-third">
-            <SimpleSelect placeholder="Select a fruit" onValueChange={value => alert(value)}>
-              {this.state.bookNames.map((bookName, index) => <option key={index} value={bookName}>{bookName}</option>)}
-            </SimpleSelect>
-          </div>
-          <div className="grid__item one-sixth">
-            <TextFieldGroup
-              value={this.state.chapter}
-              onChange={this.onChangeSearchForm}
-              type="number"
-              field="chapter"
-              label="Capitulo"
-              placeholder="# del Capitulo"
-              disabled={false}
-            />
-          </div>
-          <div className="grid__item one-sixth">
-            <TextFieldGroup
-              value={this.state.subchapter}
-              onChange={this.onChangeSearchForm}
-              type="number"
-              field="subchapter"
-              label="Subcapitulo"
-              placeholder="# del Subcapitulo"
-              disabled={false}
-            />
-          </div>
-          <div className="grid__item one-sixth">
-            <TextFieldGroup
-              value={this.state.exercise}
-              onChange={this.onChangeSearchForm}
-              type="number"
-              field="exercise"
-              label="Ejercicio"
-              placeholder="# del Ejercicio"
-              disabled={false}
-            />
-          </div>
-          <div className="grid__item one-sixth">
-            <button className="button button--wide button--gray button--mb10 bold">Buscar</button>
+        <div className="push--bottom">
+          <div className="grid grid--bottom">
+            <div className="grid__item one-third">
+              <span>Nombre del Libro</span>
+              <SimpleSelect 
+                placeholder="Selecciona un libro"
+                options={BOOKS.map(book => ({label: book.name, value: book.name}))}
+                onValueChange={ option => this.onSelectedBook(option.value)}
+              />
+            </div>
+            <div className="grid__item one-sixth">
+              <button className="button button--wide button--gray button--mb10 bold">Buscar</button>
+            </div>
           </div>
         </div>
+        { bookName ?
+          <div className="grid">
+            <div className="grid__item one-third">
+              <span>Capitulo</span>
+              <SimpleSelect 
+                placeholder="Selecciona un libro"
+                options={chapters.map(chapter => ({label: chapter.number, value: chapter.number}))}
+              />
+            </div>
+          </div>
+          : ''
+        }
       </form>
     );
   }
