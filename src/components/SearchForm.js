@@ -27,28 +27,29 @@ class SearchForm extends Component {
   }
 
   onSelectedBook(value) {
-    const chapters = BOOKS.filter(book => book.name === value)[0].chapters;
+    const books = BOOKS.filter(book => book.name === value);
+    const chapters = books && books[0] && books[0].chapters;
     this.setState({bookName: value, chapter: '', chapters});
   }
 
   onSelectedChapter(value) {
-    const subchapters = this.state.chapters.filter(chapter => chapter.number === value)[0].subchapters;
     this.setState({chapter: value, subchapters});
-    console.log(subchapters)
+    const subchapters = this.state.chapters.filter(chapter => chapter.number === value)[0].subchapters;
+    console.log(subchapters, this.state);
   }
 
   render() {
-    const { bookName, chapters, subchapters, chapter } = this.state; 
+    const { bookName, chapters, subchapters, chapter } = this.state;
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
         <div className="push--bottom">
           <div className="grid grid--bottom">
             <div className="grid__item one-third">
               <span>Nombre del Libro</span>
-              <SimpleSelect 
+              <SimpleSelect
                 placeholder="Selecciona un libro"
                 options={BOOKS.map(book => ({label: book.name, value: book.name}))}
-                onValueChange={ option => this.onSelectedBook(option.value)}
+                onValueChange={ option => this.onSelectedBook(option && option.value)}
               />
             </div>
             <div className="grid__item one-sixth">
@@ -60,19 +61,19 @@ class SearchForm extends Component {
           <div className="grid">
             <div className="grid__item one-third">
               <span>Capitulo</span>
-              <SimpleSelect 
+              <SimpleSelect
                 placeholder="Selecciona un capitulo"
                 options={chapters.map(chapter => ({label: chapter.number, value: chapter.number}))}
-                onValueChange={ option => this.onSelectedChapter(option.value)}
+                onValueChange={ option => this.onSelectedChapter(option && option.value)}
               />
             </div>
-            { chapter && subchapters ? 
+            { chapter && subchapters ?
               <div className="grid__item one-third">
                 <span>Subcapitulo</span>
-                <SimpleSelect 
+                <SimpleSelect
                   placeholder="Selecciona un capitulo"
                   options={subchapters.map(subchapter => ({label: subchapter.number, value: subchapter.number}))}
-                  onValueChange={ option => this.onSelectedChapter(option.value)}
+                  onValueChange={ option => this.onSelectedChapter(option && option.value)}
                 />
               </div>
               : ''
