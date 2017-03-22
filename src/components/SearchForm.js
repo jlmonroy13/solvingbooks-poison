@@ -11,26 +11,34 @@ class SearchForm extends Component {
       exercise: '',
       bookName: '',
       chapters: [],
+      subchapters: []
     };
 
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
     this.onSelectedBook = this.onSelectedBook.bind(this);
+    this.onSelectedChapter = this.onSelectedChapter.bind(this);
 
   }
 
   onSubmitSearchForm(e) {
     e.preventDefault();
     this.props.onSetModalState(true);
-    console.log(this.state);
+    console.log(this.state)
   }
 
   onSelectedBook(value) {
     const chapters = BOOKS.filter(book => book.name === value)[0].chapters;
-    this.setState({bookName: value, chapters});
+    this.setState({bookName: value, chapter: '', chapters});
+  }
+
+  onSelectedChapter(value) {
+    const subchapters = this.state.chapters.filter(chapter => chapter.number === value)[0].subchapters;
+    this.setState({chapter: value, subchapters});
+    console.log(subchapters)
   }
 
   render() {
-    const { bookName, chapters } = this.state; 
+    const { bookName, chapters, subchapters, chapter } = this.state; 
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
         <div className="push--bottom">
@@ -53,10 +61,22 @@ class SearchForm extends Component {
             <div className="grid__item one-third">
               <span>Capitulo</span>
               <SimpleSelect 
-                placeholder="Selecciona un libro"
+                placeholder="Selecciona un capitulo"
                 options={chapters.map(chapter => ({label: chapter.number, value: chapter.number}))}
+                onValueChange={ option => this.onSelectedChapter(option.value)}
               />
             </div>
+            { chapter && subchapters ? 
+              <div className="grid__item one-third">
+                <span>Subcapitulo</span>
+                <SimpleSelect 
+                  placeholder="Selecciona un capitulo"
+                  options={subchapters.map(subchapter => ({label: subchapter.number, value: subchapter.number}))}
+                  onValueChange={ option => this.onSelectedChapter(option.value)}
+                />
+              </div>
+              : ''
+            }
           </div>
           : ''
         }

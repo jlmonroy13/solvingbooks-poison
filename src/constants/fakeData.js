@@ -9,6 +9,14 @@ const BOOKS = [
           {
             number: '1',
             exercises: ['1', '2', '4', '5', '6', '10']
+          },
+          {
+            number: '4',
+            exercises: ['1', '2', '4', '5', '6', '10']
+          },
+          {
+            number: '40',
+            exercises: ['1', '2', '4', '5', '6', '10']
           }
         ]
       },
@@ -34,6 +42,6 @@ const BOOKS = [
       }
     ]
   }
-]
+];
 
 export default BOOKS;
