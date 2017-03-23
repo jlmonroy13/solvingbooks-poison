@@ -1,7 +1,9 @@
-import SearchFormContainer from './SearchForm';
+import InitialSearchContainer from './InitialSearch';
 import AuthenticationModalContainer from './AuthenticationModal';
+import SearchPageContainer from './SearchPage';
 
 export {
-  SearchFormContainer,
+  InitialSearchContainer,
   AuthenticationModalContainer,
+  SearchPageContainer,
 };

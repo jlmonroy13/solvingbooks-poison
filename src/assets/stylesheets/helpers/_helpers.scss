@@ -23,7 +23,7 @@
 
 // width helpers
 .full-width {
-  width: 100%;
+  width: 100% !important;
 }
 
 .small--full-width {
@@ -45,4 +45,12 @@
 
 .relative{
   position: relative;
+}
+
+.center-x-y {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
 }

@@ -2,7 +2,8 @@ import App from './App';
 import AuthenticationModal from './AuthenticationModal';
 import HomePage from './HomePage';
 import NotFoundPage from './NotFoundPage';
-import SearchForm from './SearchForm';
+import InitialSearch from './InitialSearch';
+import SearchPage from './SearchPage';
 import TextFieldGroup from './TextFieldGroup';
 
 export {
@@ -10,7 +11,8 @@ export {
 	AuthenticationModal,
 	HomePage,
 	NotFoundPage,
-	SearchForm,
+  InitialSearch,
+	SearchPage,
 	TextFieldGroup,
 };
 

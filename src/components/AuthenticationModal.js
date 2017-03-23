@@ -35,12 +35,10 @@ class AuthenticationModal extends React.Component {
 
   onSubmitLoginForm(e) {
     e.preventDefault();
-    console.log(this.state.authenticationForm);
   }
 
   onSubmitSignupForm(e) {
     e.preventDefault();
-    console.log(this.state.authenticationForm);
   }
 
   onChangeAuthenticationForm(e) {

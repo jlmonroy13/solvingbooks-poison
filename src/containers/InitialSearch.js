@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import SearchForm from '../components/SearchForm';
+import InitialSearch from '../components/InitialSearch';
 import { setModalState } from '../actions/authentication';
-
 
 const mapStateToProps = (state) => {
   const { authentication } = state;
@@ -20,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SearchForm);
+)(InitialSearch);
