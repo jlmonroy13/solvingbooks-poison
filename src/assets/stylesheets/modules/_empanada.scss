@@ -7,31 +7,59 @@
     display: inline-block;
     margin: 0 $base-spacing-unit 0 0;
     vertical-align: top;
-    @include rem(28);
+    @include rem(32);
     color: $gray-label;
   }
   &__main {
-    padding: $base-spacing-unit;
+    @include rem(16, 'padding');
     &-input {
       display: inline-block;
-      width: 75% !important;
+      width: 100% !important;
       margin-bottom: $half-spacing-unit;
+      .react-selectize-control {
+        background: #fff !important;
+        border: none !important;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+      }
     }
   }
   &__subsection {
     &-group {
       display: inline-block;
-      width: 24%;
+      width: 32%;
       margin-right: $half-spacing-unit;
+      &:last-child {
+        margin-right: 0;
+      }
     }
     &-input {
       width: 100% !important;
       @include rem(14);
+      &.disabled {
+        .react-selectize-control {
+          box-shadow: none !important;
+          border: 1px solid rgba(0,0,0,0.16) !important;
+          background: rgba(#fff,0.1) !important;
+        }
+      }
+      .react-selectize-control {
+        background: #fff !important;
+        border: none !important;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+      }
     }
   }
   &__form{
     display: inline-block;
     vertical-align: top;
-    min-width: 800px;
+    min-width: 550px;
+    margin-right: $base-spacing-unit;
+  }
+  &__button {
+    display: inline-block;
+    vertical-align: top;
+    button {
+      margin-top: 2px;
+    }
   }
 }

@@ -26,8 +26,13 @@ class InitialSearch extends Component {
     }
   }
 
-  onSelectedBook(value) {
+  onSelectedBook(option) {
+    const value = option && option.value;
     this.setState({bookName: value});
+    const route = value.replace(/ /g,"-");
+    if (value) {
+      browserHistory.push(`/${route}`);
+    }
   }
 
   render() {
@@ -38,8 +43,8 @@ class InitialSearch extends Component {
             <SimpleSelect
               placeholder="Selecciona un libro"
               options={BOOKS.map(book => ({label: book.name, value: book.name}))}
-              onValueChange={option => this.onSelectedBook(option && option.value)}
-              className="full-width"
+              onValueChange={this.onSelectedBook}
+              className="search__main-input"
             />
             <div className="push--top grid--center">
               <button className="button button--wide button--gray bold">Buscar</button>

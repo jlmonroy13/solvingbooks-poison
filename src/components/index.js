@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import NotFoundPage from './NotFoundPage';
 import InitialSearch from './InitialSearch';
 import SearchPage from './SearchPage';
+import Searcher from './Searcher';
 import TextFieldGroup from './TextFieldGroup';
 
 export {
@@ -12,7 +13,8 @@ export {
 	HomePage,
 	NotFoundPage,
   InitialSearch,
-	SearchPage,
+  SearchPage,
+	Searcher,
 	TextFieldGroup,
 };
 
