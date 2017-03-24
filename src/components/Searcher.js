@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { SimpleSelect } from 'react-selectize';
 import BOOKS from '../constants/fakeData';
 import { browserHistory, Link } from 'react-router';
+import Alert from 'react-s-alert';
 
 class Searcher extends Component {
   constructor() {
@@ -22,6 +23,7 @@ class Searcher extends Component {
     this.onSelectedChapter = this.onSelectedChapter.bind(this);
     this.onSelectedSubchapter = this.onSelectedSubchapter.bind(this);
     this.onSelectedExercise = this.onSelectedExercise.bind(this);
+    this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +37,16 @@ class Searcher extends Component {
     this.onChangeBook(bookName);
   }
 
+  onSubmitSearchForm(e) {
+    e.preventDefault();
+    const { bookName, chapter, subchapter, exercise, subchapters } = this.state;
+    if (!bookName || !chapter || (!subchapter && subchapters && subchapters.length < 0) || !exercise) {
+      Alert.error(`Debes seleccionar todos los campos.`);
+    } else {
+      console.warn(bookName.value, chapter.value, subchapter.value, exercise.value);
+    }
+  }
+
   onChangeBook(bookName) {
     const books = BOOKS.filter(book => book.name === bookName);
     const chapters = books && books[0] && books[0].chapters;
@@ -44,6 +56,7 @@ class Searcher extends Component {
       chapter: '',
       subchapter: '',
       exercise: '',
+      exercises: [],
     });
   }
 
@@ -88,7 +101,9 @@ class Searcher extends Component {
 
   onSelectedExercise(option) {
     const exercise = option && option.value;
-    this.setState({ exercise: option ? {label: exercise, value: exercise} : '' });
+    this.setState({
+      exercise: option ? {label: exercise, value: exercise} : '',
+    });
   }
 
   render() {
@@ -97,7 +112,7 @@ class Searcher extends Component {
       <header className="search__header">
           <div className="search__main">
             <Link className="search__title" to="/">El Solucionario.io</Link>
-            <form className="inline-block">
+            <form className="inline-block" onSubmit={this.onSubmitSearchForm}>
               <div className="search__form">
                 <SimpleSelect
                   placeholder="Selecciona un libro"
@@ -132,7 +147,7 @@ class Searcher extends Component {
                       placeholder="Ejercicio"
                       className="search__subsection-input"
                       options={exercises && exercises.map(exercise => ({label: exercise, value: exercise}))}
-                      disabled={exercises.length === 0}
+                      disabled={exercises && exercises.length === 0}
                       onValueChange={this.onSelectedExercise}
                       value={exercise}
                     />
@@ -140,7 +155,9 @@ class Searcher extends Component {
                 </div>
               </div>
               <div className="search__button">
-                <button className="button button--wide button--gray bold">Buscar</button>
+                <button
+                  className="button button--wide button--gray bold"
+                >Buscar</button>
               </div>
             </form>
           </div>
