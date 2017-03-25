@@ -9,7 +9,7 @@ import TextFieldGroup from './TextFieldGroup';
 import AdminIndex from './admin/AdminIndex';
 import CreateSolutionManual from './admin/CreateSolutionManual';
 import SolutionManualDetail from './admin/SolutionManualDetail';
-
+import ChaptersForm from './admin/ChaptersForm';
 
 export {
 	App,
@@ -23,4 +23,5 @@ export {
 	AdminIndex,
 	CreateSolutionManual,
 	SolutionManualDetail,
+	ChaptersForm,
 };

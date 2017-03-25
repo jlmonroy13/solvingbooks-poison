@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { ChaptersForm } from '../../components';
 
 class CreateSolutionManual extends Component {
   constructor() {
@@ -63,7 +64,7 @@ class CreateSolutionManual extends Component {
           <div>
             <h2>Capítulos</h2>
             <div>
-              <span>1</span>
+              <ChaptersForm />
             </div>
           </div>
         </form>
@@ -71,9 +72,5 @@ class CreateSolutionManual extends Component {
     );
   }
 }
-
-CreateSolutionManual.propTypes = {
-  onSetModalState: PropTypes.func.isRequired,
-};
 
 export default CreateSolutionManual;
