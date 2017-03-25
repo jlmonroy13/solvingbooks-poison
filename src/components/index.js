@@ -6,7 +6,8 @@ import InitialSearch from './InitialSearch';
 import SearchPage from './SearchPage';
 import Searcher from './Searcher';
 import TextFieldGroup from './TextFieldGroup';
-import AdminIndex from './AdminIndex';
+import AdminIndex from './admin/AdminIndex';
+import CreateSolutionManual from './admin/CreateSolutionManual';
 
 export {
 	App,
@@ -18,5 +19,6 @@ export {
 	Searcher,
 	TextFieldGroup,
 	AdminIndex,
+	CreateSolutionManual,
 };
 

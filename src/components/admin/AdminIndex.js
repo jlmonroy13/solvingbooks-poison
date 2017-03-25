@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import BOOKS from '../constants/fakeData';
+import BOOKS from '../../constants/fakeData';
 import { Link } from 'react-router';
 
 class AdminIndex extends Component {
