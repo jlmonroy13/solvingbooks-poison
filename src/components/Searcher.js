@@ -65,7 +65,7 @@ class Searcher extends Component {
     this.onChangeBook(bookName);
     if (bookName) {
       const route = bookName.replace(/ /g,"-");
-      browserHistory.push(`/${route}`);
+      browserHistory.push(`/libro/${route}`);
     }
   }
 

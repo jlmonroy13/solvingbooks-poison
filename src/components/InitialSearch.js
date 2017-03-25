@@ -20,7 +20,7 @@ class InitialSearch extends Component {
     const { bookName } = this.state;
     const route = bookName.replace(/ /g,"-");
     if (bookName) {
-      browserHistory.push(`/${route}`);
+      browserHistory.push(`/libro/${route}`);
     } else {
       Alert.error(`Selecciona un libro.`);
     }
@@ -31,7 +31,7 @@ class InitialSearch extends Component {
     this.setState({bookName: value});
     const route = value.replace(/ /g,"-");
     if (value) {
-      browserHistory.push(`/${route}`);
+      browserHistory.push(`/libro/${route}`);
     }
   }
 
