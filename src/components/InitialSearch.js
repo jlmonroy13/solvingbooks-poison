@@ -9,6 +9,7 @@ class InitialSearch extends Component {
     super();
     this.state = {
       bookName: '',
+      urlName: '',
     };
 
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
@@ -17,21 +18,20 @@ class InitialSearch extends Component {
 
   onSubmitSearchForm(e) {
     e.preventDefault();
-    const { bookName } = this.state;
-    const route = bookName.replace(/ /g,"-");
+    const { bookName, urlName } = this.state;
     if (bookName) {
-      browserHistory.push(`/libro/${route}`);
+      browserHistory.push(`/libro/${urlName}`);
     } else {
       Alert.error(`Selecciona un libro.`);
     }
   }
 
   onSelectedBook(option) {
-    const value = option && option.value;
-    this.setState({bookName: value});
-    const route = value.replace(/ /g,"-");
+    const value = option && option.label;
+    const urlName = option && option.value;
+    this.setState({bookName: value, urlName});
     if (value) {
-      browserHistory.push(`/libro/${route}`);
+      browserHistory.push(`/libro/${urlName}`);
     }
   }
 
@@ -42,7 +42,7 @@ class InitialSearch extends Component {
           <div className="grid__item five-twelfths">
             <SimpleSelect
               placeholder="Selecciona un libro"
-              options={BOOKS.map(book => ({label: book.name, value: book.name}))}
+              options={BOOKS.map(book => ({label: book.name, value: book.urlName}))}
               onValueChange={this.onSelectedBook}
               className="search__main-input"
             />

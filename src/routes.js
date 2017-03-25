@@ -6,7 +6,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
     <Route
-      path="/libro/:bookName"
+      path="/libro/:bookNameUrl"
       component={SearchPage}
     />
     <Route

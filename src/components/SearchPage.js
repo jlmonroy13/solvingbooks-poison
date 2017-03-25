@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { Searcher } from './';
 
 const SearchPage = (props) => {
-  const { bookName } = props.params;
+  const { bookNameUrl } = props.params;
   return (
-    <Searcher bookNameUrl={bookName}/>
+    <Searcher bookNameUrl={bookNameUrl}/>
   );
 };
 

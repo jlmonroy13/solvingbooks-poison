@@ -29,9 +29,12 @@ class Searcher extends Component {
   componentDidMount() {
     const bookNameRoute = this.props.bookNameUrl;
     let existingBook = false;
-    const bookName = bookNameRoute.replace(/-/g," ");
+    let bookName = '';
     BOOKS.forEach((book) => {
-      if(book.name === bookName) existingBook = true;
+      if(book.urlName === bookNameRoute) {
+        existingBook = true;
+        bookName = book.name;
+      }
     });
     if (!existingBook) browserHistory.push('/');
     this.onChangeBook(bookName);
@@ -61,11 +64,11 @@ class Searcher extends Component {
   }
 
   onSelectedBook(option) {
-    const bookName = option && option.value;
+    const bookName = option && option.label;
+    const urlName = option && option.value;
     this.onChangeBook(bookName);
     if (bookName) {
-      const route = bookName.replace(/ /g,"-");
-      browserHistory.push(`/libro/${route}`);
+      browserHistory.push(`/libro/${urlName}`);
     }
   }
 
@@ -117,7 +120,7 @@ class Searcher extends Component {
                 <SimpleSelect
                   placeholder="Selecciona un libro"
                   className="search__main-input"
-                  options={BOOKS.map(book => ({label: book.name, value: book.name}))}
+                  options={BOOKS.map(book => ({label: book.name, value: book.urlName}))}
                   onValueChange={this.onSelectedBook}
                   value={bookName}
                 />
