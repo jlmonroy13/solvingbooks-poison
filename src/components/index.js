@@ -8,17 +8,20 @@ import Searcher from './Searcher';
 import TextFieldGroup from './TextFieldGroup';
 import AdminIndex from './admin/AdminIndex';
 import CreateSolutionManual from './admin/CreateSolutionManual';
+import SolutionManualDetail from './SolutionManualDetail';
+
 
 export {
 	App,
 	AuthenticationModal,
 	HomePage,
 	NotFoundPage,
-  InitialSearch,
-  SearchPage,
+  	InitialSearch,
+  	SearchPage,
 	Searcher,
 	TextFieldGroup,
 	AdminIndex,
 	CreateSolutionManual,
+	SolutionManualDetail,
 };
 

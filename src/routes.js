@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+
 import {
   App,
   HomePage,
@@ -7,6 +8,7 @@ import {
   SearchPage,
   AdminIndex,
   CreateSolutionManual,
+  SolutionManualDetail
 } from './components';
 
 export default (
@@ -23,6 +25,10 @@ export default (
     <Route
       path="/solving1213/crear-solucionario"
       component={CreateSolutionManual}
+    />
+    <Route
+      path="/solving1213/solucionario/:bookNameUrl"
+      component={SolutionManualDetail}
     />
     <Route
       path="*"

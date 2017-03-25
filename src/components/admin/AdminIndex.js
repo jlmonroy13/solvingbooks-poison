@@ -11,10 +11,9 @@ class AdminIndex extends Component {
   
   renderBooksList() {
     return BOOKS.map(book => {
-      const route = book.name.replace(/ /g,"-").toLowerCase().replace(/---/g,"-");
       return (
         <li key={book.name}>
-          <Link to={`/solving1213/${route}`}>{book.name}</Link>
+          <Link to={`/solving1213/solucionario/${book.urlName}`}>{book.name}</Link>
         </li>
       );
     });
