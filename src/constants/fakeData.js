@@ -5,6 +5,7 @@ const BOOKS = [
     chapters: [
       {
         number: '1',
+        name: "Metodos de Analisis",
         exercises: null,
         subchapters: [
           {
@@ -23,6 +24,7 @@ const BOOKS = [
       },
       {
         number: '2',
+        name: "Teoremas de Circuitos",
         exercises: null,
         subchapters: [
           {

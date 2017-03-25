@@ -8,7 +8,7 @@ import Searcher from './Searcher';
 import TextFieldGroup from './TextFieldGroup';
 import AdminIndex from './admin/AdminIndex';
 import CreateSolutionManual from './admin/CreateSolutionManual';
-import SolutionManualDetail from './SolutionManualDetail';
+import SolutionManualDetail from './admin/SolutionManualDetail';
 
 
 export {
@@ -24,4 +24,3 @@ export {
 	CreateSolutionManual,
 	SolutionManualDetail,
 };
-
