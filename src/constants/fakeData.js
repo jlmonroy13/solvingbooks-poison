@@ -2,6 +2,7 @@ const BOOKS = [
   {
     name: "Howard Anton - Introduccion al Algebra Lineal - 9na. Edicion",
     urlName: "howard-anton-introduccion-al-algebra-lineal-9na-edicion",
+    hasSubchapters: true,
     chapters: [
       {
         number: '1',
@@ -42,6 +43,7 @@ const BOOKS = [
   {
     name: "William Hayt - Analisis de Circuitos en Ingenieria - 7ma. Edicion",
     urlName: "william-hayt-analisis-de-circuitos-en-ingenieria-7ma-edicion",
+    hasSubchapters: false,
     chapters: [
       {
         number: '1',
