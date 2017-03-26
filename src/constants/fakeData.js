@@ -10,14 +10,17 @@ const BOOKS = [
         subchapters: [
           {
             number: '1',
+            name: 'Norton',
             exercises: ['1', '2', '4', '5', '6', '10']
           },
           {
             number: '4',
+            name: 'Thevenin',
             exercises: ['1', '2', '4', '5', '6', '10']
           },
           {
             number: '40',
+            name: 'Transformacion de Fuentes',
             exercises: ['1', '2', '4', '5', '6', '10']
           }
         ]
@@ -29,6 +32,7 @@ const BOOKS = [
         subchapters: [
           {
             number: '1',
+            name: 'Senoides',
             exercises: ['4', '7', '14', '28', '66', '40']
           }
         ]
@@ -45,14 +49,9 @@ const BOOKS = [
         subchapters: null
       },
       {
-        number: '8',
-        exercises: null,
-        subchapters: [
-          {
-            number: '1',
-            exercises: ['4', '7', '14', '28', '66', '40']
-          }
-        ]
+        number: '2',
+        exercises: ['1', '2', '4', '5', '6', '16'],
+        subchapters: null
       }
     ]
   }

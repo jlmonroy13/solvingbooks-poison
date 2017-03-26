@@ -22,9 +22,17 @@ class SolutionManualDetail extends Component {
   renderChpaters() {
     const {solutionManual} =  this.state;
     return solutionManual.chapters && solutionManual.chapters.map(chapter => {
-      return (
-        <li>{chapter.number} - {chapter.name}</li>
-      );
+      return chapter.subchapters.map(subchapter => {
+         return subchapter.exercises.map(exercise => {
+          return (
+            <tr>
+              <td>{chapter.number} - {chapter.name}</td>
+              <td>{subchapter.number} - {subchapter.name}</td>
+              <td>{exercise}</td>
+            </tr>
+          )  
+        });
+      });
     });
   }
 
@@ -32,7 +40,19 @@ class SolutionManualDetail extends Component {
     return (
       <div className="container">
         <h1>{this.state.solutionManual.name}</h1>
-        <ul>{this.renderChpaters()}</ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Capitulo</th>
+              <th>Subcapitulo</th>
+              <th>Ejercicio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderChpaters()}
+          </tbody>
+        </table>
+        
       </div>
     );
   }
