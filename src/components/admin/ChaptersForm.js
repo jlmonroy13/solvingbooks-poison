@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import ObjectUtils from '../../utils/object';
+import Chapter from './Chapter';
 
 class ChaptersForm extends Component {
   constructor() {
@@ -7,40 +9,41 @@ class ChaptersForm extends Component {
       chapterName: '',
       exercises: '',
       subchapters: '',
-      hasSubchapters: true,
     };
 
+    this.onChangeField = this.onChangeField.bind(this);
+    this.onRenderChapter = this.onRenderChapter.bind(this);
   }
 
-  onChangeField(value) {
-    console.warn(value);
+  onChangeField(e) {
+    this.setState({[e.target.name]: e.target.value});
+  }
+
+  onRenderChapter(chapter) {
+    const { solutionManual: { hasSubchapters } } = this.props;
+    return (
+      <Chapter
+        hasSubchapters={hasSubchapters}
+        chapter={chapter}
+        key={chapter.number}
+      />
+    );
   }
 
   render() {
-    const { chapterName, exercises, subchapters, hasSubchapters, onChangeField } = this.state;
+    const { chapters } = this.props;
+    const chaptersArray = ObjectUtils.toArray(chapters);
     return (
       <div>
-        <span>1</span>
-        <input
-          value={chapterName}
-          onChange={onChangeField}
-          type="text"
-          name="chapterName"
-          className=""
-        />
-        <div>
-          <input
-            value={hasSubchapters ? subchapters : exercises}
-            onChange={onChangeField}
-            type="number"
-            name={hasSubchapters ? 'subchapters' : 'exercises'}
-            className=""
-          />
-          <button type="button">{hasSubchapters ? 'Agregar Subcapítulos' : 'Agregar Ejercicios'}</button>
-        </div>
+        { chaptersArray.map(this.onRenderChapter) }
       </div>
     );
   }
 }
+
+ChaptersForm.propTypes = {
+  chapters: PropTypes.object,
+  solutionManual: PropTypes.object,
+};
 
 export default ChaptersForm;

@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import CreateSolutionManual from '../../components/admin/CreateSolutionManual';
+import ChaptersForm from '../../components/admin/ChaptersForm';
 import { setBasicInfoSolutionManual, setChapters } from '../../actions/admin';
 
 const mapStateToProps = (state) => {
-  const { chapters } = state.admin;
+  const { chapters, solutionManual } = state.admin;
 
   return {
     chapters,
+    solutionManual,
   };
 };
 
@@ -22,4 +23,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CreateSolutionManual);
+)(ChaptersForm);

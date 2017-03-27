@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { ChaptersForm } from '../../components';
+import { ChaptersFormContainer } from '../../containers';
+import ArrayUtils from '../../utils/array';
+import Alert from 'react-s-alert';
 
 class CreateSolutionManual extends Component {
   constructor() {
@@ -11,9 +13,10 @@ class CreateSolutionManual extends Component {
       chapters: '',
     };
 
-     this.onChangeField = this.onChangeField.bind(this);
-     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
-     this.onAddChapters = this.onAddChapters.bind(this);
+    this.onChangeField = this.onChangeField.bind(this);
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
+    this.onAddChapters = this.onAddChapters.bind(this);
+    this.onCreateChapters = this.onCreateChapters.bind(this);
   }
 
   onChangeField(e) {
@@ -24,19 +27,42 @@ class CreateSolutionManual extends Component {
     this.setState({[e.target.name]: e.target.checked});
   }
 
+  onCreateChapters() {
+    const { chapters } = this.state;
+    const chaptersArray = [];
+    const chapterInfo = {
+      number: '',
+      name: '',
+      exercises: '',
+      subchapters: '',
+    }
+    for (let i = 1; i < parseInt(chapters) + 1; i++) {
+      chaptersArray.push({...chapterInfo, number: i});
+    }
+    return ArrayUtils.toObjectByNumber(chaptersArray);
+  }
+
   onAddChapters() {
-    const { bookName, urlName, hasSubchapters } = this.state;
-    const { onSetBasicInfo } = this.props;
+    const { bookName, urlName, hasSubchapters, chapters } = this.state;
+    const { onSetBasicInfo, onSetChapters } = this.props;
+
     const data = {
       name: bookName,
       urlName,
-      hasSubchapters, 
+      hasSubchapters,
     };
-    onSetBasicInfo(data);
+    if (!bookName || !urlName || !chapters) {
+      Alert.error(`Debes llenar los campos de la Información básica.`);
+    } else {
+      onSetChapters(this.onCreateChapters());
+      onSetBasicInfo(data);
+      Alert.success(`La información básica y los capitulos han sido creados.`);
+    }
   }
 
   render() {
     const { bookName, urlName, chapters, hasSubchapters } = this.state;
+    const { chapters: storeChapters } = this.props;
     return (
       <div className="container">
       <h1>Crear Solucionario</h1>
@@ -90,12 +116,14 @@ class CreateSolutionManual extends Component {
               </div>
             </div>
           </div>
-          <div>
-            <h2>Capítulos</h2>
+          {storeChapters[1] ?
             <div>
-              <ChaptersForm />
+              <h2>Capítulos</h2>
+              <div>
+                <ChaptersFormContainer />
+              </div>
             </div>
-          </div>
+          :''}
         </form>
       </div>
     );
@@ -104,6 +132,8 @@ class CreateSolutionManual extends Component {
 
 CreateSolutionManual.propTypes = {
   onSetBasicInfo: PropTypes.func,
+  onSetChapters: PropTypes.func,
+  chapters: PropTypes.object,
 };
 
 
