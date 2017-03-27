@@ -7,9 +7,10 @@ import {
   NotFoundPage,
   SearchPage,
   AdminIndex,
-  CreateSolutionManual,
   SolutionManualDetail
 } from './components';
+
+import { CreateSolutionManualContainer } from './containers';
 
 export default (
   <Route path="/" component={App}>
@@ -24,7 +25,7 @@ export default (
     />
     <Route
       path="/solving1213/crear-solucionario"
-      component={CreateSolutionManual}
+      component={CreateSolutionManualContainer}
     />
     <Route
       path="/solving1213/solucionario/:bookNameUrl"

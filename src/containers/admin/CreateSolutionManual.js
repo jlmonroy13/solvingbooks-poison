@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import CreateSolutionManual from '../components/admin/CreateSolutionManual';
-import { setModalState } from '../actions/authentication';
+import CreateSolutionManual from '../../components/admin/CreateSolutionManual';
+import { setBasicInfoSolutionManual } from '../../actions/admin';
 
 const mapStateToProps = (state) => {
   const { authentication } = state;
@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSetModalState: (status) => {
-    dispatch(setModalState(status));
+  onSetBasicInfo: (data) => {
+    dispatch(setBasicInfoSolutionManual(data));
   },
 });
 

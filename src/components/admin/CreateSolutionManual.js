@@ -6,30 +6,48 @@ class CreateSolutionManual extends Component {
     super();
     this.state = {
       bookName: '',
+      urlName: '',
       hasSubchapters: false,
       chapters: '',
     };
 
      this.onChangeField = this.onChangeField.bind(this);
+     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
+     this.onAddChapters = this.onAddChapters.bind(this);
   }
 
-  onChangeField(value) {
-    console.warn(value);
+  onChangeField(e) {
+    this.setState({[e.target.name]: e.target.value});
+  }
+
+  onChangeCheckbox(e) {
+    this.setState({[e.target.name]: e.target.checked});
+  }
+
+  onAddChapters() {
+    const { bookName, urlName, hasSubchapters } = this.state;
+    const { onSetBasicInfo } = this.props;
+    const data = {
+      name: bookName,
+      urlName,
+      hasSubchapters, 
+    };
+    onSetBasicInfo(data);
   }
 
   render() {
-    const { bookName, onChangeField, chapters } = this.state;
+    const { bookName, urlName, chapters, hasSubchapters } = this.state;
     return (
       <div className="container">
       <h1>Crear Solucionario</h1>
-        <form onSubmit={this.onSubmitSignupForm} autoComplete="off">
+        <form autoComplete="off">
           <div>
             <div>
               <div>
                 <label htmlFor="bookName">Nombre del Libro</label>
                 <input
                   value={bookName}
-                  onChange={onChangeField}
+                  onChange={this.onChangeField}
                   type="text"
                   name="bookName"
                   id="bookName"
@@ -37,9 +55,20 @@ class CreateSolutionManual extends Component {
                 />
               </div>
               <div>
+                <label htmlFor="urlName">Nombre en URL</label>
                 <input
-                  value={bookName}
-                  onChange={onChangeField}
+                  value={urlName}
+                  onChange={this.onChangeField}
+                  type="text"
+                  name="urlName"
+                  id="urlName"
+                  className=""
+                />
+              </div>
+              <div className="inline-block push--right">
+                <input
+                  value={hasSubchapters}
+                  onChange={this.onChangeCheckbox}
                   type="checkbox"
                   name="hasSubchapters"
                   id="hasSubchapters"
@@ -47,18 +76,18 @@ class CreateSolutionManual extends Component {
                 />
                 <label htmlFor="hasSubchapters">Subcapitulos ?</label>
               </div>
-            </div>
-            <div>
-              <label htmlFor="chapters">Número de Capítulos</label>
-              <input
-                value={chapters}
-                onChange={onChangeField}
-                type="number"
-                name="chapters"
-                id="chapters"
-                className=""
-              />
-              <button type="button">Agregar</button>
+              <div className="inline-block">
+                <label htmlFor="chapters">Número de Capítulos</label>
+                <input
+                  value={chapters}
+                  onChange={this.onChangeField}
+                  type="number"
+                  name="chapters"
+                  id="chapters"
+                  className=""
+                />
+                <button type="button" onClick={this.onAddChapters}>Agregar</button>
+              </div>
             </div>
           </div>
           <div>
@@ -72,5 +101,10 @@ class CreateSolutionManual extends Component {
     );
   }
 }
+
+CreateSolutionManual.propTypes = {
+  onSetBasicInfo: PropTypes.func,
+};
+
 
 export default CreateSolutionManual;
