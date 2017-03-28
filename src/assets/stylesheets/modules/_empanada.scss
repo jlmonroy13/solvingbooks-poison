@@ -63,3 +63,20 @@
     }
   }
 }
+
+.exercise {
+  &__container {
+    padding: $base-spacing-unit;
+  }
+  &__inner-container {
+    overflow-y: auto;
+    border: 2px dashed rgba($gray, 0.3);
+    height: calc(100vh - 164px);
+    padding: $base-spacing-unit 0;
+    border-radius: 3px;
+    text-align: center;
+  }
+  &__image {
+    max-width: 100%;
+  }
+}

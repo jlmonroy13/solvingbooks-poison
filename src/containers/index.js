@@ -3,6 +3,7 @@ import AuthenticationModalContainer from './AuthenticationModal';
 import SearcherContainer from './Searcher';
 import CreateSolutionManualContainer from './admin/CreateSolutionManual';
 import ChaptersFormContainer from './admin/ChaptersForm';
+import DisplaySectionContainer from './DisplaySection';
 
 export {
   InitialSearchContainer,
@@ -10,4 +11,5 @@ export {
   SearcherContainer,
   CreateSolutionManualContainer,
   ChaptersFormContainer,
+  DisplaySectionContainer,
 };

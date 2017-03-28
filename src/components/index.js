@@ -11,6 +11,7 @@ import CreateSolutionManual from './admin/CreateSolutionManual';
 import SolutionManualDetail from './admin/SolutionManualDetail';
 import ChaptersForm from './admin/ChaptersForm';
 import Chapter from './admin/Chapter';
+import DisplaySection from './DisplaySection';
 
 export {
 	App,
@@ -26,4 +27,5 @@ export {
 	SolutionManualDetail,
 	ChaptersForm,
 	Chapter,
+	DisplaySection,
 };

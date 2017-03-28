@@ -1,21 +1,14 @@
 import { connect } from 'react-redux';
 import Searcher from '../components/Searcher';
-import { setModalState } from '../actions/authentication';
-
-const mapStateToProps = (state) => {
-  const { authentication } = state;
-  return {
-    authentication,
-  };
-};
+import { setImageReady } from '../actions/searcher';
 
 const mapDispatchToProps = dispatch => ({
-  onSetModalState: (status) => {
-    dispatch(setModalState(status));
+  onSetImageState: (imageState) => {
+    dispatch(setImageReady(imageState));
   },
 });
 
 export default connect(
-  mapStateToProps,
+  null ,
   mapDispatchToProps,
 )(Searcher);

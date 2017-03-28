@@ -3,6 +3,7 @@ import { SimpleSelect } from 'react-selectize';
 import BOOKS from '../constants/fakeData';
 import { browserHistory, Link } from 'react-router';
 import Alert from 'react-s-alert';
+import * as firebase from 'firebase';
 
 class Searcher extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class Searcher extends Component {
       exercise: '',
       exercises: [],
       chapters: [],
-      subchapters: [],
+      subchapters: []
     };
 
     this.onChangeBook = this.onChangeBook.bind(this);
@@ -38,6 +39,14 @@ class Searcher extends Component {
     });
     if (!existingBook) browserHistory.push('/');
     this.onChangeBook(bookName);
+
+    // const testRef = firebase.database().ref().child('test');
+    // testRef.on('value', snap => {
+    //   this.setState({
+    //     test: snap.val()
+    //   })
+    // })
+
   }
 
   onSubmitSearchForm(e) {
@@ -46,7 +55,7 @@ class Searcher extends Component {
     if (!bookName || !chapter || (!subchapter && subchapters && subchapters.length < 0) || !exercise) {
       Alert.error(`Debes seleccionar todos los campos.`);
     } else {
-      console.warn(bookName.value, chapter.value, subchapter.value, exercise.value);
+      this.props.onSetImageState(true);
     }
   }
 
@@ -171,6 +180,7 @@ class Searcher extends Component {
 
 Searcher.propTypes = {
   bookNameUrl: PropTypes.string,
+  onSetImageState: PropTypes.func,
 };
 
 export default Searcher;
