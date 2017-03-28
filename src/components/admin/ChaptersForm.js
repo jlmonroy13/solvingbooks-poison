@@ -1,28 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import ObjectUtils from '../../utils/object';
-import Chapter from './Chapter';
+import { ChapterContainer } from '../../containers';
 
-class ChaptersForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      chapterName: '',
-      exercises: '',
-      subchapters: '',
-    };
+const ChaptersForm = (props) => {
+  const { chapters } = props;
+  const chaptersArray = ObjectUtils.toArray(chapters);
 
-    this.onChangeField = this.onChangeField.bind(this);
-    this.onRenderChapter = this.onRenderChapter.bind(this);
-  }
-
-  onChangeField(e) {
-    this.setState({[e.target.name]: e.target.value});
-  }
-
-  onRenderChapter(chapter) {
-    const { solutionManual: { hasSubchapters } } = this.props;
+  function onRenderChapter(chapter) {
+    const { solutionManual: { hasSubchapters } } = props;
     return (
-      <Chapter
+      <ChapterContainer
         hasSubchapters={hasSubchapters}
         chapter={chapter}
         key={chapter.number}
@@ -30,15 +17,11 @@ class ChaptersForm extends Component {
     );
   }
 
-  render() {
-    const { chapters } = this.props;
-    const chaptersArray = ObjectUtils.toArray(chapters);
-    return (
-      <div>
-        { chaptersArray.map(this.onRenderChapter) }
-      </div>
-    );
-  }
+  return (
+    <div>
+      { chaptersArray.map(onRenderChapter) }
+    </div>
+  );
 }
 
 ChaptersForm.propTypes = {

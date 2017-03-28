@@ -4,6 +4,8 @@ import SearcherContainer from './Searcher';
 import CreateSolutionManualContainer from './admin/CreateSolutionManual';
 import ChaptersFormContainer from './admin/ChaptersForm';
 import DisplaySectionContainer from './DisplaySection';
+import ChapterContainer from './admin/Chapter';
+import SubchaptersFormContainer from './admin/SubchaptersForm';
 
 export {
   InitialSearchContainer,
@@ -12,4 +14,6 @@ export {
   CreateSolutionManualContainer,
   ChaptersFormContainer,
   DisplaySectionContainer,
+  ChapterContainer,
+  SubchaptersFormContainer,
 };

@@ -10,8 +10,10 @@ import AdminIndex from './admin/AdminIndex';
 import CreateSolutionManual from './admin/CreateSolutionManual';
 import SolutionManualDetail from './admin/SolutionManualDetail';
 import ChaptersForm from './admin/ChaptersForm';
+import SubchaptersForm from './admin/SubchaptersForm';
 import Chapter from './admin/Chapter';
 import DisplaySection from './DisplaySection';
+import Subchapter from './admin/Subchapter';
 
 export {
 	App,
@@ -26,6 +28,8 @@ export {
 	CreateSolutionManual,
 	SolutionManualDetail,
 	ChaptersForm,
+	SubchaptersForm,
 	Chapter,
 	DisplaySection,
+	Subchapter,
 };

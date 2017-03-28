@@ -7,9 +7,6 @@ class CreateSolutionManual extends Component {
   constructor() {
     super();
     this.state = {
-      bookName: '',
-      urlName: '',
-      hasSubchapters: false,
       chapters: '',
     };
 
@@ -20,11 +17,34 @@ class CreateSolutionManual extends Component {
   }
 
   onChangeField(e) {
-    this.setState({[e.target.name]: e.target.value});
+    const { solutionManual } = this.props;
+    const { name, urlName, hasSubchapters } = solutionManual;
+    let data = {};
+
+    if (e.target.name !== 'chapters') {
+      if (e.target.name === 'name') {
+        data = {
+          name: e.target.value,
+          urlName,
+          hasSubchapters,
+        };
+      } else if (e.target.name === 'urlName') {
+        data = {
+          name,
+          urlName: e.target.value,
+          hasSubchapters,
+        };
+      } else {
+
+      }
+
+      data[e.target.name] = e.target.value;
+      this.props.onSetBasicInfo(data);
+    }
   }
 
   onChangeCheckbox(e) {
-    this.setState({[e.target.name]: e.target.checked});
+    this.props.onSetHasSubchapters(e.target.checked);
   }
 
   onCreateChapters() {
@@ -43,11 +63,12 @@ class CreateSolutionManual extends Component {
   }
 
   onAddChapters() {
-    const { bookName, urlName, hasSubchapters, chapters } = this.state;
-    const { onSetBasicInfo, onSetChapters } = this.props;
+    const { onSetBasicInfo, onSetChapters, solutionManual } = this.props;
+    const { chapters } = this.state;
+    const { name, urlName, hasSubchapters } = solutionManual;
 
     const data = {
-      name: bookName,
+      name,
       urlName,
       hasSubchapters,
     };
@@ -61,7 +82,7 @@ class CreateSolutionManual extends Component {
   }
 
   render() {
-    const { bookName, urlName, chapters, hasSubchapters } = this.state;
+    const { name, hasSubchapters, urlName } = this.props.solutionManual;
     const { chapters: storeChapters } = this.props;
     return (
       <div className="container">
@@ -69,56 +90,54 @@ class CreateSolutionManual extends Component {
         <form autoComplete="off">
           <div>
             <div>
-              <div>
-                <label htmlFor="bookName">Nombre del Libro</label>
-                <input
-                  value={bookName}
-                  onChange={this.onChangeField}
-                  type="text"
-                  name="bookName"
-                  id="bookName"
-                  className=""
-                />
-              </div>
-              <div>
-                <label htmlFor="urlName">Nombre en URL</label>
-                <input
-                  value={urlName}
-                  onChange={this.onChangeField}
-                  type="text"
-                  name="urlName"
-                  id="urlName"
-                  className=""
-                />
-              </div>
-              <div className="inline-block push--right">
-                <input
-                  value={hasSubchapters}
-                  onChange={this.onChangeCheckbox}
-                  type="checkbox"
-                  name="hasSubchapters"
-                  id="hasSubchapters"
-                  className=""
-                />
-                <label htmlFor="hasSubchapters">Subcapitulos ?</label>
-              </div>
-              <div className="inline-block">
-                <label htmlFor="chapters">Número de Capítulos</label>
-                <input
-                  value={chapters}
-                  onChange={this.onChangeField}
-                  type="number"
-                  name="chapters"
-                  id="chapters"
-                  className=""
-                />
-                <button type="button" onClick={this.onAddChapters}>Agregar</button>
-              </div>
+              <label htmlFor="bookName">Nombre del Libro</label>
+              <input
+                value={name}
+                onChange={this.onChangeField}
+                type="text"
+                name="name"
+                id="name"
+                className=""
+              />
+            </div>
+            <div>
+              <label htmlFor="urlName">Nombre en URL</label>
+              <input
+                value={urlName}
+                onChange={this.onChangeField}
+                type="text"
+                name="urlName"
+                id="urlName"
+                className=""
+              />
+            </div>
+            <div className="inline-block push--right">
+              <label htmlFor="hasSubchapters">¿Subcapítulos?</label>
+              <input
+                value={hasSubchapters}
+                onChange={this.onChangeCheckbox}
+                type="checkbox"
+                name="hasSubchapters"
+                id="hasSubchapters"
+                className=""
+              />
+            </div>
+            <div className="inline-block">
+              <label htmlFor="chapters">Capítulos</label>
+              <input
+                value={chapters}
+                onChange={this.onChangeField}
+                type="number"
+                name="chapters"
+                id="chapters"
+                className=""
+              />
+              <button type="button" onClick={this.onAddChapters}>Agregar</button>
             </div>
           </div>
           {storeChapters[1] ?
             <div>
-              <h2>Capítulos</h2>
+              <h3>Capítulos</h3>
               <div>
                 <ChaptersFormContainer />
               </div>
@@ -133,7 +152,9 @@ class CreateSolutionManual extends Component {
 CreateSolutionManual.propTypes = {
   onSetBasicInfo: PropTypes.func,
   onSetChapters: PropTypes.func,
+  onSetHasSubchapters: PropTypes.func,
   chapters: PropTypes.object,
+  solutionManual: PropTypes.object,
 };
 
 
