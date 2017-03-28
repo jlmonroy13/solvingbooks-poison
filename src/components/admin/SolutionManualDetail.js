@@ -9,7 +9,7 @@ class SolutionManualDetail extends Component {
       solutionManual: {}
     }
 
-    this.renderChpaters = this.renderChpaters.bind(this);
+    this.renderChapters = this.renderChapters.bind(this);
   }
 
   componentDidMount() {
@@ -19,24 +19,38 @@ class SolutionManualDetail extends Component {
     this.setState({solutionManual});
   }
 
-  renderChpaters() {
-    const {solutionManual} =  this.state;
+  renderChapters() {
+    const {solutionManual} = this.state;
     return solutionManual.chapters && solutionManual.chapters.map(chapter => {
-      return chapter.subchapters.map(subchapter => {
-         return subchapter.exercises.map(exercise => {
-          return (
-            <tr>
-              <td>{chapter.number} - {chapter.name}</td>
-              <td>{subchapter.number} - {subchapter.name}</td>
-              <td>{exercise}</td>
-            </tr>
-          )  
+      if (solutionManual.hasSubchapters) {
+        return chapter.subchapters.map(subchapter => {
+          return subchapter.exercises.map(exercise => {
+            return createRow(chapter, subchapter, exercise); 
+          });
         });
-      });
+      } else {
+        return chapter.exercises.map(exercise => {
+          return createRow(chapter, null, exercise);   
+        });
+      }
     });
+    function createRow(chapter, subchapter, exercise) {
+      return (
+        <tr>
+          <td>{chapter.number} - {chapter.name}</td>
+          {subchapter ? <td>{subchapter.number} - {subchapter.name}</td> : null}
+          <td>{exercise}</td>
+          <td>
+            <span className="push-half--right">Editar</span>
+            <span>Eliminar</span>
+          </td>
+        </tr>
+      )
+    }
   }
 
   render() {
+    const { solutionManual } = this.state;
     return (
       <div className="container">
         <h1>{this.state.solutionManual.name}</h1>
@@ -44,15 +58,15 @@ class SolutionManualDetail extends Component {
           <thead>
             <tr>
               <th>Capitulo</th>
-              <th>Subcapitulo</th>
+              {solutionManual && solutionManual.hasSubchapters ? <th>Subcapitulo</th> : null }
               <th>Ejercicio</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {this.renderChpaters()}
+            {this.renderChapters()}
           </tbody>
         </table>
-        
       </div>
     );
   }

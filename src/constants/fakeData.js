@@ -47,11 +47,13 @@ const BOOKS = [
     chapters: [
       {
         number: '1',
+        name: 'Thevenin',
         exercises: ['1', '2', '4', '5', '6', '10'],
         subchapters: null
       },
       {
         number: '2',
+        name: 'Ley de Ohm',
         exercises: ['1', '2', '4', '5', '6', '16'],
         subchapters: null
       }
