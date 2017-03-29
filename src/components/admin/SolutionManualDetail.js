@@ -20,14 +20,15 @@ class SolutionManualDetail extends Component {
   }
 
   componentWillMount() {
+    const { solutionManuals } = this.props;
     const bookNameRoute = this.props.params.bookNameUrl;
-    const solutionManual = BOOKS.filter(book => book.urlName === bookNameRoute)[0];
+    const solutionManual = solutionManuals.filter(book => book.urlName === bookNameRoute)[0];
     if (!solutionManual) browserHistory.push('/solving1213');
     this.setState({solutionManual});
   }
 
   renderChapters() {
-    const {solutionManual} = this.state;
+    const { solutionManual } = this.state;
     return solutionManual.chapters && solutionManual.chapters.map(chapter => {
       if (solutionManual.hasSubchapters) {
         return chapter.subchapters.map(subchapter => {
@@ -46,7 +47,7 @@ class SolutionManualDetail extends Component {
         <tr>
           <td>{chapter.number} - {chapter.name}</td>
           {subchapter ? <td>{subchapter.number} - {subchapter.name}</td> : null}
-          <td>{exercise}</td>
+          <td>{exercise.number}</td>
           <td>
             <span className="push-half--right">Editar</span>
             <span>Eliminar</span>
@@ -58,13 +59,13 @@ class SolutionManualDetail extends Component {
 
   onSubmitUploadForm(e) {
     e.preventDefault();
-    const { imageFile, chapter, subchapter, exercise } = this.state;
-    const storageRef = firebase.storage().ref(`d13VdWtP3XKpYiuu9xajqS7HVC3/${imageFile.name}`);
+    const { imageFile, chapter, subchapter, exercise, solutionManual } = this.state;
+    const storageRef = firebase.storage().ref(`${solutionManual.id}/${imageFile.name}`);
     const task = storageRef.put(imageFile);
     task.on('state_changed',
       function complete(response) {
         const imageUrl = response.a && response.a.downloadURLs[0];
-        const databasePath = `solutionManuals/d13VdWtP3XKpYiuu9xajqS7HVC3/chapters/${chapter-1}/subchapters/${subchapter-1}/exercises/${exercise-1}`;
+        const databasePath = `solutionManuals/${solutionManual.id}/chapters/${chapter-1}/subchapters/${subchapter-1}/exercises/${exercise-1}`;
         firebase.database().ref(databasePath).set({ 
           imageUrl,
           number: exercise

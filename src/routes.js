@@ -1,14 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { setSolutionManuals } from './actions/solutionManuals';
-import { CreateSolutionManualContainer } from './containers';
+import { CreateSolutionManualContainer, AdminIndexContainer, SolutionManualDetailContainer } from './containers';
 import {
   App,
   HomePage,
   NotFoundPage,
   SearchPage,
-  AdminIndex,
-  SolutionManualDetail
 } from './components';
 
 const onEnterPage = store => {
@@ -29,7 +27,7 @@ export default store => (
     />
     <Route
       path="/solving1213"
-      component={AdminIndex}
+      component={AdminIndexContainer}
     />
     <Route
       path="/solving1213/crear-solucionario"
@@ -37,7 +35,7 @@ export default store => (
     />
     <Route
       path="/solving1213/solucionario/:bookNameUrl"
-      component={SolutionManualDetail}
+      component={SolutionManualDetailContainer}
     />
     <Route
       path="*"

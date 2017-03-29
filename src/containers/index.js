@@ -6,6 +6,8 @@ import ChaptersFormContainer from './admin/ChaptersForm';
 import DisplaySectionContainer from './DisplaySection';
 import ChapterContainer from './admin/Chapter';
 import SubchaptersFormContainer from './admin/SubchaptersForm';
+import AdminIndexContainer from './admin/AdminIndex';
+import SolutionManualDetailContainer from './admin/SolutionManualDetail';
 
 export {
   InitialSearchContainer,
@@ -15,5 +17,7 @@ export {
   ChaptersFormContainer,
   DisplaySectionContainer,
   ChapterContainer,
+  AdminIndexContainer,
   SubchaptersFormContainer,
+  SolutionManualDetailContainer,
 };

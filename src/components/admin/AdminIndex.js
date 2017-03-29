@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import BOOKS from '../../constants/fakeData';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 class AdminIndex extends Component {
@@ -10,7 +9,8 @@ class AdminIndex extends Component {
   }
   
   renderBooksList() {
-    return BOOKS.map(book => {
+    const { solutionManuals } = this.props;
+    return solutionManuals.map(book => {
       return (
         <li key={book.name}>
           <Link to={`/solving1213/solucionario/${book.urlName}`}>{book.name}</Link>
@@ -28,6 +28,10 @@ class AdminIndex extends Component {
       </div>
     );
   }
+}
+
+AdminIndex.propTypes= {
+  solutionManuals: PropTypes.object,
 }
 
 export default AdminIndex;
