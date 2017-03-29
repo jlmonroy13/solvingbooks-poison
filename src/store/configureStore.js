@@ -19,8 +19,8 @@ function configureStoreDev(initialState) {
   const logger = createLogger();
   const middlewares = [
     reduxImmutableStateInvariant(),
-    logger,
     thunk,
+    logger,
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools

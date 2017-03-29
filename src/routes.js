@@ -11,12 +11,10 @@ import {
   SolutionManualDetail
 } from './components';
 
-console.log(setSolutionManuals);
-
 const onEnterPage = store => {
-  return () => {
+  return (nextState, replace, callback) => {
     const { dispatch } = store;
-    dispatch(setSolutionManuals());
+    dispatch(setSolutionManuals(callback));
   };
 };
 

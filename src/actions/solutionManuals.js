@@ -5,13 +5,14 @@ const onSetSolutionManuals = solutionManuals => ({
 	payload: solutionManuals,
 });
 
-const setSolutionManuals = () => {
+const setSolutionManuals = (callback) => {
 	return dispatch => {
 		return database.once('value').then(onSuccess);
 
 		function onSuccess(snap) {
 			const data = snap.val();
-			return dispatch(onSetSolutionManuals(data));
+			dispatch(onSetSolutionManuals(data));
+			callback();
 		}
 	};
 };

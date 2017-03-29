@@ -25,21 +25,21 @@ class Searcher extends Component {
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
   }
 
-  // componentDidMount() {
-  //   const bookNameRoute = this.props.bookNameUrl;
-  //   let existingBook = false;
-  //   let bookName = '';
-  //   const { solutionManuals } = this.props;
+  componentDidMount() {
+    const bookNameRoute = this.props.bookNameUrl;
+    let existingBook = false;
+    let bookName = '';
+    const { solutionManuals } = this.props;
 
-  //   solutionManuals.forEach((book) => {
-  //     if(book.urlName === bookNameRoute) {
-  //       existingBook = true;
-  //       bookName = book.name;
-  //     }
-  //   });
-  //   if (!existingBook) browserHistory.push('/');
-  //   this.onChangeBook(bookName);
-  // }
+    solutionManuals.forEach((book) => {
+      if(book.urlName === bookNameRoute) {
+        existingBook = true;
+        bookName = book.name;
+      }
+    });
+    if (!existingBook) browserHistory.push('/');
+    this.onChangeBook(bookName);
+  }
 
   onSubmitSearchForm(e) {
     e.preventDefault();
@@ -77,7 +77,7 @@ class Searcher extends Component {
   onSelectedChapter(option) {
     const selectedChapter = option && option.value;
     const stateChapters = this.state.chapters;
-    const chapters = stateChapters && stateChapters.filter(chapter => chapter.number === selectedChapter);
+    const chapters = stateChapters && stateChapters.filter(chapter => chapter.number === parseInt(selectedChapter));
     const subchapters = chapters && chapters[0] && chapters[0].subchapters;
     let exercises = [];
     if (!subchapters) {
@@ -95,7 +95,7 @@ class Searcher extends Component {
   onSelectedSubchapter(option) {
     const selectedSubchapter = option && option.value;
     const stateSubchapters = this.state.subchapters;
-    const subchapters = stateSubchapters && stateSubchapters.filter(subchapter => subchapter.number === selectedSubchapter);
+    const subchapters = stateSubchapters && stateSubchapters.filter(subchapter => subchapter.number === parseInt(selectedSubchapter));
     const exercises = subchapters && subchapters[0] && subchapters[0].exercises;
     this.setState({
       subchapter: option ? {label: selectedSubchapter, value: selectedSubchapter} : '',
@@ -114,8 +114,6 @@ class Searcher extends Component {
   render() {
     const { bookName, chapter, subchapter, exercise, chapters, subchapters, exercises } = this.state;
     const { solutionManuals } = this.props;
-
-
     return (
       <header className="search__header">
           <div className="search__main">
@@ -134,7 +132,7 @@ class Searcher extends Component {
                     <SimpleSelect
                       placeholder="Capítulo"
                       className="search__subsection-input"
-                      options={chapters && chapters.map(chapter => ({label: chapter.number, value: chapter.number}))}
+                      options={chapters && chapters.map(chapter => ({label: chapter.number.toString(), value: chapter.number.toString()}))}
                       onValueChange={this.onSelectedChapter}
                       disabled={!bookName}
                       value={chapter}
@@ -144,7 +142,7 @@ class Searcher extends Component {
                     <SimpleSelect
                       placeholder="Subcapítulo"
                       className="search__subsection-input"
-                      options={subchapters && subchapters.map(subchapter => ({label: subchapter.number, value: subchapter.number}))}
+                      options={subchapters && subchapters.map(subchapter => ({label: subchapter.number.toString(), value: subchapter.number.toString()}))}
                       disabled={!chapter || !subchapters}
                       onValueChange={this.onSelectedSubchapter}
                       value={subchapter}
@@ -154,7 +152,7 @@ class Searcher extends Component {
                     <SimpleSelect
                       placeholder="Ejercicio"
                       className="search__subsection-input"
-                      options={exercises && exercises.map(exercise => ({label: exercise, value: exercise}))}
+                      options={exercises && exercises.map(exercise => ({label: exercise.number.toString(), value: exercise.number.toString()}))}
                       disabled={exercises && exercises.length === 0}
                       onValueChange={this.onSelectedExercise}
                       value={exercise}
