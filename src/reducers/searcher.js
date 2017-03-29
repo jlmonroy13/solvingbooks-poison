@@ -1,13 +1,13 @@
 const initialState = {
-	isImageReady: false,
+	imageUrl: 'empty',
 };
 
 export default function searcherReducer(state = initialState, action) {
 	switch (action.type) {
-		case 'SET_IMAGE_READY':
+		case 'SET_IMAGE_URL':
 			return {
 				...state,
-				isImageReady: action.payload,
+				imageUrl: action.payload,
 			};
 		default:
 			return state;

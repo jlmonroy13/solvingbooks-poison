@@ -1,6 +1,6 @@
-const setImageReady = imageState => ({
-	type: 'SET_IMAGE_READY',
-	payload: imageState,
+const setImageUrl = imageUrl => ({
+	type: 'SET_IMAGE_URL',
+	payload: imageUrl,
 });
 
 const setSolutionManuals = solutionManuals => ({
@@ -10,6 +10,6 @@ const setSolutionManuals = solutionManuals => ({
 
 
 export {
-	setImageReady,
+	setImageUrl,
 	setSolutionManuals,
 };

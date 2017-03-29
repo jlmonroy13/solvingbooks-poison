@@ -43,11 +43,12 @@ class Searcher extends Component {
 
   onSubmitSearchForm(e) {
     e.preventDefault();
-    const { bookName, chapter, subchapter, exercise, subchapters } = this.state;
+    const { bookName, chapter, subchapter, exercise, exercises, subchapters } = this.state;
     if (!bookName || !chapter || (!subchapter && subchapters && subchapters.length < 0) || !exercise) {
       Alert.error(`Debes seleccionar todos los campos.`);
     } else {
-      this.props.onSetImageState(true);
+      const imageUrl = exercises[parseInt(exercise.value) - 1].imageUrl;
+      this.props.onSetImageUrl(imageUrl);
     }
   }
 
@@ -174,7 +175,7 @@ class Searcher extends Component {
 
 Searcher.propTypes = {
   bookNameUrl: PropTypes.string,
-  onSetImageState: PropTypes.func,
+  onSetImageUrl: PropTypes.func,
   solutionManuals: PropTypes.array,
 };
 

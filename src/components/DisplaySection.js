@@ -8,15 +8,18 @@ class DisplaySection extends Component {
     }
   }
   render() {
-    const { isImageReady } = this.props.searcher;
+    const { imageUrl } = this.props.searcher;
     return (
       <div>
         <div className="exercise__container">
           <div className="exercise__inner-container">
-            { isImageReady ?
-              <img src="../assets/images/1-2-15.jpg" className="exercise__image"/>
+            { !imageUrl ?
+              <h1>¡Este ejercicio no esta disponible aún!</h1>
             : 
-              <h1>¡Aqui va a salir el resultado de tu busqueda!</h1>
+              imageUrl === 'empty' ?
+                <h1>¡Aqui va a salir el resultado de tu busqueda!</h1>
+              :
+                <img src={imageUrl} className="exercise__image"/>
             }
             
           </div>
