@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import * as firebase from 'firebase';
 import { setSolutionManuals } from './actions/solutionManuals';
 import { CreateSolutionManualContainer } from './containers';
 import {
@@ -12,24 +11,14 @@ import {
   SolutionManualDetail
 } from './components';
 
-const config = {
-  apiKey: "AIzaSyCmC7Db6RYYO9WNm2laAqVJcn6U-G9MFLc",
-  authDomain: "elsolucionario-6c2b9.firebaseapp.com",
-  databaseURL: "https://elsolucionario-6c2b9.firebaseio.com",
-  storageBucket: "elsolucionario-6c2b9.appspot.com",
-  messagingSenderId: "280386060132"
-}
+console.log(setSolutionManuals);
 
 const onEnterPage = store => {
   return () => {
-    firebase.initializeApp(config);
     const { dispatch } = store;
-    const solutionManualsRef = firebase.database().ref().child('solutionManuals');
-    solutionManualsRef.on('value', snap => {
-      dispatch(setSolutionManuals(snap.val()));
-    });
+    dispatch(setSolutionManuals());
   };
-}
+};
 
 export default store => (
   <Route path="/" component={App} onEnter={onEnterPage(store)}>

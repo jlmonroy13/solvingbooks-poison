@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { SimpleSelect } from 'react-selectize';
-import ObjectUtils from '../utils/object';
 import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 
@@ -38,15 +37,14 @@ class InitialSearch extends Component {
 
   render() {
     const { solutionManuals } = this.props;
-    const solutionManualsArr = ObjectUtils.toArray(solutionManuals);
-    
+
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
         <div className="grid grid--center">
           <div className="grid__item five-twelfths">
             <SimpleSelect
               placeholder="Selecciona un libro"
-              options={solutionManualsArr.map(book => ({label: book.name, value: book.urlName}))}
+              options={solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
               onValueChange={this.onSelectedBook}
               className="search__main-input"
             />
@@ -62,7 +60,7 @@ class InitialSearch extends Component {
 
 InitialSearch.propTypes = {
   onSetModalState: PropTypes.func.isRequired,
-  solutionManuals: PropTypes.object,
+  solutionManuals: PropTypes.array,
 };
 
 export default InitialSearch;

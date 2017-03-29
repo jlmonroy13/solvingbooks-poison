@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { SimpleSelect } from 'react-selectize';
-import BOOKS from '../constants/fakeData';
 import { browserHistory, Link } from 'react-router';
 import Alert from 'react-s-alert';
 
@@ -26,19 +25,21 @@ class Searcher extends Component {
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
   }
 
-  componentDidMount() {
-    const bookNameRoute = this.props.bookNameUrl;
-    let existingBook = false;
-    let bookName = '';
-    BOOKS.forEach((book) => {
-      if(book.urlName === bookNameRoute) {
-        existingBook = true;
-        bookName = book.name;
-      }
-    });
-    if (!existingBook) browserHistory.push('/');
-    this.onChangeBook(bookName);
-  }
+  // componentDidMount() {
+  //   const bookNameRoute = this.props.bookNameUrl;
+  //   let existingBook = false;
+  //   let bookName = '';
+  //   const { solutionManuals } = this.props;
+
+  //   solutionManuals.forEach((book) => {
+  //     if(book.urlName === bookNameRoute) {
+  //       existingBook = true;
+  //       bookName = book.name;
+  //     }
+  //   });
+  //   if (!existingBook) browserHistory.push('/');
+  //   this.onChangeBook(bookName);
+  // }
 
   onSubmitSearchForm(e) {
     e.preventDefault();
@@ -51,7 +52,8 @@ class Searcher extends Component {
   }
 
   onChangeBook(bookName) {
-    const books = BOOKS.filter(book => book.name === bookName);
+    const { solutionManuals } = this.props;
+    const books = solutionManuals.filter(book => book.name === bookName);
     const chapters = books && books[0] && books[0].chapters;
     this.setState({
       bookName: bookName ? {label: bookName, value: bookName} : '',
@@ -111,6 +113,9 @@ class Searcher extends Component {
 
   render() {
     const { bookName, chapter, subchapter, exercise, chapters, subchapters, exercises } = this.state;
+    const { solutionManuals } = this.props;
+
+
     return (
       <header className="search__header">
           <div className="search__main">
@@ -120,7 +125,7 @@ class Searcher extends Component {
                 <SimpleSelect
                   placeholder="Selecciona un libro"
                   className="search__main-input"
-                  options={BOOKS.map(book => ({label: book.name, value: book.urlName}))}
+                  options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
                   onValueChange={this.onSelectedBook}
                   value={bookName}
                 />
@@ -172,6 +177,7 @@ class Searcher extends Component {
 Searcher.propTypes = {
   bookNameUrl: PropTypes.string,
   onSetImageState: PropTypes.func,
+  solutionManuals: PropTypes.array,
 };
 
 export default Searcher;
