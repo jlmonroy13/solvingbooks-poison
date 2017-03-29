@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Searcher } from './';
 import { DisplaySectionContainer, SearcherContainer } from '../containers';
 
 const SearchPage = (props) => {

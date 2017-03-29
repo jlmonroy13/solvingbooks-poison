@@ -28,7 +28,7 @@ class Chapter extends Component {
       number: '',
       name: '',
       exercises: '',
-    }
+    };
     for (let i = 1; i < parseInt(subchapters) + 1; i++) {
       subchaptersArray.push({...subchaptersInfo, number: i});
     }
@@ -39,12 +39,6 @@ class Chapter extends Component {
     const { chapterName, subchapters } = this.state;
     const { chapter, onSetSubchapters } = this.props;
 
-    const data = {
-      name: chapterName,
-      number: chapter.number,
-      exercises: null,
-      subchapters: {},
-    };
     if (!chapterName || !subchapters) {
       Alert.error(`Debes escribir el nombre del capitulo y el número de Subcapítulos.`);
     } else {
@@ -94,8 +88,10 @@ class Chapter extends Component {
 }
 
 Chapter.propTypes = {
-  chapters: PropTypes.object,
+  chapter: PropTypes.object,
   solutionManual: PropTypes.object,
+  onSetSubchapters: PropTypes.func,
+  hasSubchapters: PropTypes.bool,
 };
 
 export default Chapter;

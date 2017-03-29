@@ -34,8 +34,6 @@ class CreateSolutionManual extends Component {
           urlName: e.target.value,
           hasSubchapters,
         };
-      } else {
-
       }
 
       data[e.target.name] = e.target.value;
@@ -55,7 +53,8 @@ class CreateSolutionManual extends Component {
       name: '',
       exercises: '',
       subchapters: '',
-    }
+    };
+
     for (let i = 1; i < parseInt(chapters) + 1; i++) {
       chaptersArray.push({...chapterInfo, number: i});
     }
@@ -72,7 +71,7 @@ class CreateSolutionManual extends Component {
       urlName,
       hasSubchapters,
     };
-    if (!bookName || !urlName || !chapters) {
+    if (!name || !urlName || !chapters) {
       Alert.error(`Debes llenar los campos de la Información básica.`);
     } else {
       onSetChapters(this.onCreateChapters());
@@ -84,6 +83,8 @@ class CreateSolutionManual extends Component {
   render() {
     const { name, hasSubchapters, urlName } = this.props.solutionManual;
     const { chapters: storeChapters } = this.props;
+    const { chapters } = this.state;
+
     return (
       <div className="container">
       <h1>Crear Solucionario</h1>

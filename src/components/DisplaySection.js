@@ -23,8 +23,7 @@ class DisplaySection extends Component {
         </div>
       </div>
     );
-  }
-  
-};
+  } 
+}
 
 export default DisplaySection;

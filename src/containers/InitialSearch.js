@@ -3,10 +3,11 @@ import InitialSearch from '../components/InitialSearch';
 import { setModalState } from '../actions/authentication';
 
 const mapStateToProps = (state) => {
-  const { authentication } = state;
+  const { authentication, solutionManuals } = state;
 
   return {
     authentication,
+    solutionManuals,
   };
 };
 

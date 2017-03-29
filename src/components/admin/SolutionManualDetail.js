@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import BOOKS from '../../constants/fakeData';
 import { browserHistory } from 'react-router';
 
@@ -7,12 +7,12 @@ class SolutionManualDetail extends Component {
     super();
     this.state = {
       solutionManual: {}
-    }
+    };
 
     this.renderChapters = this.renderChapters.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const bookNameRoute = this.props.params.bookNameUrl;
     const solutionManual = BOOKS.filter(book => book.urlName === bookNameRoute)[0];
     if (!solutionManual) browserHistory.push('/solving1213');
@@ -45,7 +45,7 @@ class SolutionManualDetail extends Component {
             <span>Eliminar</span>
           </td>
         </tr>
-      )
+      );
     }
   }
 
@@ -71,5 +71,9 @@ class SolutionManualDetail extends Component {
     );
   }
 }
+
+SolutionManualDetail.propTypes = {
+  params: PropTypes.object,
+};
 
 export default SolutionManualDetail;
