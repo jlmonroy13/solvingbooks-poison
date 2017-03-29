@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import BOOKS from '../../constants/fakeData';
 import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
 
@@ -49,6 +48,9 @@ class SolutionManualDetail extends Component {
           {subchapter ? <td>{subchapter.number} - {subchapter.name}</td> : null}
           <td>{exercise.number}</td>
           <td>
+            <a href={exercise.imageUrl} target="_blank">{exercise.imageUrl}</a>
+          </td>
+          <td>
             <span className="push-half--right">Editar</span>
             <span>Eliminar</span>
           </td>
@@ -65,7 +67,7 @@ class SolutionManualDetail extends Component {
     task.on('state_changed',
       function complete(response) {
         const imageUrl = response.a && response.a.downloadURLs[0];
-        const databasePath = `solutionManuals/${solutionManual.id}/chapters/${chapter-1}/subchapters/${subchapter-1}/exercises/${exercise-1}`;
+        const databasePath = solutionManual.hasSubchapters ? `solutionManuals/${solutionManual.id}/chapters/${chapter-1}/subchapters/${subchapter-1}/exercises/${exercise-1}` : `solutionManuals/${solutionManual.id}/chapters/${chapter-1}/exercises/${exercise-1}`;
         firebase.database().ref(databasePath).set({ 
           imageUrl,
           number: exercise
@@ -111,6 +113,7 @@ class SolutionManualDetail extends Component {
               <th>Capitulo</th>
               {solutionManual && solutionManual.hasSubchapters ? <th>Subcapitulo</th> : null }
               <th>Ejercicio</th>
+              <th>Url de la Imagen</th>
               <th>Acciones</th>
             </tr>
           </thead>

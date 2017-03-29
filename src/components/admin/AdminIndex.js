@@ -31,7 +31,7 @@ class AdminIndex extends Component {
 }
 
 AdminIndex.propTypes= {
-  solutionManuals: PropTypes.object,
+  solutionManuals: PropTypes.array,
 }
 
 export default AdminIndex;
