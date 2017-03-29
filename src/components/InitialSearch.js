@@ -3,6 +3,7 @@ import { SimpleSelect } from 'react-selectize';
 import BOOKS from '../constants/fakeData';
 import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
+import * as firebase from 'firebase';
 
 class InitialSearch extends Component {
   constructor() {
@@ -10,10 +11,20 @@ class InitialSearch extends Component {
     this.state = {
       bookName: '',
       urlName: '',
+      solutionManuals: {},
     };
 
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
     this.onSelectedBook = this.onSelectedBook.bind(this);
+  }
+
+  componentDidMount() {
+    const solutionManualsRef = firebase.database().ref().child('solutionManuals');
+    solutionManualsRef.on('value', snap => {
+      this.setState({
+        solutionManuals: snap.val()
+      });
+    });
   }
 
   onSubmitSearchForm(e) {
@@ -36,6 +47,8 @@ class InitialSearch extends Component {
   }
 
   render() {
+    const { solutionManuals } = this.state;
+    console.log(solutionManuals)
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
         <div className="grid grid--center">

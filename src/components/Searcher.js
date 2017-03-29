@@ -3,7 +3,6 @@ import { SimpleSelect } from 'react-selectize';
 import BOOKS from '../constants/fakeData';
 import { browserHistory, Link } from 'react-router';
 import Alert from 'react-s-alert';
-import * as firebase from 'firebase';
 
 class Searcher extends Component {
   constructor() {
@@ -39,14 +38,6 @@ class Searcher extends Component {
     });
     if (!existingBook) browserHistory.push('/');
     this.onChangeBook(bookName);
-
-    // const testRef = firebase.database().ref().child('test');
-    // testRef.on('value', snap => {
-    //   this.setState({
-    //     test: snap.val()
-    //   })
-    // })
-
   }
 
   onSubmitSearchForm(e) {
