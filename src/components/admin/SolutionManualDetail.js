@@ -1,16 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
+import Alert from 'react-s-alert';
 
 class SolutionManualDetail extends Component {
   constructor() {
     super();
     this.state = {
       solutionManual: {},
-      imageFile: '',
-      chapter: '',
-      subchapter: '',
-      exercise: '',
+      imageFiles: [],
     }
 
     this.renderChapters = this.renderChapters.bind(this);
@@ -41,7 +39,7 @@ class SolutionManualDetail extends Component {
         });
       }
     });
-    function createRow(chapter, subchapter, exercise) {
+    function createRow(chapter, subchapter, exercise)  {
       return (
         <tr>
           <td>{chapter.number} - {chapter.name}</td>
@@ -61,28 +59,27 @@ class SolutionManualDetail extends Component {
 
   onSubmitUploadForm(e) {
     e.preventDefault();
-    const { imageFile, chapter, subchapter, exercise, solutionManual } = this.state;
-    const storageRef = firebase.storage().ref(`${solutionManual.id}/${imageFile.name}`);
-    const task = storageRef.put(imageFile);
-    task.on('state_changed',
-      function complete(response) {
-        const imageUrl = response.a && response.a.downloadURLs[0];
-        const databasePath = solutionManual.hasSubchapters ? `solutionManuals/${solutionManual.id}/chapters/${chapter-1}/subchapters/${subchapter-1}/exercises/${exercise-1}` : `solutionManuals/${solutionManual.id}/chapters/${chapter-1}/exercises/${exercise-1}`;
-        firebase.database().ref(databasePath).set({ 
-          imageUrl,
-          number: exercise
-        });
-      },
-      function error(err) {
-        console.error(err);
-      }
-    )
-  }
-
-  onChangeFileInput(e) {
-    e.preventDefault();
-    const imageFile = e.target.files[0];
-    this.setState(getDataFromImageFile(imageFile));
+    const { imageFiles, solutionManual } = this.state;
+    for (let i=0; i < imageFiles.length; i++) {
+      const storageRef = firebase.storage().ref(`${solutionManual.id}/${imageFiles[i].name}`);
+      const task = storageRef.put(imageFiles[i]);
+      const { chapter, subchapter, exercise, imageFile } = getDataFromImageFile(imageFiles[i]);
+      task.on('state_changed',
+        function complete(response) {
+          const imageUrl = response.a && response.a.downloadURLs[0];
+          const subchapterPath = solutionManual.hasSubchapters ? `/subchapters/${subchapter-1}` : '';
+          const databasePath =  `solutionManuals/${solutionManual.id}/chapters/${chapter-1}${subchapterPath}/exercises/${exercise-1}`;
+          firebase.database().ref(databasePath).set({ 
+            imageUrl,
+            number: exercise
+          });
+          if (response.a) Alert.success(`El ejercicio ${imageFile.name} se ha cargado exitosamente!`);
+        },
+        function error(err) {
+          Alert.success(err);
+        }
+      )
+    }
     function getDataFromImageFile(imageFile) {
       const name = imageFile.name.substr(0, imageFile.name.lastIndexOf('.'));
       const array = name.split('-');
@@ -96,6 +93,12 @@ class SolutionManualDetail extends Component {
     }
   }
 
+  onChangeFileInput(e) {
+    e.preventDefault();
+    const imageFiles = e.target.files;
+    this.setState({imageFiles});
+  }
+
   render() {
     const { solutionManual } = this.state;
     return (
@@ -103,7 +106,7 @@ class SolutionManualDetail extends Component {
         <h1>{this.state.solutionManual.name}</h1>
         <div className="push--bottom">
           <form onSubmit={this.onSubmitUploadForm}>
-            <input type="file" className="push-half--right" onChange={this.onChangeFileInput} />
+            <input type="file" className="push-half--right" onChange={this.onChangeFileInput} multiple/>
             <button>Cargar Imagenes</button>
           </form>
         </div>
