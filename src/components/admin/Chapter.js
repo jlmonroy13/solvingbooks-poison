@@ -39,12 +39,6 @@ class Chapter extends Component {
     const { chapterName, subchapters } = this.state;
     const { chapter, onSetSubchapters } = this.props;
 
-    const data = {
-      name: chapterName,
-      number: chapter.number,
-      exercises: null,
-      subchapters: {},
-    };
     if (!chapterName || !subchapters) {
       Alert.error(`Debes escribir el nombre del capitulo y el número de Subcapítulos.`);
     } else {

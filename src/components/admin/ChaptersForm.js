@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import ObjectUtils from '../../utils/object';
 import { ChapterContainer } from '../../containers';
 

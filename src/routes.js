@@ -12,8 +12,14 @@ import {
 
 import { CreateSolutionManualContainer } from './containers';
 
-export default (
-  <Route path="/" component={App}>
+const onEnterPage = store => {
+  return () => {
+    console.warn(store);
+  }
+}
+
+export default store => (
+  <Route path="/" component={App} onEnter={onEnterPage(store)}>
     <IndexRoute component={HomePage}/>
     <Route
       path="/libro/:bookNameUrl"
