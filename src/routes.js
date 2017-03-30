@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { setSolutionManuals } from './actions/solutionManuals';
-import { CreateSolutionManualContainer, AdminIndexContainer, SolutionManualDetailContainer } from './containers';
 import {
   App,
   HomePage,
   NotFoundPage,
   SearchPage,
 } from './components';
+
+import { CreateSolutionManualContainer, AdminIndexContainer, SolutionManualDetailContainer } from './containers';
 
 const onEnterPage = store => {
   return (nextState, replace, callback) => {
