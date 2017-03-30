@@ -1,13 +1,16 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import ObjectUtils from '../../utils/object';
 import Subchapter from './Subchapter';
 
-const SubchaptersForm = (props) => {
-  const { chapters, chapterNumber } = props;
-  const subchaptersArray = ObjectUtils.toArray(chapters[chapterNumber].subchapters);
+class SubchaptersForm extends Component {
+  constructor() {
+    super();
 
+    this.onRenderSubchapter = this.onRenderSubchapter.bind(this);
+  }
 
-  function onRenderSubchapter(subchapter) {
+  onRenderSubchapter(subchapter) {
+    const { chapterNumber } = this.props;
     return (
       <Subchapter
         subchapter={subchapter}
@@ -17,11 +20,16 @@ const SubchaptersForm = (props) => {
     );
   }
 
-  return (
-    <div>
-      { subchaptersArray.map(onRenderSubchapter) }
-    </div>
-  );
+  render() {
+    const { chapters, chapterNumber } = this.props;
+    const subchaptersArray = ObjectUtils.toArray(chapters[chapterNumber].subchapters);
+
+    return (
+      <div>
+        { subchaptersArray.map(this.onRenderSubchapter) }
+      </div>
+    );
+  }
 }
 
 SubchaptersForm.propTypes = {

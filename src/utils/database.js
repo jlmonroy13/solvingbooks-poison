@@ -7,7 +7,7 @@ const config = {
   databaseURL: "https://elsolucionario-6c2b9.firebaseio.com",
   storageBucket: "elsolucionario-6c2b9.appspot.com",
   messagingSenderId: "280386060132"
-}
+};
 
 firebase.initializeApp(config);
 

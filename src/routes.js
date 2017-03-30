@@ -17,7 +17,7 @@ const onEnterPage = store => {
   };
 };
 
-export default store => (
+const routes = store => (
   <Route path="/" component={App} onEnter={onEnterPage(store)}>
     <IndexRoute
       component={HomePage}
@@ -44,3 +44,5 @@ export default store => (
     />
   </Route>
 );
+
+export default routes;

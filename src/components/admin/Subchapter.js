@@ -41,16 +41,13 @@ class Subchapter extends Component {
             />
           </div>
         </div>
-        <div>
-
-        </div>
       </div>
     );
   }
 }
 
 Subchapter.propTypes = {
-  subchapters: PropTypes.object,
+  subchapter: PropTypes.object,
 };
 
 export default Subchapter;

@@ -7,7 +7,7 @@ class AdminIndex extends Component {
 
     this.renderBooksList = this.renderBooksList.bind(this);
   }
-  
+
   renderBooksList() {
     const { solutionManuals } = this.props;
     return solutionManuals.map(book => {
@@ -32,6 +32,6 @@ class AdminIndex extends Component {
 
 AdminIndex.propTypes= {
   solutionManuals: PropTypes.array,
-}
+};
 
 export default AdminIndex;

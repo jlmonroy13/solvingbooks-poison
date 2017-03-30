@@ -1,13 +1,15 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import ObjectUtils from '../../utils/object';
 import { ChapterContainer } from '../../containers';
 
-const ChaptersForm = (props) => {
-  const { chapters } = props;
-  const chaptersArray = ObjectUtils.toArray(chapters);
+class ChaptersForm extends Component {
+  constructor() {
+    super();
 
-  function onRenderChapter(chapter) {
-    const { solutionManual: { hasSubchapters } } = props;
+    this.onRenderChapter = this.onRenderChapter.bind(this);
+  }
+  onRenderChapter(chapter) {
+    const { solutionManual: { hasSubchapters } } = this.props;
     return (
       <ChapterContainer
         hasSubchapters={hasSubchapters}
@@ -17,12 +19,17 @@ const ChaptersForm = (props) => {
     );
   }
 
-  return (
-    <div>
-      { chaptersArray.map(onRenderChapter) }
-    </div>
-  );
-};
+  render() {
+    const { chapters } = this.props;
+    const chaptersArray = ObjectUtils.toArray(chapters);
+
+    return (
+      <div>
+        { chaptersArray.map(this.onRenderChapter) }
+      </div>
+    );
+  }
+}
 
 ChaptersForm.propTypes = {
   chapters: PropTypes.object,

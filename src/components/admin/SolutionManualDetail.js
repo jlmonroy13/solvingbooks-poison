@@ -9,7 +9,7 @@ class SolutionManualDetail extends Component {
     this.state = {
       solutionManual: {},
       imageFiles: [],
-    }
+    };
 
     this.renderChapters = this.renderChapters.bind(this);
     this.onSubmitUploadForm = this.onSubmitUploadForm.bind(this);
@@ -30,12 +30,12 @@ class SolutionManualDetail extends Component {
       if (solutionManual.hasSubchapters) {
         return chapter.subchapters.map(subchapter => {
           return subchapter.exercises.map(exercise => {
-            return createRow(chapter, subchapter, exercise); 
+            return createRow(chapter, subchapter, exercise);
           });
         });
       } else {
         return chapter.exercises.map(exercise => {
-          return createRow(chapter, null, exercise);   
+          return createRow(chapter, null, exercise);
         });
       }
     });
@@ -69,7 +69,7 @@ class SolutionManualDetail extends Component {
           const imageUrl = response.a && response.a.downloadURLs[0];
           const subchapterPath = solutionManual.hasSubchapters ? `/subchapters/${subchapter-1}` : '';
           const databasePath =  `solutionManuals/${solutionManual.id}/chapters/${chapter-1}${subchapterPath}/exercises/${exercise-1}`;
-          firebase.database().ref(databasePath).set({ 
+          firebase.database().ref(databasePath).set({
             imageUrl,
             number: exercise
           });
@@ -78,7 +78,7 @@ class SolutionManualDetail extends Component {
         function error(err) {
           Alert.success(err);
         }
-      )
+      );
     }
     function getDataFromImageFile(imageFile) {
       const name = imageFile.name.substr(0, imageFile.name.lastIndexOf('.'));
@@ -87,9 +87,9 @@ class SolutionManualDetail extends Component {
         imageFile,
         chapter: array[0],
         exercise: array[array.length - 1],
-      }
+      };
       data.subchapter = array.length === 2 ? null : array[1];
-      return data
+      return data;
     }
   }
 
@@ -131,6 +131,7 @@ class SolutionManualDetail extends Component {
 
 SolutionManualDetail.propTypes = {
   params: PropTypes.object,
+  solutionManuals: PropTypes.object,
 };
 
 export default SolutionManualDetail;
