@@ -38,6 +38,10 @@ class CreateSolutionManual extends Component {
 
       data[e.target.name] = e.target.value;
       this.props.onSetBasicInfo(data);
+    } else {
+      this.setState({
+        chapters: e.target.value,
+      });
     }
   }
 

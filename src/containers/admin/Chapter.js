@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import Chapter from '../../components/admin/Chapter';
-import { setSubchapters } from '../../actions/admin';
+import { setSubchapters, setChapterWithExercises } from '../../actions/admin';
 
 const mapDispatchToProps = dispatch => ({
   onSetSubchapters: (chapterId, subchapters) => {
     dispatch(setSubchapters(chapterId, subchapters));
+  },
+  onSetChapterWithExercises: chapter => {
+    dispatch(setChapterWithExercises(chapter));
   },
 });
 

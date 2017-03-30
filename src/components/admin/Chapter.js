@@ -18,7 +18,25 @@ class Chapter extends Component {
   }
 
   onChangeField(e) {
+  const { onSetChapterWithExercises, chapter } = this.props;
     this.setState({[e.target.name]: e.target.value});
+    if (e.target.name !== 'subchapters') {
+      if (e.target.name === 'exercises') {
+        onSetChapterWithExercises({
+          exercises: e.target.value,
+          name: this.state.chapterName,
+          number: chapter.number,
+          subchapters: null,
+        });
+      } else if (e.target.name === 'chapterName') {
+        onSetChapterWithExercises({
+          exercises: this.state.exercises,
+          name: e.target.value,
+          number: chapter.number,
+          subchapters: null,
+        });
+      }
+    }
   }
 
   onCreateSubchapters() {
@@ -50,6 +68,7 @@ class Chapter extends Component {
   render() {
     const { chapterName, exercises, subchapters } = this.state;
     const { chapter, hasSubchapters } = this.props;
+    console.warn(chapter);
     return (
       <div key={chapter.number} className="push-half--bottom">
         <div>
@@ -91,6 +110,7 @@ Chapter.propTypes = {
   chapter: PropTypes.object,
   solutionManual: PropTypes.object,
   onSetSubchapters: PropTypes.func,
+  onSetChapterWithExercises: PropTypes.func,
   hasSubchapters: PropTypes.bool,
 };
 

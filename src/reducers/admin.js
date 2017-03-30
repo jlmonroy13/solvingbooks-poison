@@ -47,6 +47,17 @@ export default function adminReducer(state = initialState, action) {
 					hasSubchapters: action.payload,
 				}
 			};
+		case 'SET_CHAPTER_WITH_EXERCISE':
+			return {
+				...state,
+				chapters: {
+					...state.chapters,
+					[action.payload.number]: {
+						...state.chapters[action.payload.number],
+						...action.payload,
+					}
+				}
+			};
 		default:
 			return state;
 	}
