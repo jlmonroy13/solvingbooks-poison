@@ -15,6 +15,7 @@ class Chapter extends Component {
     this.onChangeField = this.onChangeField.bind(this);
     this.onAddSubchapters = this.onAddSubchapters.bind(this);
     this.onCreateSubchapters = this.onCreateSubchapters.bind(this);
+    this.onCreateExercises = this.onCreateExercises.bind(this);
   }
 
   onChangeField(e) {
@@ -23,20 +24,31 @@ class Chapter extends Component {
     if (e.target.name !== 'subchapters') {
       if (e.target.name === 'exercises') {
         onSetChapterWithExercises({
-          exercises: e.target.value,
+          exercises: this.onCreateExercises(e.target.value),
           name: this.state.chapterName,
           number: chapter.number,
           subchapters: null,
         });
       } else if (e.target.name === 'chapterName') {
         onSetChapterWithExercises({
-          exercises: this.state.exercises,
+          exercises: this.onCreateExercises(this.state.exercises),
           name: e.target.value,
           number: chapter.number,
           subchapters: null,
         });
       }
     }
+  }
+
+  onCreateExercises(exercises) {
+    const exercisesArray = [];
+    const exerciseInfo = {
+      number: '',
+    };
+    for (let i = 1; i < parseInt(exercises) + 1; i++) {
+      exercisesArray.push({...exerciseInfo, number: i});
+    }
+    return exercisesArray;
   }
 
   onCreateSubchapters() {
@@ -60,7 +72,12 @@ class Chapter extends Component {
     if (!chapterName || !subchapters) {
       Alert.error(`Debes escribir el nombre del capitulo y el número de Subcapítulos.`);
     } else {
-      onSetSubchapters(chapter.number, this.onCreateSubchapters());
+      onSetSubchapters({
+        subchapters: this.onCreateSubchapters(),
+        name: chapterName,
+        number: chapter.number,
+        exercises: null,
+      });
       Alert.success(`El nombre del capítulo y sus subcapítulos han sido creados.`);
     }
   }
@@ -68,7 +85,7 @@ class Chapter extends Component {
   render() {
     const { chapterName, exercises, subchapters } = this.state;
     const { chapter, hasSubchapters } = this.props;
-    console.warn(chapter);
+
     return (
       <div key={chapter.number} className="push-half--bottom">
         <div>
@@ -95,7 +112,7 @@ class Chapter extends Component {
             : ''}
           </div>
         </div>
-        {hasSubchapters && chapter.subchapters[1] ?
+        {hasSubchapters && chapter.subchapters && chapter.subchapters[1] ?
           <div className="push--left push--bottom">
             <h4>Subcapítulos</h4>
             <SubchaptersFormContainer chapterNumber={chapter.number} />

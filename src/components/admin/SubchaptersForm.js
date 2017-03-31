@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import ObjectUtils from '../../utils/object';
-import Subchapter from './Subchapter';
+import { SubchapterContainer } from '../../containers';
 
 class SubchaptersForm extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class SubchaptersForm extends Component {
   onRenderSubchapter(subchapter) {
     const { chapterNumber } = this.props;
     return (
-      <Subchapter
+      <SubchapterContainer
         subchapter={subchapter}
         key={subchapter.number}
         chapterNumber={chapterNumber}

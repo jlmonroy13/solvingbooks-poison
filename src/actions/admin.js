@@ -3,12 +3,9 @@ const setChapters = chapters => ({
 	payload: chapters,
 });
 
-const setSubchapters = (chapterId, subchapters) => ({
+const setSubchapters = chapter => ({
   type: 'SET_SUBCHAPTERS',
-  payload: {
-    chapterId,
-    subchapters,
-  },
+  payload: chapter,
 });
 
 const setBasicInfoSolutionManual = data => ({
@@ -21,20 +18,18 @@ const setHasSubchapters = state => ({
   payload: state,
 });
 
-const setChapterWithExercises = (chapter) => ({
+const setChapterWithExercises = chapter => ({
   type: 'SET_CHAPTER_WITH_EXERCISE',
   payload: chapter,
 });
 
-const setExerciseSubchapter = (exercise, chapterId, subchapterId) => ({
-  type: 'SET_EXERCISE_SUBCHAPTER',
+const setSubchapterInfo = (subchapter, chapterId) => ({
+  type: 'SET_SUBCHAPTER_INFO',
   payload: {
-    exercise,
+    subchapter,
     chapterId,
-    subchapterId,
   },
 });
-
 
 
 export {
@@ -43,5 +38,5 @@ export {
 	setBasicInfoSolutionManual,
   setHasSubchapters,
   setChapterWithExercises,
-  setExerciseSubchapter,
+  setSubchapterInfo,
 };

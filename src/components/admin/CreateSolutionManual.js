@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { ChaptersFormContainer } from '../../containers';
 import ArrayUtils from '../../utils/array';
+import ObjectUtils from '../../utils/object';
 import Alert from 'react-s-alert';
 
 class CreateSolutionManual extends Component {
@@ -14,6 +15,31 @@ class CreateSolutionManual extends Component {
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onAddChapters = this.onAddChapters.bind(this);
     this.onCreateChapters = this.onCreateChapters.bind(this);
+    this.onClickCreateJSON = this.onClickCreateJSON.bind(this);
+  }
+
+  onClickCreateJSON() {
+    const { chapters, solutionManual } = this.props;
+    let data = {};
+    if (solutionManual.hasSubchapters) {
+      const newChapters = ObjectUtils.toArray(chapters).map((chapter => (
+        {
+          ...chapter,
+          subchapters: [...ObjectUtils.toArray(chapter.subchapters)],
+        }
+      )));
+      data = {
+        ...solutionManual,
+        chapters: newChapters,
+      };
+    } else {
+      data = {
+        ...solutionManual,
+        chapters: [...ObjectUtils.toArray(chapters)],
+      };
+    }
+    console.warn(data);
+    alert(JSON.stringify(data));
   }
 
   onChangeField(e) {
@@ -149,6 +175,9 @@ class CreateSolutionManual extends Component {
             </div>
           :''}
         </form>
+        { (storeChapters[1] && storeChapters[1].exercises) || (storeChapters[1] && storeChapters[1].subchapters && storeChapters[1].subchapters[1]) ?
+          <button onClick={this.onClickCreateJSON}>Crear Solucionario</button>
+        :''}
       </div>
     );
   }
