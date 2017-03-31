@@ -23,7 +23,7 @@ class AdminIndex extends Component {
     return (
       <div className="container">
         <h1>Solucionarios</h1>
-        <Link to="" className="button button--wide button--gray bold">Crear Solucionario</Link>
+        <Link to="/solving1213/crear-solucionario" className="button button--wide button--gray bold">Crear Solucionario</Link>
         <ul>{this.renderBooksList()}</ul>
       </div>
     );

@@ -3,6 +3,7 @@ import { ChaptersFormContainer } from '../../containers';
 import ArrayUtils from '../../utils/array';
 import ObjectUtils from '../../utils/object';
 import Alert from 'react-s-alert';
+import database from '../../utils/database';
 
 class CreateSolutionManual extends Component {
   constructor() {
@@ -15,10 +16,10 @@ class CreateSolutionManual extends Component {
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onAddChapters = this.onAddChapters.bind(this);
     this.onCreateChapters = this.onCreateChapters.bind(this);
-    this.onClickCreateJSON = this.onClickCreateJSON.bind(this);
+    this.onCreateJSON = this.onCreateJSON.bind(this);
   }
 
-  onClickCreateJSON() {
+  onCreateJSON() {
     const { chapters, solutionManual } = this.props;
     let data = {};
     if (solutionManual.hasSubchapters) {
@@ -38,8 +39,11 @@ class CreateSolutionManual extends Component {
         chapters: [...ObjectUtils.toArray(chapters)],
       };
     }
-    console.warn(data);
-    alert(JSON.stringify(data));
+    database.push(data).then(response => {
+      const solutionManualId = response.path.o[1];
+      database.child(solutionManualId).update({id: solutionManualId});
+      Alert.success(`Solucionario creado exitosamente.`);
+    });
   }
 
   onChangeField(e) {
@@ -181,7 +185,7 @@ class CreateSolutionManual extends Component {
         </form>
         { (storeChapters[1] && storeChapters[1].exercises) || (storeChapters[1] && storeChapters[1].subchapters && storeChapters[1].subchapters[1]) ?
           <button
-            onClick={this.onClickCreateJSON}
+            onClick={this.onCreateJSON}
             className="button button--wide button--gray bold push--bottom"
           >Crear Solucionario</button>
         :''}

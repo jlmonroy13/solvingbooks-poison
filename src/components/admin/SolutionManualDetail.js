@@ -34,7 +34,7 @@ class SolutionManualDetail extends Component {
           });
         });
       } else {
-        return chapter.exercises.map(exercise => {
+        return chapter.exercises && chapter.exercises.map(exercise => {
           return createRow(chapter, null, exercise);
         });
       }
