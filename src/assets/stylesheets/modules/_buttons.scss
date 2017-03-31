@@ -68,6 +68,19 @@
   }
 }
 
+.button--basic {
+  color: rgba($gray-text, 0.7);
+  background-color: transparent;
+  border: 1px solid rgba($gray-text, 0.7);
+  transition: 0.5s;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: darken($gray-text, 5%);
+    outline: none;
+  }
+}
+
 .button--mb10 {
   margin-bottom: 5px;
 }

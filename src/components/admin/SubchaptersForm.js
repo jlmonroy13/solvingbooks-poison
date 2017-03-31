@@ -25,7 +25,7 @@ class SubchaptersForm extends Component {
     const subchaptersArray = ObjectUtils.toArray(chapters[chapterNumber].subchapters);
 
     return (
-      <div>
+      <div className="form__border">  
         { subchaptersArray.map(this.onRenderSubchapter) }
       </div>
     );

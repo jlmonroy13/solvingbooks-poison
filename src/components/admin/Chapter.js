@@ -97,6 +97,7 @@ class Chapter extends Component {
             name="chapterName"
             className="push-half--right"
             placeholder="Nombre"
+            className="form__input form__input--medium"
           />
           <div className="inline-block">
             <input
@@ -104,11 +105,15 @@ class Chapter extends Component {
               onChange={this.onChangeField}
               type="number"
               name={hasSubchapters ? 'subchapters' : 'exercises'}
-              className=""
-              placeholder={hasSubchapters ? '# Subcapitulos' : '# Ejercicios'}
+              className={hasSubchapters ? 'form__input form__input--medium' : 'form__input form__input--large'}
+              placeholder={hasSubchapters ? 'Subcapitulos' : 'Ejercicios'}
             />
             {hasSubchapters ?
-              <button type="button" onClick={this.onAddSubchapters}>Agregar Subcapítulos</button>
+              <button
+                type="button"
+                onClick={this.onAddSubchapters}
+                className="button button--wide button--basic bold inline-block"
+              >Agregar Subcapítulos</button>
             : ''}
           </div>
         </div>

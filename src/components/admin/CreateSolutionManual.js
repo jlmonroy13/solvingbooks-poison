@@ -117,7 +117,7 @@ class CreateSolutionManual extends Component {
 
     return (
       <div className="container">
-      <h1>Crear Solucionario</h1>
+        <h1>Crear Solucionario</h1>
         <form autoComplete="off">
           <div>
             <div>
@@ -128,7 +128,7 @@ class CreateSolutionManual extends Component {
                 type="text"
                 name="name"
                 id="name"
-                className=""
+                className="form__input push-half--bottom"
               />
             </div>
             <div>
@@ -139,7 +139,7 @@ class CreateSolutionManual extends Component {
                 type="text"
                 name="urlName"
                 id="urlName"
-                className=""
+                className="form__input push-half--bottom"
               />
             </div>
             <div className="inline-block push--right">
@@ -161,9 +161,13 @@ class CreateSolutionManual extends Component {
                 type="number"
                 name="chapters"
                 id="chapters"
-                className=""
+                className="form__input form__input--small"
               />
-              <button type="button" onClick={this.onAddChapters}>Agregar</button>
+              <button
+                type="button"
+                onClick={this.onAddChapters}
+                className="button button--wide button--basic bold"
+              >Agregar Capítulos</button>
             </div>
           </div>
           {storeChapters[1] ?
@@ -176,7 +180,10 @@ class CreateSolutionManual extends Component {
           :''}
         </form>
         { (storeChapters[1] && storeChapters[1].exercises) || (storeChapters[1] && storeChapters[1].subchapters && storeChapters[1].subchapters[1]) ?
-          <button onClick={this.onClickCreateJSON}>Crear Solucionario</button>
+          <button
+            onClick={this.onClickCreateJSON}
+            className="button button--wide button--gray bold push--bottom"
+          >Crear Solucionario</button>
         :''}
       </div>
     );

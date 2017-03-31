@@ -80,3 +80,34 @@
     max-width: 100%;
   }
 }
+
+.form {
+  &__input {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid rgba($gray-label, 0.3);
+    padding: $half-spacing-unit/2 $half-spacing-unit;
+    outline: none;
+    &--small {
+      width: 20%;
+      display: inline-block;
+      margin: 0 $half-spacing-unit;
+    }
+    &--medium {
+      width: 40%;
+      display: inline-block;
+      margin: 0 $half-spacing-unit;
+    }
+    &--large {
+      width: 68%;
+      display: inline-block;
+      margin: 0 $half-spacing-unit;
+    }
+  }
+  &__border {
+    padding: $base-spacing-unit;
+    border-radius: 8px;
+    border: 1px solid $gray-highlight;
+    background-color: rgba($gray-bckgr, 0.5);
+  }
+}

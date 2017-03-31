@@ -53,7 +53,7 @@ class Subchapter extends Component {
             onChange={this.onChangeField}
             type="text"
             name="subchapterName"
-            className="push-half--right"
+            className="form__input form__input--medium"
             placeholder="Nombre"
           />
           <div className="inline-block">
@@ -62,8 +62,8 @@ class Subchapter extends Component {
               onChange={this.onChangeField}
               type="number"
               name="exercises"
-              className=""
-              placeholder="# Ejercicios"
+              className="form__input form__input--large"
+              placeholder="Ejercicios"
             />
           </div>
         </div>
