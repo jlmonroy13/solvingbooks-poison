@@ -128,28 +128,28 @@ class Searcher extends Component {
                   onValueChange={this.onSelectedBook}
                   value={bookName}
                 />
-                <div className="search__subsection">
-                  <div className="search__subsection-group">
+                <div className="grid">
+                  <div className="grid__item medium--two-fifths">
                     <SimpleSelect
                       placeholder="Capítulo"
                       className="search__subsection-input"
-                      options={chapters && chapters.map(chapter => ({label: chapter.number.toString(), value: chapter.number.toString()}))}
+                      options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: chapter.number.toString()}))}
                       onValueChange={this.onSelectedChapter}
                       disabled={!bookName}
                       value={chapter}
                     />
                   </div>
-                  <div className="search__subsection-group">
+                  <div className="grid__item medium--two-fifths">
                     <SimpleSelect
                       placeholder="Subcapítulo"
                       className="search__subsection-input"
-                      options={subchapters && subchapters.map(subchapter => ({label: subchapter.number.toString(), value: subchapter.number.toString()}))}
+                      options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: subchapter.number.toString()}))}
                       disabled={!chapter || !subchapters}
                       onValueChange={this.onSelectedSubchapter}
                       value={subchapter}
                     />
                   </div>
-                  <div className="search__subsection-group">
+                  <div className="grid__item medium--one-fifth">
                     <SimpleSelect
                       placeholder="Ejercicio"
                       className="search__subsection-input"
