@@ -1,0 +1,27 @@
+#nprogress .bar {
+  background-color: $gray-bckgr;
+  height: 4px;
+}
+
+#nprogress .spinner {
+  border-top-color: $gray-bckgr;
+  border-left-color: $gray-bckgr;
+  top: 50%;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 4px;
+  padding: 15px;
+}
+
+#nprogress .spinner-icon {
+  border: solid 5px transparent;
+  border-top-color: $gray-bckgr;
+  border-left-color: $gray-bckgr;
+  width: 35px;
+  height: 35px;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px $gray-bckgr, 0 0 5px $gray-bckgr;
+}

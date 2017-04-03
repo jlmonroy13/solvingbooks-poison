@@ -95,7 +95,6 @@ class Chapter extends Component {
             onChange={this.onChangeField}
             type="text"
             name="chapterName"
-            className="push-half--right"
             placeholder="Nombre"
             className="form__input form__input--medium"
           />

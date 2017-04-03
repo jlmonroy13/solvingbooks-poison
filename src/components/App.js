@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Alert from 'react-s-alert';
+import { Spinner } from 'react-redux-spinner';
 import 'react-s-alert/dist/s-alert-default.css';
 
 // This is a class-based component because the current
@@ -11,6 +12,7 @@ class App extends React.Component {
       <div>
         {this.props.children}
         <Alert stack={{limit: 3}} />
+        <Spinner />
       </div>
     );
   }
