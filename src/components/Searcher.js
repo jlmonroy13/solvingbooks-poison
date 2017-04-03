@@ -133,7 +133,7 @@ class Searcher extends Component {
                     <SimpleSelect
                       placeholder="Capítulo"
                       className="search__subsection-input"
-                      options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: chapter.number.toString()}))}
+                      options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: (`${chapter.number.toString()} - ${chapter.name}`)}))}
                       onValueChange={this.onSelectedChapter}
                       disabled={!bookName}
                       value={chapter}
@@ -143,7 +143,7 @@ class Searcher extends Component {
                     <SimpleSelect
                       placeholder="Subcapítulo"
                       className="search__subsection-input"
-                      options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: subchapter.number.toString()}))}
+                      options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: (`${subchapter.number.toString()} - ${subchapter.name}`)}))}
                       disabled={!chapter || !subchapters}
                       onValueChange={this.onSelectedSubchapter}
                       value={subchapter}
