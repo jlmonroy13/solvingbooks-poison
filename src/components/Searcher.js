@@ -152,7 +152,7 @@ class Searcher extends Component {
                   <div className="grid__item medium--one-fifth">
                     <SimpleSelect
                       placeholder="Ejercicio"
-                      className="search__subsection-input"
+                      className="search__subsection-input search__subsection-input--small"
                       options={exercises && exercises.map(exercise => ({label: exercise.number.toString(), value: exercise.number.toString()}))}
                       disabled={exercises && exercises.length === 0}
                       onValueChange={this.onSelectedExercise}

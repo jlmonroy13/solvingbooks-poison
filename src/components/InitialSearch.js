@@ -41,7 +41,7 @@ class InitialSearch extends Component {
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
         <div className="grid grid--center">
-          <div className="grid__item five-twelfths">
+          <div className="grid__item one-half">
             <SimpleSelect
               placeholder="Selecciona un libro"
               options={solutionManuals.map(book => ({label: book.name, value: book.urlName}))}

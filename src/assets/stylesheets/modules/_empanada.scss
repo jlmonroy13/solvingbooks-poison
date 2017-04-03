@@ -41,11 +41,18 @@
       }
       span {
         white-space: nowrap;
-        width: 14em;
+        width: 207px;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: inline-block;
+      }
+      &--small {
+        span {
+          width: 4em;
+        }
       }
     }
+
   }
   &__form{
     display: inline-block;
