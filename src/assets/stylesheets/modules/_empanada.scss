@@ -1,4 +1,19 @@
 .search {
+  &__display {
+    margin-top: $base-spacing-unit*7;
+    display: block;
+    &-title {
+      max-width: 539px;
+      margin: auto;
+    }
+    &-icon {
+      position: absolute;
+      top: 530px;
+      right: 150px;
+      transform: rotate(-90deg);
+      width: 120px;
+    }
+  }
   &__header {
     background-color: rgba($gray-bckgr, 0.4);
     border-bottom: 2px solid $gray-bckgr;

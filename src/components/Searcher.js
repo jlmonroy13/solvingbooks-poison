@@ -23,6 +23,7 @@ class Searcher extends Component {
     this.onSelectedSubchapter = this.onSelectedSubchapter.bind(this);
     this.onSelectedExercise = this.onSelectedExercise.bind(this);
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
+    this.setImage = this.setImage.bind(this);
   }
 
   componentDidMount() {
@@ -41,14 +42,22 @@ class Searcher extends Component {
     this.onChangeBook(bookName);
   }
 
+  setImage() {
+    const { exercise, exercises } = this.state;
+    this.props.onSetStatusRequestFalse();
+    const imageUrl = exercises[parseInt(exercise.value) - 1].imageUrl;
+    this.props.onSetImageUrl(imageUrl);
+  }
+
   onSubmitSearchForm(e) {
     e.preventDefault();
-    const { bookName, chapter, subchapter, exercise, exercises, subchapters } = this.state;
+    const { bookName, chapter, subchapter, exercise, subchapters } = this.state;
     if (!bookName || !chapter || (!subchapter && subchapters && subchapters.length < 0) || !exercise) {
       Alert.error(`Debes seleccionar todos los campos.`);
     } else {
-      const imageUrl = exercises[parseInt(exercise.value) - 1].imageUrl;
-      this.props.onSetImageUrl(imageUrl);
+      this.props.onSetImageUrl('loading');
+      this.props.onSetStatusRequestTrue();
+      setTimeout(this.setImage, 200);
     }
   }
 
@@ -176,6 +185,8 @@ class Searcher extends Component {
 Searcher.propTypes = {
   bookNameUrl: PropTypes.string,
   onSetImageUrl: PropTypes.func,
+  onSetStatusRequestFalse: PropTypes.func,
+  onSetStatusRequestTrue: PropTypes.func,
   solutionManuals: PropTypes.array,
 };
 

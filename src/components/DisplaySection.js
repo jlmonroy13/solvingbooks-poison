@@ -10,15 +10,21 @@ class DisplaySection extends Component {
       <div>
         <div className="exercise__container">
           <div className="exercise__inner-container">
-            { !imageUrl ?
-              <h1>¡Este ejercicio no esta disponible aún!</h1>
+            { imageUrl === 'loading' ?
+              ''
             :
               imageUrl === 'empty' ?
                 <h1>¡Aqui va a salir el resultado de tu busqueda!</h1>
               :
-                <img src={imageUrl} className="exercise__image"/>
+                !imageUrl ?
+                  <span className="search__display">
+                    <h1>Este ejercicio no esta disponible.</h1>
+                    <h1 className="search__display-title">Si lo necesitas con urgencia, escribenos y lo subiremos inmediatamente.</h1>
+                    <img src={require('../assets/images/arrow.svg')} className="search__display-icon" />
+                  </span>
+                :
+                  <img src={imageUrl} className="exercise__image"/>
             }
-
           </div>
         </div>
       </div>

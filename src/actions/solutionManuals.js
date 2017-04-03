@@ -35,4 +35,6 @@ const setSolutionManuals = (callback) => {
 
 export {
 	setSolutionManuals,
+	setStatusRequestFalse,
+	setStatusRequestTrue,
 };
