@@ -14,12 +14,12 @@ class DisplaySection extends Component {
               ''
             :
               imageUrl === 'empty' ?
-                <h1>¡Aqui va a salir el resultado de tu busqueda!</h1>
+                <h1 className="exercise__message">¡Aqui va a salir el resultado de tu busqueda!</h1>
               :
                 !imageUrl ?
                   <span className="search__display">
-                    <h1>Este ejercicio no esta disponible.</h1>
-                    <h1 className="search__display-title">Si lo necesitas con urgencia, escribenos y lo subiremos inmediatamente.</h1>
+                    <h1 className="exercise__message">Este ejercicio no esta disponible.</h1>
+                    <h1 className="search__display-title exercise__message">Si lo necesitas con urgencia, escribenos y lo subiremos inmediatamente.</h1>
                     <img src={require('../assets/images/arrow.svg')} className="search__display-icon" />
                   </span>
                 :

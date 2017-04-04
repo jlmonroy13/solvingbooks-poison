@@ -37,19 +37,20 @@ class InitialSearch extends Component {
 
   render() {
     const { solutionManuals } = this.props;
-
     return (
       <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
-        <div className="grid grid--center">
-          <div className="grid__item one-half">
-            <SimpleSelect
-              placeholder="Selecciona un libro"
-              options={solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
-              onValueChange={this.onSelectedBook}
-              className="search__main-input"
-            />
-            <div className="push--top grid--center">
-              <button className="button button--wide button--gray bold">Buscar</button>
+        <div className="search__main-container">
+          <div className="grid grid--center">
+            <div className="grid__item medium--one-half">
+              <SimpleSelect
+                placeholder="Selecciona un libro"
+                options={solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
+                onValueChange={this.onSelectedBook}
+                className="search__main-input"
+              />
+              <div className="push--top grid--center">
+                <button className="button button--wide button--gray bold">Buscar</button>
+              </div>
             </div>
           </div>
         </div>

@@ -127,9 +127,11 @@ class Searcher extends Component {
     return (
       <header className="search__header">
           <div className="search__main">
-            <Link className="search__title" to="/">El Solucionario.io</Link>
-            <form className="inline-block" onSubmit={this.onSubmitSearchForm}>
-              <div className="search__form">
+            <div className="search__title">
+              <Link to="/">ElSolucionario.io</Link>
+            </div>
+            <form className="search__form" onSubmit={this.onSubmitSearchForm}>
+              <div>
                 <SimpleSelect
                   placeholder="Selecciona un libro"
                   className="search__main-input"

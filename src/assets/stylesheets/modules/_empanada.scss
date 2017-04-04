@@ -1,7 +1,18 @@
 .search {
+  &__main-title {
+    @include rem(40);
+    @media #{$medium}{
+      @include rem(50);
+    }
+  }
+  &__main-container {
+    padding: $base-spacing-unit;
+  }
   &__display {
-    margin-top: $base-spacing-unit*7;
     display: block;
+    @media #{$medium}{
+      margin-top: $base-spacing-unit*7;
+    }
     &-title {
       max-width: 539px;
       margin: auto;
@@ -12,6 +23,10 @@
       right: 150px;
       transform: rotate(-90deg);
       width: 120px;
+      display: none;
+      @media #{$medium}{
+        display: block;
+      }
     }
   }
   &__header {
@@ -19,11 +34,17 @@
     border-bottom: 2px solid $gray-bckgr;
   }
   &__title {
-    display: inline-block;
-    margin: 0 $base-spacing-unit 0 0;
+    margin: 0 $base-spacing-unit $half-spacing-unit 0;
     vertical-align: top;
+    text-align: center;
     @include rem(32);
-    color: $gray-label;
+    a {
+      color: $gray-label;
+    }
+    @media #{$medium}{
+      display: inline-block;
+      text-align: $start;
+    }
   }
   &__main {
     @include rem(16, 'padding');
@@ -53,6 +74,10 @@
         background: #fff !important;
         border: none !important;
         box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+        margin-bottom: $half-spacing-unit;
+        @media #{$medium}{
+          margin: 0;
+        }
       }
       span {
         white-space: nowrap;
@@ -72,8 +97,13 @@
   &__form{
     display: inline-block;
     vertical-align: top;
-    min-width: 720px;
     margin-right: $base-spacing-unit;
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    @media #{$medium}{
+      padding-right: $base-spacing-unit*6;
+    }
   }
   &__button {
     display: inline-block;
@@ -81,23 +111,48 @@
     button {
       margin-top: 2px;
     }
+    @media #{$medium}{
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 }
 
 .exercise {
   &__container {
-    padding: $base-spacing-unit;
+    padding: $half-spacing-unit;
+    padding-bottom: 0;
+    @media #{$medium}{
+      padding: $base-spacing-unit;
+    }
+  }
+  &__message {
+    @include rem(25);
+    max-width: 300px;
+    margin: $base-spacing-unit auto;
+    @media #{$medium}{
+      @include rem(38);
+      max-width: initial;
+    }
   }
   &__inner-container {
     overflow-y: auto;
     border: 2px dashed rgba($gray, 0.3);
-    height: calc(100vh - 164px);
+    height: calc(100vh - 360px);
     padding: $base-spacing-unit 0;
     border-radius: 3px;
     text-align: center;
+    overflow-x: auto;
+    @media #{$medium}{
+      height: calc(100vh - 164px);
+    }
   }
   &__image {
-    max-width: 100%;
+    max-width: initial;
+    @media #{$medium}{
+      max-width: 100%;
+    }
   }
 }
 
@@ -130,4 +185,8 @@
     border: 1px solid $gray-highlight;
     background-color: rgba($gray-bckgr, 0.5);
   }
+}
+
+.react-selectize-search-field-and-selected-values {
+  max-height: 50px;
 }
