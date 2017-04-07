@@ -1,5 +1,10 @@
 const initialState = {
 	imageUrl: 'empty',
+	solutionManual: {},
+	bookName: '',
+	chapter: '',
+	subchapter: '',
+	exercise: '',
 };
 
 export default function searcherReducer(state = initialState, action) {
@@ -8,6 +13,16 @@ export default function searcherReducer(state = initialState, action) {
 			return {
 				...state,
 				imageUrl: action.payload,
+			};
+		case 'SET_SOLUTION_MANUAL':
+			return {
+				...state,
+				solutionManual: action.payload,
+			};
+		case 'SET_SELECTIONS':
+			return {
+				...state,
+				...action.payload,
 			};
 		default:
 			return state;

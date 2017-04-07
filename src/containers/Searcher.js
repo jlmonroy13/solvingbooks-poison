@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Searcher from '../components/Searcher';
-import { setImageUrl } from '../actions/searcher';
+import { setImageUrl, setSolutionManual, setSelections } from '../actions/searcher';
 import { setStatusRequestFalse, setStatusRequestTrue } from '../actions/solutionManuals';
 import ObjectUtils from '../utils/object';
 
@@ -22,6 +22,12 @@ const mapDispatchToProps = dispatch => ({
   },
   onSetStatusRequestTrue: () => {
     dispatch(setStatusRequestTrue());
+  },
+  onSetSolutionManual: (solutionManual) => {
+    dispatch(setSolutionManual(solutionManual));
+  },
+  onSetSelections: (obj) => {
+    dispatch(setSelections(obj));
   },
 });
 

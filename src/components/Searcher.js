@@ -62,9 +62,16 @@ class Searcher extends Component {
   }
 
   onChangeBook(bookName) {
-    const { solutionManuals } = this.props;
-    const books = solutionManuals.filter(book => book.name === bookName);
-    const chapters = books && books[0] && books[0].chapters;
+    const { solutionManuals, onSetSolutionManual, onSetSelections } = this.props;
+    const book = solutionManuals.filter(bookItem => bookItem.name === bookName);
+    const chapters = book && book[0] && book[0].chapters;
+    onSetSolutionManual(book[0]);
+    onSetSelections({
+      bookName: bookName || '',
+      chapter: '',
+      subchapter: '',
+      exercise: '',
+    });
     this.setState({
       bookName: bookName ? {label: bookName, value: bookName} : '',
       chapters,
@@ -85,6 +92,7 @@ class Searcher extends Component {
   }
 
   onSelectedChapter(option) {
+    const { onSetSelections } = this.props;
     const selectedChapter = option && option.value;
     const stateChapters = this.state.chapters;
     const chapters = stateChapters && stateChapters.filter(chapter => chapter.number === parseInt(selectedChapter));
@@ -93,6 +101,11 @@ class Searcher extends Component {
     if (!subchapters) {
       exercises = chapters && chapters[0] && chapters[0].exercises;
     }
+    onSetSelections({
+      chapter: option ? selectedChapter : '',
+      subchapter: '',
+      exercise: '',
+    });
     this.setState({
       chapter: option ? {label: selectedChapter, value: selectedChapter} : '',
       subchapters,
@@ -103,10 +116,15 @@ class Searcher extends Component {
   }
 
   onSelectedSubchapter(option) {
+    const { onSetSelections } = this.props;
     const selectedSubchapter = option && option.value;
     const stateSubchapters = this.state.subchapters;
     const subchapters = stateSubchapters && stateSubchapters.filter(subchapter => subchapter.number === parseInt(selectedSubchapter));
     const exercises = subchapters && subchapters[0] && subchapters[0].exercises;
+    onSetSelections({
+      subchapter: option ? selectedSubchapter : '',
+      exercise: '',
+    });
     this.setState({
       subchapter: option ? {label: selectedSubchapter, value: selectedSubchapter} : '',
       exercises,
@@ -115,7 +133,9 @@ class Searcher extends Component {
   }
 
   onSelectedExercise(option) {
+    const { onSetSelections } = this.props;
     const exercise = option && option.value;
+    onSetSelections({ exercise: option ? exercise : '' });
     this.setState({
       exercise: option ? {label: exercise, value: exercise} : '',
     });
@@ -189,6 +209,8 @@ Searcher.propTypes = {
   onSetImageUrl: PropTypes.func,
   onSetStatusRequestFalse: PropTypes.func,
   onSetStatusRequestTrue: PropTypes.func,
+  onSetSolutionManual: PropTypes.func,
+  onSetSelections: PropTypes.func,
   solutionManuals: PropTypes.array,
 };
 

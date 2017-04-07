@@ -27,10 +27,13 @@ class InitialSearch extends Component {
   }
 
   onSelectedBook(option) {
-    const value = option && option.label;
-    const urlName = option && option.value;
-    this.setState({bookName: value, urlName});
-    if (value) {
+    const { solutionManualsObj, onSetSolutionManual } = this.props;
+    const bookName = option && option.label;
+    const id = option && option.value;
+    const { urlName } = solutionManualsObj[id];
+    this.setState({bookName, urlName});
+    if (bookName) {
+      onSetSolutionManual(solutionManualsObj[id]);
       browserHistory.push(`/libro/${urlName}`);
     }
   }
@@ -44,7 +47,7 @@ class InitialSearch extends Component {
             <div className="grid__item medium--one-half">
               <SimpleSelect
                 placeholder="Selecciona un libro"
-                options={solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
+                options={solutionManuals.map(book => ({label: book.name, value: book.id}))}
                 onValueChange={this.onSelectedBook}
                 className="search__main-input"
               />
@@ -61,7 +64,9 @@ class InitialSearch extends Component {
 
 InitialSearch.propTypes = {
   onSetModalState: PropTypes.func.isRequired,
+  onSetSolutionManual: PropTypes.func.isRequired,
   solutionManuals: PropTypes.array,
+  solutionManualsObj: PropTypes.object,
 };
 
 export default InitialSearch;
