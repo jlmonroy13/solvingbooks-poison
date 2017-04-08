@@ -45,7 +45,6 @@ class DisplaySection extends Component {
                   <span className="search__display">
                     <h1 className="exercise__message">Este ejercicio no esta disponible.</h1>
                     <h1 className="search__display-title exercise__message">Si lo necesitas con urgencia, escribenos y lo subiremos inmediatamente.</h1>
-                    <img src={require('../assets/images/arrow.svg')} className="search__display-icon" />
                   </span>
                 :
                   <img src={imageUrl} className="exercise__image"/>

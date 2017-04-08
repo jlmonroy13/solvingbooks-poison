@@ -13,14 +13,20 @@ $brand-danger:           #d9534f !default;
 $brand-ui:               #DFDFDF;
 $brand-default:          #DFDFDF;
 
+//APP COLORS
+$sapphire:              #2130A0;
+$warm-grey:             #878787;
 
-$color-brand: 					beige;
+$color-brand: 					$sapphire;
 
 $body-bg:								white;
 $hr-border:							$gray-lighter;
 $link-color:						$brand-info;
 $link-hover-color:			darken($link-color, 15%);
-$color-text-body:       $gray;
+$color-text-body:       $warm-grey;
+
+
+
 
 //APP COLORS
 $gray-bckgr: 						#ECEDEE;
@@ -34,3 +40,6 @@ $red:										#8B181C;
 $yellow:								#EAE735;
 $green:									#21B166;
 $dark-green:						#1EA29B;
+
+
+
