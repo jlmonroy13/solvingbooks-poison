@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ChaptersFormContainer } from '../../containers';
+import ChaptersFormContainer from '../../containers/admin/ChaptersForm';
 import ArrayUtils from '../../utils/array';
 import ObjectUtils from '../../utils/object';
 import Alert from 'react-s-alert';
