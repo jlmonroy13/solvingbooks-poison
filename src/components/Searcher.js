@@ -54,10 +54,6 @@ class Searcher extends Component {
     const { bookName, chapter, subchapter, exercise, subchapters } = this.state;
     if (!bookName || !chapter || (!subchapter && subchapters && subchapters.length < 0) || !exercise) {
       Alert.error(`Debes seleccionar todos los campos.`);
-    } else {
-      this.props.onSetImageUrl('loading');
-      this.props.onSetStatusRequestTrue();
-      setTimeout(this.setImage, 200);
     }
   }
 
@@ -139,6 +135,9 @@ class Searcher extends Component {
     this.setState({
       exercise: option ? {label: exercise, value: exercise} : '',
     });
+    this.props.onSetImageUrl('loading');
+    this.props.onSetStatusRequestTrue();
+    setTimeout(this.setImage, 100);
   }
 
   render() {
