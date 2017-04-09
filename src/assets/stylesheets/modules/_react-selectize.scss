@@ -1,0 +1,74 @@
+.simple-select.react-selectize.default {
+  font-family: 'Rubik';
+  &.dropdown-menu {
+    .option-wrapper {
+      border-bottom: 1px solid rgba($gray-light, 0.2);
+      font-weight: 300;
+      padding: $half-spacing-unit/3 0 $half-spacing-unit/3 $half-spacing-unit;
+      &.highlight {
+        background-color: rgba($gray-lighter, 0.7);
+      }
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+  &.root-node {
+    width: 100%;
+    &.open {
+      .react-selectize-control {
+        background: $white;
+        .react-selectize-placeholder {
+          color: $brownish-grey;
+          font-weight: 400;
+        }
+      }
+      .react-selectize-control {
+        .react-selectize-toggle-button-container {
+          &:before {
+            color: $cornflower;
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+    .react-selectize-control {
+      @include rem(16);
+      @include transition('0.3s');
+      border: none;
+      border-radius: $input-border-radius;
+      color: $input-color;
+      font-weight: 300;
+      padding-left: $half-spacing-unit;
+      padding-top: 10px;
+      @media #{$medium} {
+        @include rem(18);
+      }
+      .react-selectize-placeholder {
+        @include transition('0.3s');
+        color: $input-color-placeholder;
+      }
+      .resizable-input {
+        @include transition('0.3s');
+        color: $input-color;
+        position: relative;
+        top: -4px;
+      }
+      .react-selectize-toggle-button-container {
+        position: relative;
+        &:before {
+          @include rem(10);
+          @include transition('0.3s');
+          font-family: 'icon-family';
+          color: $white;
+          content: '\e901';
+          display: block;
+          position: absolute;
+        }
+        .react-selectize-toggle-button {
+          display: none;
+        }
+      }
+    }
+  }
+}

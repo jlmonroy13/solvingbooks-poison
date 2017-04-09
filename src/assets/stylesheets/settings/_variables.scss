@@ -68,7 +68,7 @@ $border-radius-large:               5px;
 $border-radius-small:               3px;
 
 // Buttons
-$btn-font-family: 			inherit; //puede ser inherit
+$btn-font-family: 			          inherit; //puede ser inherit
 $btn-font-weight:                	300;
 $button-border-width:            	1px;
 
@@ -96,19 +96,19 @@ $btn-danger-color:               	#fff;
 $btn-danger-bg:                  	$brand-danger;
 $btn-danger-border:              	darken($btn-danger-bg, 5%);
 
-$btn-border-radius:        	 	 	4px;
+$btn-border-radius:        	 	 	  3px;
 $btn-link-disabled-color:        	$gray-light;
 
 
 //== Forms
 $input-bg:                       	#fff;
 $input-bg-disabled:              	$gray-lighter;
-$input-color:                    	#9B9B9B;
+$input-color:                    	$white;
 $input-border-width:             	1px;
 $input-border:                   	#EAEAEA;
-$input-border-radius:            	0;
+$input-border-radius:            	3px;
 $input-border-focus:             	#66afe9;
-$input-color-placeholder:        	#cccccc;
+$input-color-placeholder:        	$white;
 $input-height-base:              	($line-height-computed + ($padding-base-vertical * 2)) + ($button-border-width * 2);
 $input-height-large:             	(floor($font-size-base * $line-height-base) + ($padding-large-vertical * 2));
 $input-height-small:             	(floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2));

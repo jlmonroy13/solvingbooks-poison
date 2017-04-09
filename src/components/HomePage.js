@@ -1,12 +1,17 @@
 import React from 'react';
-import { InitialSearchContainer, AuthenticationModalContainer } from '../containers';
+import { InitialSearchContainer } from '../containers';
 
 const HomePage = () => (
-  <div className="center-x-y text--center">
-    <h1 className="search__main-title">ElSolucionario.io</h1>
+  <section className="landing-page">
+    <h1 className="landing-page__title">
+      <span className="sr-only">El Solucionario</span>
+      <img src="../assets/images/logo.svg" alt="Logo El Solucionario" className="landing-page__logo"/>
+    </h1>
+    <div className="text--center">
+      <p className="landing-page__legend">Todas las respuestas en un solo lugar</p>
+    </div>
     <InitialSearchContainer />
-    <AuthenticationModalContainer />
-  </div>
+  </section>
 );
 
 export default HomePage;

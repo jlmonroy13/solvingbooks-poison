@@ -1,6 +1,6 @@
 .button {
-  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-small, $line-height-small, $btn-border-radius);
   @include user-select(none);
+  @include transition('0.3s ease-out');
   display: inline-block;
   margin-bottom: 0;
   font-weight: $btn-font-weight;
@@ -12,19 +12,18 @@
   background-image: none;
   border: $button-border-width solid transparent;
   white-space: nowrap;
-  transition: all 0.2s ease-out;
+  padding: 12px 16px;
   &,
   &:active,
   &.is-active {
-    &:focus {
-      @include tab-focus();
-    }
+    outline: none;
   }
 
   &:hover,
   &:focus {
     color: $btn-default-color;
     text-decoration: none;
+    outline: none;
   }
 
   &:active,

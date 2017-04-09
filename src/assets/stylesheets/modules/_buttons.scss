@@ -1,86 +1,15 @@
-.button--link-upper {
-  @extend .button--link;
-  font-family: $font-family-sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.button--link-gray {
-  color: $gray-text;
-  @include rem(18);
-  &:hover,
-  &:focus,
-  &:active {
-    color: $blue;
-    text-decoration: none;
+.button--primary {
+  @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.47));
+  @include rem(17);
+  color: $color-brand;
+  background-color: $white;
+  border-radius: $btn-border-radius;
+  font-weight: 700;
+  &:hover {
+    @include box-shadow(0 1px 1px 0 rgba(255, 242, 242, 0.15));
+    background-color: $dark-indigo;
+    color: rgba($cream, 0.65);
   }
 }
 
-.button--dark-green {
-  background-color: $dark-green;
-  color: #fff;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: darken($dark-green, 5%);
-  }
-}
 
-.button--light-green {
-  background-color: $green;
-  color: #fff;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: darken($green, 5%);
-  }
-}
-
-.button--blue {
-  background-color: $blue;
-  color: #fff;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: darken($blue, 5%);
-  }
-}
-
-.button--dark-blue {
-  background-color: $dark-blue;
-  color: #fff;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: darken($dark-blue, 5%);
-  }
-}
-
-.button--gray {
-  color: #fff;
-  background-color: rgba($gray-text, 0.7);
-  transition: 0.5s;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: darken($gray-text, 5%);
-    outline: none;
-  }
-}
-
-.button--basic {
-  color: rgba($gray-text, 0.7);
-  background-color: transparent;
-  border: 1px solid rgba($gray-text, 0.7);
-  transition: 0.5s;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: darken($gray-text, 5%);
-    outline: none;
-  }
-}
-
-.button--mb10 {
-  margin-bottom: 5px;
-}
