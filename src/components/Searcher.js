@@ -144,60 +144,56 @@ class Searcher extends Component {
     const { bookName, chapter, subchapter, exercise, chapters, subchapters, exercises } = this.state;
     const { solutionManuals } = this.props;
     return (
-      <header className="search__header">
-          <div className="search__main">
-            <div className="search__title">
-              <Link to="/">ElSolucionario.io</Link>
+      <header className="header">
+        <Link to="/" className="header__logo">
+          <img src="../assets/images/logo-header.svg" alt="El Solucionario"/>
+        </Link>
+        <form className="search__form" onSubmit={this.onSubmitSearchForm}>
+          <div>
+            <div className="push-half--bottom">
+              <SimpleSelect
+                placeholder="Selecciona un libro"
+                options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
+                onValueChange={this.onSelectedBook}
+                value={bookName}
+              />
             </div>
-            <form className="search__form" onSubmit={this.onSubmitSearchForm}>
-              <div>
-                <SimpleSelect
-                  placeholder="Selecciona un libro"
-                  className="search__main-input"
-                  options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
-                  onValueChange={this.onSelectedBook}
-                  value={bookName}
-                />
-                <div className="grid">
-                  <div className="grid__item medium--two-fifths">
-                    <SimpleSelect
-                      placeholder="Capítulo"
-                      className="search__subsection-input"
-                      options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: (`${chapter.number.toString()} - ${chapter.name}`)}))}
-                      onValueChange={this.onSelectedChapter}
-                      disabled={!bookName}
-                      value={chapter}
-                    />
-                  </div>
-                  <div className="grid__item medium--two-fifths">
-                    <SimpleSelect
-                      placeholder="Subcapítulo"
-                      className="search__subsection-input"
-                      options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: (`${subchapter.number.toString()} - ${subchapter.name}`)}))}
-                      disabled={!chapter || !subchapters}
-                      onValueChange={this.onSelectedSubchapter}
-                      value={subchapter}
-                    />
-                  </div>
-                  <div className="grid__item medium--one-fifth">
-                    <SimpleSelect
-                      placeholder="Ejercicio"
-                      className="search__subsection-input search__subsection-input--small"
-                      options={exercises && exercises.map(exercise => ({label: exercise.number.toString(), value: exercise.number.toString()}))}
-                      disabled={exercises && exercises.length === 0}
-                      onValueChange={this.onSelectedExercise}
-                      value={exercise}
-                    />
-                  </div>
+            <div className="push-half--bottom">
+              <div className="grid">
+                <div className="grid__item medium--two-fifths">
+                  <SimpleSelect
+                    placeholder="Capítulo"
+                    className="header__input"
+                    options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: (`${chapter.number.toString()} - ${chapter.name}`)}))}
+                    onValueChange={this.onSelectedChapter}
+                    disabled={!bookName}
+                    value={chapter}
+                  />
+                </div>
+                <div className="grid__item medium--two-fifths">
+                  <SimpleSelect
+                    placeholder="Subcapítulo"
+                    className="header__input"
+                    options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: (`${subchapter.number.toString()} - ${subchapter.name}`)}))}
+                    disabled={!chapter || !subchapters}
+                    onValueChange={this.onSelectedSubchapter}
+                    value={subchapter}
+                  />
+                </div>
+                <div className="grid__item medium--one-fifth">
+                  <SimpleSelect
+                    placeholder="Ejercicio"
+                    options={exercises && exercises.map(exercise => ({label: exercise.number.toString(), value: exercise.number.toString()}))}
+                    disabled={exercises && exercises.length === 0}
+                    onValueChange={this.onSelectedExercise}
+                    value={exercise}
+                  />
                 </div>
               </div>
-              <div className="search__button">
-                <button
-                  className="button button--wide button--gray bold"
-                >Buscar</button>
-              </div>
-            </form>
+            </div>
           </div>
+          <button className="button button--primary header__button">Buscar</button>
+        </form>
       </header>
     );
   }

@@ -1,13 +1,13 @@
 .landing-page {
+  @include flexbox;
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction(column);
   background-color: $color-brand;
   background-image: url('../images/background-landing.jpg');
   background-position: center;
   height: 100vh;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   color: $white;
   padding: 0 $base-spacing-unit;
   &__logo {

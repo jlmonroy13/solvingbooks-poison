@@ -1,0 +1,65 @@
+.display-section {
+  background-image: url('../images/background-pattern.jpg');
+  height: calc(100vh - 369px);
+  padding: $half-spacing-unit $base-spacing-unit;
+  position: relative;
+  @media #{$medium} {
+    height: calc(100vh - 164px);
+    padding: $base-spacing-unit $base-spacing-unit*4;
+  }
+  &__inner-container {
+    @include box-shadow(0 1px 2px 0 rgba(0, 0, 0, 0.2));
+    @include flexbox;
+    @include justify-content(center);
+    background-color: $white;
+    border-radius: 9px;
+    height: calc(100vh - 391px);
+    overflow-y: auto;
+    padding: $base-spacing-unit 0;
+    @media #{$medium} {
+      height: calc(100vh - 208px);
+    }
+  }
+  &__result {
+    text-align: center;
+  }
+  &__message {
+    @include align-items(center);
+    @include flexbox;
+    @include rem(20);
+    text-align: center;
+    @media #{$medium} {
+      @include rem(28);
+    }
+  }
+  &__image-container {
+    @media #{$medium-max} {
+      overflow-x: auto;
+    }
+  }
+  &__image {
+    @media #{$medium} {
+      max-width: 100%;
+    }
+  }
+  &-share {
+    position: absolute;
+    top: -65px;
+    right: $base-spacing-unit;
+    left: initial;
+    @media #{$medium} {
+      left: $base-spacing-unit;
+      right: initial;
+      top: $base-spacing-unit;
+    }
+    &__item {
+      cursor: pointer;
+      display: inline-block;
+      margin-left: $half-spacing-unit;
+      @media #{$medium} {
+        display: block;
+        margin-bottom: $half-spacing-unit;
+      }
+    }
+  }
+}

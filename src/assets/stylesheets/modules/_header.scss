@@ -1,0 +1,92 @@
+.header {
+  background-image: linear-gradient(179deg, $sapphire, $purpleblue);
+  padding: $base-spacing-unit;
+  position: relative;
+  @media #{$medium} {
+    padding: $base-spacing-unit $base-spacing-unit*6 $base-spacing-unit $base-spacing-unit*13;
+  }
+  &__logo {
+    display: block;
+    text-align: center;
+    margin-bottom: $half-spacing-unit;
+    @media #{$medium} {
+      position: absolute;
+      left: $base-spacing-unit;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &__button {
+    @media #{$medium} {
+      position: absolute;
+      right: $base-spacing-unit;
+      top: $base-spacing-unit;
+    }
+  }
+  .simple-select.react-selectize.default {
+    &.root-node {
+      &.disabled {
+        .react-selectize-control {
+          background: rgba(255, 255, 255, 0.4);
+          opacity: 0.26;
+        }
+      }
+      &.open {
+        .react-selectize-control {
+          background: $white;
+          color: $brownish-grey;
+          font-weight: 400;
+          .react-selectize-placeholder {
+            color: $brownish-grey;
+            font-weight: 400;
+          }
+        }
+        .react-selectize-control {
+          .react-selectize-toggle-button-container {
+            &:before {
+              color: $cornflower;
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+      .react-selectize-control {
+        background: rgba(255, 255, 255, 0.4);
+        @media #{$medium-max} {
+          span {
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+          }
+        }
+      }
+      &.header__input {
+        margin-bottom: $half-spacing-unit;
+        @media #{$medium} {
+          margin: 0;
+        }
+        .option-wrapper,
+        .value-wrapper {
+          span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+          }
+        }
+        .option-wrapper {
+          span  {
+            width: 100%;
+          }
+        }
+        .value-wrapper {
+          span {
+            width: 220px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -44,50 +44,49 @@ class DisplaySection extends Component {
     const TwitterIcon = generateShareIcon('twitter');
 
     return (
-      <div>
-        <div className="display-section-sn">
+      <section className="display-section">
+        <h1 className="sr-only">Display section</h1>
+        <div className="display-section-share">
           <FacebookShareButton
             url={`https://www.elsolucionario.io${pathname}`}
             children={<FacebookIcon size={40} round={true}/>}
-            className="display-section-sn__element"
-            title="ElSolucionario.io - Todas las respuestas en un solo lugar"
+            className="display-section-share__item"
+            title="El Solucionario - Todas las respuestas en un solo lugar"
             description="Ingresa y encuentra los solucionarios de los libros de Ingeniería, es totalmente gratis."
           />
           <TwitterShareButton
             url={`https://www.elsolucionario.io${pathname}`}
             children={<TwitterIcon size={40} round={true}/>}
-            className="display-section-sn__element"
-            title="ElSolucionario.io - Ingresa y encuentra los solucionarios de los libros de Ingeniería, es totalmente gratis."
+            className="display-section-share__item"
+            title="El Solucionario - Ingresa y encuentra los solucionarios de los libros de Ingeniería, es totalmente gratis."
           />
           <WhatsappShareButton
             url={`https://www.elsolucionario.io${pathname}`}
             children={<WhatsappIcon size={40} round={true}/>}
-            className="display-section-sn__element display-section-sn__element--wp"
-            title="ElSolucionario.io - Ingresa y encuentra los solucionarios de los libros de Ingeniería, es totalmente gratis."
+            className="display-section-share__item small--only"
+            title="El Solucionario - Ingresa y encuentra los solucionarios de los libros de Ingeniería, es totalmente gratis."
             separator=" "
           />
         </div>
-        <div className="display-section">
-          <div className="exercise__container">
-            <div className="exercise__inner-container">
-              { imageUrl === 'loading' ?
-                ''
+        <div className="display-section__inner-container">
+          { imageUrl === 'loading' ?
+            ''
+          :
+            imageUrl === 'empty' ?
+              <p className="display-section__message">{displayMessage}</p>
+            :
+              !imageUrl ?
+              <p className="display-section__message">
+                Este ejercicio no esta disponible.<br/>
+                Si lo necesitas con urgencia, escribenos y lo subiremos inmediatamente.
+              </p>
               :
-                imageUrl === 'empty' ?
-                  <h1 className="exercise__message">{displayMessage}</h1>
-                :
-                  !imageUrl ?
-                    <span className="search__display">
-                      <h1 className="exercise__message">Este ejercicio no esta disponible.</h1>
-                      <h1 className="search__display-title exercise__message">Si lo necesitas con urgencia, escribenos y lo subiremos inmediatamente.</h1>
-                    </span>
-                  :
-                    <img src={imageUrl} className="exercise__image"/>
-              }
-            </div>
-          </div>
+                <div className="display-section__image-container">
+                  <img src={imageUrl} className="display-section__image"/>
+                </div>  
+          }
         </div>
-      </div>
+      </section>
     );
   }
 }

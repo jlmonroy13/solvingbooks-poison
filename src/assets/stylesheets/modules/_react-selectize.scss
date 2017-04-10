@@ -4,7 +4,7 @@
     .option-wrapper {
       border-bottom: 1px solid rgba($gray-light, 0.2);
       font-weight: 300;
-      padding: $half-spacing-unit/3 0 $half-spacing-unit/3 $half-spacing-unit;
+      padding: $half-spacing-unit/3 $half-spacing-unit;
       &.highlight {
         background-color: rgba($gray-lighter, 0.7);
       }
@@ -30,6 +30,11 @@
             transform: rotate(180deg);
           }
         }
+        .react-selectize-reset-button-container {
+          &:before {
+            color: $cornflower;
+          }
+        }
       }
     }
     .react-selectize-control {
@@ -49,8 +54,7 @@
         color: $input-color-placeholder;
       }
       .resizable-input {
-        @include transition('0.3s');
-        color: $input-color;
+        color: $brownish-grey;
         position: relative;
         top: -4px;
       }
@@ -66,6 +70,21 @@
           position: absolute;
         }
         .react-selectize-toggle-button {
+          display: none;
+        }
+      }
+      .react-selectize-reset-button-container {
+        position: relative;
+        &:before {
+          @include rem(10);
+          @include transition('0.3s');
+          font-family: 'icon-family';
+          color: $white;
+          content: '\e903';
+          display: block;
+          position: absolute;
+        }
+        .react-selectize-reset-button {
           display: none;
         }
       }
