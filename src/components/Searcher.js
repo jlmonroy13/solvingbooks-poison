@@ -146,7 +146,7 @@ class Searcher extends Component {
     return (
       <header className="header">
         <Link to="/" className="header__logo">
-          <img src="../assets/images/logo-header.svg" alt="El Solucionario"/>
+          <img src={require('../assets/images/logo-header.svg')} alt="El Solucionario"/>
         </Link>
         <form className="search__form" onSubmit={this.onSubmitSearchForm}>
           <div>
