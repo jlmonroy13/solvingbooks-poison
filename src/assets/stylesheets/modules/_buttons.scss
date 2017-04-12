@@ -10,6 +10,9 @@
     background-color: $dark-indigo;
     color: rgba($cream, 0.65);
   }
+  &:focus {
+    color: $color-brand;
+  }
 }
 
 
