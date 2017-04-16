@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import Searcher from '../components/Searcher';
 import { setImageUrl, setSolutionManual, setSelections } from '../actions/searcher';
-import { setStatusRequestFalse, setStatusRequestTrue } from '../actions/solutionManuals';
+import { setStatusRequestFalse, setStatusRequestTrue } from '../actions/spinner';
+import { setModalState } from '../actions/authentication';
 import ObjectUtils from '../utils/object';
 
 const mapStateToProps = (state) => {
@@ -28,6 +29,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSetSelections: (obj) => {
     dispatch(setSelections(obj));
+  },
+  onSetModalState: (status) => {
+    dispatch(setModalState(status));
   },
 });
 

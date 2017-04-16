@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import InitialSearch from '../components/InitialSearch';
-import { setModalState } from '../actions/authentication';
 import { setSolutionManual } from '../actions/searcher';
 import ObjectUtils from '../utils/object';
 
@@ -16,9 +15,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSetModalState: (status) => {
-    dispatch(setModalState(status));
-  },
   onSetSolutionManual: (solutionManual) => {
     dispatch(setSolutionManual(solutionManual));
   },

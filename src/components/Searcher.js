@@ -14,7 +14,7 @@ class Searcher extends Component {
       exercise: '',
       exercises: [],
       chapters: [],
-      subchapters: []
+      subchapters: [],
     };
 
     this.onChangeBook = this.onChangeBook.bind(this);
@@ -129,14 +129,15 @@ class Searcher extends Component {
   }
 
   onSelectedExercise(option) {
-    const { onSetSelections } = this.props;
+    const { onSetSelections, onSetImageUrl, onSetStatusRequestTrue, onSetModalState } = this.props;
     const exercise = option && option.value;
     onSetSelections({ exercise: option ? exercise : '' });
     this.setState({
       exercise: option ? {label: exercise, value: exercise} : '',
     });
-    this.props.onSetImageUrl('loading');
-    this.props.onSetStatusRequestTrue();
+    onSetImageUrl('loading');
+    onSetStatusRequestTrue();
+    onSetModalState(true);
     setTimeout(this.setImage, 100);
   }
 
@@ -206,6 +207,7 @@ Searcher.propTypes = {
   onSetStatusRequestTrue: PropTypes.func,
   onSetSolutionManual: PropTypes.func,
   onSetSelections: PropTypes.func,
+  onSetModalState: PropTypes.func,
   solutionManuals: PropTypes.array,
 };
 

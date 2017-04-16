@@ -1,17 +1,4 @@
-import database from '../utils/database';
-import { pendingTask, begin, end } from 'react-redux-spinner';
-
-const setStatusRequestFalse = () => ({
-	type: 'SET_STATUS_REQUEST',
-	payload: false,
-	[ pendingTask ]: end,
-});
-
-const setStatusRequestTrue = () => ({
-	type: 'SET_STATUS_REQUEST',
-	payload: true,
-	[ pendingTask ]: begin,
-});
+import { setStatusRequestFalse, setStatusRequestTrue } from './spinner';
 
 const onSetSolutionManuals = solutionManuals => ({
 	type: 'SET_SOLUTION_MANUALS',
@@ -19,9 +6,11 @@ const onSetSolutionManuals = solutionManuals => ({
 });
 
 const setSolutionManuals = (callback) => {
-	return dispatch => {
+	return (dispatch, getState, getFirebase) => {
 		dispatch(setStatusRequestTrue());
-		database.once('value').then(onSuccess);
+		const firebase = getFirebase();
+		const firebaseRef = firebase.ref('/solutionManuals');
+		firebaseRef.once('value').then(onSuccess);
 
 		function onSuccess(snap) {
 			dispatch(setStatusRequestFalse());
@@ -35,6 +24,4 @@ const setSolutionManuals = (callback) => {
 
 export {
 	setSolutionManuals,
-	setStatusRequestFalse,
-	setStatusRequestTrue,
 };

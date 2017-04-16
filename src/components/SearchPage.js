@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { DisplaySectionContainer, SearcherContainer } from '../containers';
+import { DisplaySectionContainer, SearcherContainer, AuthenticationModalContainer } from '../containers';
 
 const SearchPage = (props) => {
   const { bookNameUrl } = props.params;
@@ -7,6 +7,7 @@ const SearchPage = (props) => {
     <div>
       <SearcherContainer bookNameUrl={bookNameUrl}/>
       <DisplaySectionContainer/>
+      <AuthenticationModalContainer />
     </div>
   );
 };

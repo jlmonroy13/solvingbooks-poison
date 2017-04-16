@@ -1,6 +1,17 @@
 import React, { PropTypes } from 'react';
 import ReactModal from 'react-modal';
 import { TextFieldGroup } from './';
+import Alert from 'react-s-alert';
+import { connect } from 'react-redux'
+import { pathToJS } from 'react-redux-firebase'
+@connect(
+  // Map state to props
+  ({ firebase }) => ({
+    authError: pathToJS(firebase, 'authError'),
+    auth: pathToJS(firebase, 'auth'),
+    profile: pathToJS(firebase, 'profile')
+  })
+)
 
 class AuthenticationModal extends React.Component {
   constructor() {
@@ -16,29 +27,42 @@ class AuthenticationModal extends React.Component {
       isSignUp: true,
     };
 
-    this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onChangeAuthenticationForm = this.onChangeAuthenticationForm.bind(this);
-    this.activateSignUp = this.activateSignUp.bind(this);
-    this.activateLogIn = this.activateLogIn.bind(this);
-    this.onSubmitSignupForm = this.onSubmitSignupForm.bind(this);
-    this.onSubmitLoginForm = this.onSubmitLoginForm.bind(this);
-  }
-
-  handleOpenModal() {
-    this.props.onSetModalState(true);
+    this.changeLogInSignUp = this.changeLogInSignUp.bind(this);
+    this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
   handleCloseModal() {
     this.props.onSetModalState(false);
   }
 
-  onSubmitLoginForm(e) {
+  onSubmitForm(e) {
     e.preventDefault();
-  }
+    const {
+      authenticationForm: { userName, email, password, passwordConfirmation},
+      isSignUp,
+    } = this.state;
+    const { onCreateUser, onLogIn } = this.props;
 
-  onSubmitSignupForm(e) {
-    e.preventDefault();
+    if(isSignUp) {
+      if(!userName, !email, !password, !passwordConfirmation) {
+        Alert.error(`Debes llenar todos los campos.`);
+      } else if(password !== passwordConfirmation) {
+        Alert.error(`Las contraseñas no coinciden.`);
+      } else {
+        const credentials = { email, password };
+        const profile = { username: userName, email };
+        onCreateUser(credentials, profile);
+      }
+    } else {
+      if(!email, !password) {
+        Alert.error(`Debes llenar todos los campos.`);
+      } else {
+        const credentials = { email, password };
+        onLogIn(credentials);
+      }
+    }  
   }
 
   onChangeAuthenticationForm(e) {
@@ -51,18 +75,17 @@ class AuthenticationModal extends React.Component {
     });
   }
 
-  activateLogIn() {
-    this.setState({ isSignUp: false });
-  }
-
-  activateSignUp() {
-    this.setState({ isSignUp: true });
+  changeLogInSignUp() {
+    const { isSignUp } = this.state;
+    this.setState({ isSignUp: !isSignUp });
   }
 
   render() {
     const { isSignUp } = this.state;
     const { authentication } = this.props;
     const authenticationTitle = isSignUp ? 'registrarte' : 'iniciar sesión';
+    console.warn(this.props);
+
     return (
       <ReactModal
         isOpen={authentication.isModalOpen}
@@ -76,8 +99,8 @@ class AuthenticationModal extends React.Component {
             <span className="modal__btn-close" onClick={this.handleCloseModal}>&#120;</span>
           </div>
           <div className="modal__body">
-            {isSignUp ?
-              <form onSubmit={this.onSubmitSignupForm} autoComplete="off">
+            <form onSubmit={this.onSubmitForm} autoComplete="off">
+              { isSignUp ?
                 <TextFieldGroup
                   value={this.state.authenticationForm.userName}
                   onChange={this.onChangeAuthenticationForm}
@@ -85,20 +108,22 @@ class AuthenticationModal extends React.Component {
                   field="userName"
                   label="Nombre de Usuario"
                 />
-                <TextFieldGroup
-                  value={this.state.authenticationForm.email}
-                  onChange={this.onChangeAuthenticationForm}
-                  type="email"
-                  field="email"
-                  label="Correo"
-                />
-                <TextFieldGroup
-                  value={this.state.authenticationForm.password}
-                  onChange={this.onChangeAuthenticationForm}
-                  type="password"
-                  field="password"
-                  label="Contraseña"
-                />
+              : ''}
+              <TextFieldGroup
+                value={this.state.authenticationForm.email}
+                onChange={this.onChangeAuthenticationForm}
+                type="email"
+                field="email"
+                label="Correo"
+              />
+              <TextFieldGroup
+                value={this.state.authenticationForm.password}
+                onChange={this.onChangeAuthenticationForm}
+                type="password"
+                field="password"
+                label="Contraseña"
+              />
+              { isSignUp ?
                 <TextFieldGroup
                   value={this.state.authenticationForm.passwordConfirmation}
                   onChange={this.onChangeAuthenticationForm}
@@ -106,29 +131,10 @@ class AuthenticationModal extends React.Component {
                   field="passwordConfirmation"
                   label="Confirmar Contraseña"
                 />
-                <button className="button button--gray bold button--full-block push--top">Registrarse</button>
-                <p className="modal__body-footer">¿Ya tienes una cuenta? <span className="modal__body-footer-link" onClick={this.activateLogIn}>¡Ingresa ya!</span></p>
-              </form>
-            :
-              <form onSubmit={this.onSubmitLogInForm} autoComplete="off">
-                <TextFieldGroup
-                  value={this.state.authenticationForm.email}
-                  onChange={this.onChangeAuthenticationForm}
-                  type="email"
-                  field="email"
-                  label="Correo"
-                />
-                <TextFieldGroup
-                  value={this.state.authenticationForm.password}
-                  onChange={this.onChangeAuthenticationForm}
-                  type="password"
-                  field="password"
-                  label="Contraseña"
-                />
-                <button className="button button--gray bold button--full-block push--top">Ingresar</button>
-                <p className="modal__body-footer">¿Aún no tienes una cuenta? <span className="modal__body-footer-link" onClick={this.activateSignUp}>¡Registrate!</span></p>
-              </form>
-            }
+              : ''}
+              <button className="button button--gray bold button--full-block push--top">{isSignUp ? 'Registrarse' : 'Ingresar'}</button>
+              <p className="modal__body-footer">{isSignUp ? '¿Ya tienes una cuenta? ' : '¿Aún no tienes una cuenta? '}<span className="modal__body-footer-link" onClick={this.changeLogInSignUp}>{isSignUp ? '¡Ingresa ya!' : '¡Registrate!'}</span></p>
+            </form>
           </div>
         </div>
       </ReactModal>
@@ -138,6 +144,8 @@ class AuthenticationModal extends React.Component {
 
 AuthenticationModal.propTypes = {
   onSetModalState: PropTypes.func.isRequired,
+  onLogIn: PropTypes.func.isRequired,
+  onCreateUser: PropTypes.func.isRequired,
   authentication: PropTypes.object.isRequired,
 };
 

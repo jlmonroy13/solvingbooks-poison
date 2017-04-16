@@ -8,7 +8,8 @@
       "presets": [
         "latest",
         "react-hmre"
-      ]
+      ],
+      "plugins": ["transform-decorators-legacy"]
     },
     "production": {
       "presets": [
@@ -20,7 +21,8 @@
       ],
       "plugins": [
         "transform-react-constant-elements",
-        "transform-react-remove-prop-types"
+        "transform-react-remove-prop-types",
+        "transform-decorators-legacy"
       ]
     },
     "test": {

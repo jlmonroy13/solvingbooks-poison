@@ -40,6 +40,7 @@ class InitialSearch extends Component {
 
   render() {
     const { solutionManuals } = this.props;
+
     return (
       <div className="landing-page__form">
         <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
@@ -58,7 +59,6 @@ class InitialSearch extends Component {
 }
 
 InitialSearch.propTypes = {
-  onSetModalState: PropTypes.func.isRequired,
   onSetSolutionManual: PropTypes.func.isRequired,
   solutionManuals: PropTypes.array,
   solutionManualsObj: PropTypes.object,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AthenticationModal from '../components/AuthenticationModal';
-import { setModalState } from '../actions/authentication';
+import { setModalState, createUser, logIn } from '../actions/authentication';
 
 
 const mapStateToProps = (state) => {
@@ -14,6 +14,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   onSetModalState: (status) => {
     dispatch(setModalState(status));
+  },
+  onCreateUser: (credentials, profile) => {
+    dispatch(createUser(credentials, profile));
+  },
+  onLogIn: (credentials) => {
+    dispatch(logIn(credentials));
   },
 });
 
