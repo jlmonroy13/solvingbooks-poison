@@ -3,7 +3,7 @@
   padding: $base-spacing-unit;
   position: relative;
   @media #{$medium} {
-    padding: $base-spacing-unit $base-spacing-unit*6 $base-spacing-unit $base-spacing-unit*13;
+    padding: $base-spacing-unit $base-spacing-unit*11 $base-spacing-unit $base-spacing-unit*13;
   }
   &__logo {
     display: block;
@@ -19,7 +19,7 @@
   &__button {
     @media #{$medium} {
       position: absolute;
-      right: $base-spacing-unit;
+      right: $base-spacing-unit*6;
       top: $base-spacing-unit;
     }
   }
