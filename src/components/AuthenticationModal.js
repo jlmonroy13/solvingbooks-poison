@@ -2,16 +2,6 @@ import React, { PropTypes } from 'react';
 import ReactModal from 'react-modal';
 import { TextFieldGroup } from './';
 import Alert from 'react-s-alert';
-import { connect } from 'react-redux'
-import { pathToJS } from 'react-redux-firebase'
-@connect(
-  // Map state to props
-  ({ firebase }) => ({
-    authError: pathToJS(firebase, 'authError'),
-    auth: pathToJS(firebase, 'auth'),
-    profile: pathToJS(firebase, 'profile')
-  })
-)
 
 class AuthenticationModal extends React.Component {
   constructor() {
@@ -84,7 +74,6 @@ class AuthenticationModal extends React.Component {
     const { isSignUp } = this.state;
     const { authentication } = this.props;
     const authenticationTitle = isSignUp ? 'registrarte' : 'iniciar sesión';
-    console.warn(this.props);
 
     return (
       <ReactModal

@@ -14,7 +14,6 @@ const setUserLogged = userInfo => ({
 const createUser = (credentials, profile) => {
 	return (dispatch, getState, getFirebase) => {
 		dispatch(setStatusRequestTrue());
-		console.warn(getFirebase());
 		const firebase = getFirebase();
 		firebase.createUser(credentials, profile)
 			.then(onSuccessCreateUser)
@@ -22,7 +21,6 @@ const createUser = (credentials, profile) => {
 
 		function onSuccessCreateUser({ username, email }) {
 			const userInfo = { username, email };
-			localStorage.setItem('solucionarioUser', JSON.stringify(userInfo));
 			dispatch(setStatusRequestFalse());
 			dispatch(setUserLogged(userInfo));
 			dispatch(setModalState(false));
@@ -38,19 +36,21 @@ const createUser = (credentials, profile) => {
 const logIn = (credentials) => {
 	return (dispatch, getState, getFirebase) => {
 		dispatch(setStatusRequestTrue());
-		console.warn(getFirebase());
 		const firebase = getFirebase();
 		firebase.login(credentials)
 			.then(onSuccessLogIn)
 			.catch(onErrorLogIn);
 
-		function onSuccessLogIn(data) {
-			console.warn(data);
-			console.warn(firebase.auth());
-			// const userInfo = { username, email };
-			// localStorage.setItem('solucionarioUser', JSON.stringify(userInfo));
+		firebase.auth().onAuthStateChanged(firebaseUser => {
+			if(firebaseUser) {
+				alert('usuario loggeado');
+			} else {
+				alert('No hay gente loggeada');
+			}
+		});
+
+		function onSuccessLogIn() {
 			dispatch(setStatusRequestFalse());
-			// dispatch(setUserLogged(userInfo));
 			dispatch(setModalState(false));
 		}
 
@@ -60,7 +60,6 @@ const logIn = (credentials) => {
 		}
 	};
 };
-
 
 export {
 	setModalState,

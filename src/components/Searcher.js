@@ -8,16 +8,13 @@ class Searcher extends Component {
     super();
 
     this.state = {
-      bookName: '',
       chapter: '',
       subchapter: '',
       exercise: '',
       exercises: [],
-      chapters: [],
       subchapters: [],
     };
 
-    this.onChangeBook = this.onChangeBook.bind(this);
     this.onSelectedBook = this.onSelectedBook.bind(this);
     this.onSelectedChapter = this.onSelectedChapter.bind(this);
     this.onSelectedSubchapter = this.onSelectedSubchapter.bind(this);
@@ -26,27 +23,13 @@ class Searcher extends Component {
     this.setImage = this.setImage.bind(this);
   }
 
-  componentDidMount() {
-    const bookNameRoute = this.props.bookNameUrl;
-    let existingBook = false;
-    let bookName = '';
-    const { solutionManuals } = this.props;
-
-    solutionManuals.forEach((book) => {
-      if(book.urlName === bookNameRoute) {
-        existingBook = true;
-        bookName = book.name;
-      }
-    });
-    if (!existingBook) browserHistory.push('/');
-    this.onChangeBook(bookName);
-  }
-
   setImage() {
     const { exercise, exercises } = this.state;
-    this.props.onSetStatusRequestFalse();
+    const { onSetModalState, onSetStatusRequestFalse } = this.props;
+    onSetStatusRequestFalse();
     const imageUrl = exercises[parseInt(exercise.value) - 1].imageUrl;
     this.props.onSetImageUrl(imageUrl);
+    onSetModalState(true);
   }
 
   onSubmitSearchForm(e) {
@@ -57,40 +40,24 @@ class Searcher extends Component {
     }
   }
 
-  onChangeBook(bookName) {
-    const { solutionManuals, onSetSolutionManual, onSetSelections } = this.props;
-    const book = solutionManuals.filter(bookItem => bookItem.name === bookName);
-    const chapters = book && book[0] && book[0].chapters;
-    onSetSolutionManual(book[0]);
-    onSetSelections({
-      bookName: bookName || '',
-      chapter: '',
-      subchapter: '',
-      exercise: '',
-    });
-    this.setState({
-      bookName: bookName ? {label: bookName, value: bookName} : '',
-      chapters,
-      chapter: '',
-      subchapter: '',
-      exercise: '',
-      exercises: [],
-    });
-  }
-
   onSelectedBook(option) {
-    const bookName = option && option.label;
-    const urlName = option && option.value;
-    this.onChangeBook(bookName);
-    if (bookName) {
-      browserHistory.push(`/libro/${urlName}`);
+    if(!option) {
+      this.props.onSetSolutionManual({});
+      this.setState({ chapter: '', subchapter: '', exercise: '', exercises: [] });
+    } else {
+      const bookName = option && option.label;
+      const urlName = option && option.value;
+
+      if (bookName) {
+        browserHistory.push(`/libro/${urlName}`);
+      }
     }
   }
 
   onSelectedChapter(option) {
-    const { onSetSelections } = this.props;
+    const { onSetSelections, solutionManual } = this.props;
     const selectedChapter = option && option.value;
-    const stateChapters = this.state.chapters;
+    const { chapters: stateChapters } =  solutionManual;
     const chapters = stateChapters && stateChapters.filter(chapter => chapter.number === parseInt(selectedChapter));
     const subchapters = chapters && chapters[0] && chapters[0].subchapters;
     let exercises = [];
@@ -129,7 +96,7 @@ class Searcher extends Component {
   }
 
   onSelectedExercise(option) {
-    const { onSetSelections, onSetImageUrl, onSetStatusRequestTrue, onSetModalState } = this.props;
+    const { onSetSelections, onSetImageUrl, onSetStatusRequestTrue } = this.props;
     const exercise = option && option.value;
     onSetSelections({ exercise: option ? exercise : '' });
     this.setState({
@@ -137,13 +104,15 @@ class Searcher extends Component {
     });
     onSetImageUrl('loading');
     onSetStatusRequestTrue();
-    onSetModalState(true);
     setTimeout(this.setImage, 100);
   }
 
   render() {
-    const { bookName, chapter, subchapter, exercise, chapters, subchapters, exercises } = this.state;
-    const { solutionManuals } = this.props;
+    const { chapter, subchapter, exercise, subchapters, exercises } = this.state;
+    const { solutionManuals, solutionManual } = this.props;
+    const { name, chapters } =  solutionManual;
+    const bookName = name ? {label: name, value: name} : '';
+
     return (
       <header className="header">
         <Link to="/" className="header__logo">
@@ -205,10 +174,13 @@ Searcher.propTypes = {
   onSetImageUrl: PropTypes.func,
   onSetStatusRequestFalse: PropTypes.func,
   onSetStatusRequestTrue: PropTypes.func,
+  onGetSolutionManual: PropTypes.func,
   onSetSolutionManual: PropTypes.func,
   onSetSelections: PropTypes.func,
   onSetModalState: PropTypes.func,
   solutionManuals: PropTypes.array,
+  solutionManualsObj: PropTypes.object,
+  solutionManual: PropTypes.object,
 };
 
 export default Searcher;

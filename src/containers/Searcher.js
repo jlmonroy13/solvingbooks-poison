@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
 import Searcher from '../components/Searcher';
-import { setImageUrl, setSolutionManual, setSelections } from '../actions/searcher';
+import { setImageUrl, setSelections, getSolutionManual, setSolutionManual } from '../actions/searcher';
 import { setStatusRequestFalse, setStatusRequestTrue } from '../actions/spinner';
 import { setModalState } from '../actions/authentication';
 import ObjectUtils from '../utils/object';
 
 const mapStateToProps = (state) => {
-  const { solutionManuals } = state;
+  const { solutionManuals, searcher: { solutionManual } } = state;
   const solutionManualsArr = ObjectUtils.toArray(solutionManuals);
 
   return {
     solutionManuals: solutionManualsArr,
+    solutionManualsObj: solutionManuals,
+    solutionManual,
   };
 };
 
@@ -23,6 +25,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSetStatusRequestTrue: () => {
     dispatch(setStatusRequestTrue());
+  },
+  onGetSolutionManual: (solutionManualId) => {
+    dispatch(getSolutionManual(solutionManualId));
   },
   onSetSolutionManual: (solutionManual) => {
     dispatch(setSolutionManual(solutionManual));
@@ -39,3 +44,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Searcher);
+
