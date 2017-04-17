@@ -1,16 +1,16 @@
-.dropdown-menu {
+.user-dropdown {
   cursor: pointer;
   padding-bottom: $half-spacing-unit;
   position: absolute;
   right: $base-spacing-unit*2;
   top: 27px;
   &:hover {
-    .dropdown-menu__content {
+    .user-dropdown__content {
       opacity: 1;
       transform: translateY(0);
       visibility: visible;
     }
-    .dropdown-menu__arrow {
+    .user-dropdown__arrow {
       transform: rotate(180deg);
     }
   }

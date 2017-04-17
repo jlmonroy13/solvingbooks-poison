@@ -163,11 +163,11 @@ class Searcher extends Component {
             </div>
           </div>
           <button className="button button--primary header__button">Buscar</button>
-          <div className="dropdown-menu">
-            <span className="dropdown-menu__avatar"></span>
-            <span className="icon icon--chevron dropdown-menu__arrow"></span>
-            <ul className="dropdown-menu__content">
-              <li className="dropdown-menu__item">Cerrar sesión</li>
+          <div className="user-dropdown">
+            <span className="user-dropdown__avatar"></span>
+            <span className="icon icon--chevron user-dropdown__arrow"></span>
+            <ul className="user-dropdown__content">
+              <li className="user-dropdown__item">Cerrar sesión</li>
             </ul>
           </div>
         </form>
