@@ -6,14 +6,14 @@ class SolutionManualDetail extends Component {
   constructor() {
     super();
     this.state = {
-      imageFiles: [],
+      imageFiles: []
     };
 
     this.renderChapters = this.renderChapters.bind(this);
     this.onSubmitUploadForm = this.onSubmitUploadForm.bind(this);
     this.onChangeFileInput = this.onChangeFileInput.bind(this);
   }
-
+  
   renderChapters() {
     const { solutionManual } = this.props;
     return solutionManual.chapters && solutionManual.chapters.map(chapter => {
@@ -51,10 +51,11 @@ class SolutionManualDetail extends Component {
     e.preventDefault();
     const { imageFiles } = this.state;
     const { solutionManual } = this.props;
-    for (let i=0; i < imageFiles.length; i++) {
-      const storageRef = firebase.storage().ref(`${solutionManual.id}/${imageFiles[i].name}`);
-      const task = storageRef.put(imageFiles[i]);
-      const { chapter, subchapter, exercise, imageFile } = getDataFromImageFile(imageFiles[i]);
+    let index = 0;
+    function uploadImage() {
+      const storageRef = firebase.storage().ref(`${solutionManual.id}/${imageFiles[index].name}`);
+      const task = storageRef.put(imageFiles[index]);
+      const { chapter, subchapter, exercise, imageFile } = getDataFromImageFile(imageFiles[index]);
       task.on('state_changed',
         function complete(response) {
           const imageUrl = response.a && response.a.downloadURLs[0];
@@ -65,12 +66,15 @@ class SolutionManualDetail extends Component {
             number: exercise
           });
           if (response.a) Alert.success(`El ejercicio ${imageFile.name} se ha cargado exitosamente!`);
+          index += 1;
+          if (index < imageFiles.length) uploadImage();
         },
         function error(err) {
           Alert.success(err);
         }
       );
     }
+
     function getDataFromImageFile(imageFile) {
       const name = imageFile.name.substr(0, imageFile.name.lastIndexOf('.'));
       const array = name.split('-');
@@ -82,6 +86,8 @@ class SolutionManualDetail extends Component {
       data.subchapter = array.length === 2 ? null : array[1];
       return data;
     }
+
+    uploadImage();
   }
 
   onChangeFileInput(e) {
@@ -91,7 +97,7 @@ class SolutionManualDetail extends Component {
   }
 
   render() {
-    const { solutionManual } = this.props;
+    const { solutionManual, exerciseCounter } = this.props;
     return (
       <div className="container">
         <h1>{solutionManual.name}</h1>
@@ -101,6 +107,7 @@ class SolutionManualDetail extends Component {
             <button>Cargar Imagenes</button>
           </form>
         </div>
+        <div className="push--bottom">Ejercicios con respuesta: {exerciseCounter}</div>
         <table className="table">
           <thead>
             <tr>
@@ -124,6 +131,7 @@ SolutionManualDetail.propTypes = {
   params: PropTypes.object,
   solutionManuals: PropTypes.array,
   solutionManual: PropTypes.object,
+  exerciseCounter: PropTypes.number,
 };
 
 export default SolutionManualDetail;
