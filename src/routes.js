@@ -20,26 +20,36 @@ const onEnterPage = store => {
   };
 };
 
+const fetchSolutionManual = (store, callback, startPosition) => {
+  const { dispatch, getState } = store;
+  const {
+    solutionManuals,
+    routing: { locationBeforeTransitions: { pathname } },
+    pendingTasks,
+  } = getState();
+  const urlName = pathname.substring(startPosition);
+  const solutionManualsArr = ObjectUtils.toArray(solutionManuals);
+  const book = solutionManualsArr.filter((bookItem) => urlName === bookItem.urlName);
+  if(pendingTasks === 0) dispatch(setStatusRequestTrue());
+
+  dispatch(getSolutionManual(book[0].id, callback));
+  dispatch(setSelections({
+    bookName: book[0].name || '',
+    chapter: '',
+    subchapter: '',
+    exercise: '',
+  }));
+};
+
 const onEnterSearcher = store => {
   return (nextState, replace, callback) => {
-    const { dispatch, getState } = store;
-    const {
-      solutionManuals,
-      routing: { locationBeforeTransitions: { pathname } },
-      pendingTasks,
-    } = getState();
-    const urlName = pathname.substring(7);
-    const solutionManualsArr = ObjectUtils.toArray(solutionManuals);
-    const book = solutionManualsArr.filter((bookItem) => urlName === bookItem.urlName);
-    if(pendingTasks === 0) dispatch(setStatusRequestTrue());
+    fetchSolutionManual(store, callback, 7);
+  };
+};
 
-    dispatch(getSolutionManual(book[0].id, callback));
-    dispatch(setSelections({
-      bookName: book[0].name || '',
-      chapter: '',
-      subchapter: '',
-      exercise: '',
-    }));
+const onEnterAdminDetail = store => {
+  return (nextState, replace, callback) => {
+    fetchSolutionManual(store, callback, 26);
   };
 };
 
@@ -64,6 +74,7 @@ const routes = store => (
     <Route
       path="/solving1213/solucionario/:bookNameUrl"
       component={SolutionManualDetailContainer}
+      onEnter={onEnterAdminDetail(store)}
     />
     <Route
       path="*"

@@ -21,6 +21,7 @@ class Searcher extends Component {
     this.onSelectedExercise = this.onSelectedExercise.bind(this);
     this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
     this.setImage = this.setImage.bind(this);
+    this.onOpenModal = this.onOpenModal.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,11 @@ class Searcher extends Component {
     onSetImageUrl(imageUrl);
     if(!isUserLogged && numberOfsearches>0 && imageUrl) onSetModalState(true);
     if(imageUrl) onAddNumberOfSearches();
+  }
+
+  onOpenModal() {
+    this.props.onSetModalState(true);
+    this.props.onSetAuthBtnStatus(true);
   }
 
   onSubmitSearchForm(e) {
@@ -177,8 +183,8 @@ class Searcher extends Component {
                 <li className="user-dropdown__item" onClick={onLogOut} >Cerrar sesión</li>
               </ul>
             </div>
-          : 
-            <span className="login__button button button--bordered">Ingresar</span>
+          :
+            <span className="login__button button button--bordered" onClick={this.onOpenModal}>Ingresar</span>
           }
         </form>
       </header>
@@ -199,6 +205,7 @@ Searcher.propTypes = {
   onSetModalState: PropTypes.func,
   onAddNumberOfSearches: PropTypes.func,
   onAuthFirebaseListener: PropTypes.func,
+  onSetAuthBtnStatus: PropTypes.func,
   onLogOut: PropTypes.func,
   solutionManuals: PropTypes.array,
   solutionManualsObj: PropTypes.object,

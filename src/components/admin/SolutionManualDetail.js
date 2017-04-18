@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
 import Alert from 'react-s-alert';
 
@@ -7,7 +6,6 @@ class SolutionManualDetail extends Component {
   constructor() {
     super();
     this.state = {
-      solutionManual: {},
       imageFiles: [],
     };
 
@@ -16,16 +14,8 @@ class SolutionManualDetail extends Component {
     this.onChangeFileInput = this.onChangeFileInput.bind(this);
   }
 
-  componentWillMount() {
-    const { solutionManuals } = this.props;
-    const bookNameRoute = this.props.params.bookNameUrl;
-    const solutionManual = solutionManuals.filter(book => book.urlName === bookNameRoute)[0];
-    if (!solutionManual) browserHistory.push('/solving1213');
-    this.setState({solutionManual});
-  }
-
   renderChapters() {
-    const { solutionManual } = this.state;
+    const { solutionManual } = this.props;
     return solutionManual.chapters && solutionManual.chapters.map(chapter => {
       if (solutionManual.hasSubchapters) {
         return chapter.subchapters.map(subchapter => {
@@ -59,7 +49,8 @@ class SolutionManualDetail extends Component {
 
   onSubmitUploadForm(e) {
     e.preventDefault();
-    const { imageFiles, solutionManual } = this.state;
+    const { imageFiles } = this.state;
+    const { solutionManual } = this.props;
     for (let i=0; i < imageFiles.length; i++) {
       const storageRef = firebase.storage().ref(`${solutionManual.id}/${imageFiles[i].name}`);
       const task = storageRef.put(imageFiles[i]);
@@ -100,10 +91,10 @@ class SolutionManualDetail extends Component {
   }
 
   render() {
-    const { solutionManual } = this.state;
+    const { solutionManual } = this.props;
     return (
       <div className="container">
-        <h1>{this.state.solutionManual.name}</h1>
+        <h1>{solutionManual.name}</h1>
         <div className="push--bottom">
           <form onSubmit={this.onSubmitUploadForm}>
             <input type="file" className="push-half--right" onChange={this.onChangeFileInput} multiple/>
@@ -131,7 +122,8 @@ class SolutionManualDetail extends Component {
 
 SolutionManualDetail.propTypes = {
   params: PropTypes.object,
-  solutionManuals: PropTypes.object,
+  solutionManuals: PropTypes.array,
+  solutionManual: PropTypes.object,
 };
 
 export default SolutionManualDetail;

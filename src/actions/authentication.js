@@ -11,6 +11,11 @@ const setIsUserLogged = (status) => ({
 	payload: status,
 });
 
+const setAuthBtnStatus = (status) => ({
+	type: 'SET_AUTH_BUTTON_STATUS',
+	payload: status,
+});
+
 const createUser = (credentials, profile) => {
 	return (dispatch, getState, getFirebase) => {
 		dispatch(setStatusRequestTrue());
@@ -77,4 +82,5 @@ export {
 	logIn,
 	logOut,
 	authFirebaseListener,
+	setAuthBtnStatus,
 };

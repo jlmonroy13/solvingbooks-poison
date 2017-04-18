@@ -24,6 +24,7 @@ class AuthenticationModal extends React.Component {
 
   handleCloseModal() {
     this.props.onSetModalState(false);
+    this.props.onSetAuthBtnStatus(false);
   }
 
   onSubmitForm(e) {
@@ -51,7 +52,7 @@ class AuthenticationModal extends React.Component {
         const credentials = { email, password };
         onLogIn(credentials);
       }
-    }  
+    }
   }
 
   onChangeAuthenticationForm(e) {
@@ -83,7 +84,14 @@ class AuthenticationModal extends React.Component {
       >
         <section className="modal__content">
           <div className="modal__header">
-            <h1 className="modal__header-title">{`Antes debes ${authenticationTitle}`}</h1>
+            { authentication.isAuthBtnClicked ?
+              <div>
+                <h1 className="modal__header-title">{isSignUp ? 'Registrate' : 'Inicia Sesión' }</h1>
+                <span className="modal__btn-close" onClick={this.handleCloseModal}>&#120;</span>
+              </div>
+            :
+              <h1 className="modal__header-title">{`Antes debes ${authenticationTitle}`}</h1>
+            }
           </div>
           <div className="modal__body">
             <form onSubmit={this.onSubmitForm} autoComplete="off">
@@ -125,6 +133,7 @@ class AuthenticationModal extends React.Component {
 
 AuthenticationModal.propTypes = {
   onSetModalState: PropTypes.func.isRequired,
+  onSetAuthBtnStatus: PropTypes.func,
   onLogIn: PropTypes.func.isRequired,
   onCreateUser: PropTypes.func.isRequired,
   authentication: PropTypes.object.isRequired,

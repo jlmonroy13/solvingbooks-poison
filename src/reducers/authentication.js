@@ -1,6 +1,7 @@
 const initialState = {
 	isModalOpen: false,
 	isUserLogged: false,
+	isAuthBtnClicked: false,
 };
 
 export default function authenticationReducer(state = initialState, action) {
@@ -14,6 +15,11 @@ export default function authenticationReducer(state = initialState, action) {
 			return {
 				...state,
 				isUserLogged: action.payload,
+			};
+		case 'SET_AUTH_BUTTON_STATUS':
+			return {
+				...state,
+				isAuthBtnClicked: action.payload,
 			};
 		default:
 			return state;
