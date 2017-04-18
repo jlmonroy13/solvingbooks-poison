@@ -2,14 +2,14 @@
   background-image: linear-gradient(179deg, $sapphire, $purpleblue);
   padding: $base-spacing-unit;
   position: relative;
-  @media #{$medium} {
-    padding: $base-spacing-unit $base-spacing-unit*6 $base-spacing-unit $base-spacing-unit*13;
+  @media #{$large} {
+    padding: $base-spacing-unit $base-spacing-unit*11 $base-spacing-unit $base-spacing-unit*13;
   }
   &__logo {
     display: block;
     text-align: center;
     margin-bottom: $half-spacing-unit;
-    @media #{$medium} {
+    @media #{$large} {
       position: absolute;
       left: $base-spacing-unit;
       top: 50%;
@@ -17,9 +17,9 @@
     }
   }
   &__button {
-    @media #{$medium} {
+    @media #{$large} {
       position: absolute;
-      right: $base-spacing-unit;
+      right: $base-spacing-unit*6;
       top: $base-spacing-unit;
     }
   }
@@ -52,7 +52,7 @@
       }
       .react-selectize-control {
         background: rgba(255, 255, 255, 0.4);
-        @media #{$medium-max} {
+        @media #{$large-max} {
           span {
             width: 200px;
             white-space: nowrap;
@@ -64,7 +64,7 @@
       }
       &.header__input {
         margin-bottom: $half-spacing-unit;
-        @media #{$medium} {
+        @media #{$large} {
           margin: 0;
         }
         .option-wrapper,
@@ -83,8 +83,15 @@
         }
         .value-wrapper {
           span {
-            width: 220px;
+            width: 200px;
           }
+        }
+        &--small {
+          .value-wrapper {
+          span {
+            width: 50px;
+          }
+        }
         }
       }
     }
