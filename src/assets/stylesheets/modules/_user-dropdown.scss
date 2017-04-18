@@ -4,6 +4,10 @@
   position: absolute;
   right: $base-spacing-unit*2;
   top: 27px;
+  display: none;
+  @media #{$large} {
+    display: block;
+  }
   &:hover {
     .user-dropdown__content {
       opacity: 1;

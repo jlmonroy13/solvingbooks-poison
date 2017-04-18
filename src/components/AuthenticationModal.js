@@ -81,9 +81,9 @@ class AuthenticationModal extends React.Component {
         className="Modal"
         overlayClassName="modal"
       >
-        <div className="modal__content">
+        <section className="modal__content">
           <div className="modal__header">
-            <h2 className="modal__header-title">{`Antes debes ${authenticationTitle}`}</h2>
+            <h1 className="modal__header-title">{`Antes debes ${authenticationTitle}`}</h1>
           </div>
           <div className="modal__body">
             <form onSubmit={this.onSubmitForm} autoComplete="off">
@@ -93,6 +93,7 @@ class AuthenticationModal extends React.Component {
                 type="email"
                 field="email"
                 label="Correo"
+                placeholder="Correo"
               />
               <TextFieldGroup
                 value={this.state.authenticationForm.password}
@@ -100,6 +101,7 @@ class AuthenticationModal extends React.Component {
                 type="password"
                 field="password"
                 label="Contraseña"
+                placeholder="Contraseña"
               />
               { isSignUp ?
                 <TextFieldGroup
@@ -108,13 +110,14 @@ class AuthenticationModal extends React.Component {
                   type="password"
                   field="passwordConfirmation"
                   label="Confirmar Contraseña"
+                 placeholder="Confirmar Contraseña"
                 />
               : ''}
-              <button className="button button--gray bold button--full-block push--top">{isSignUp ? 'Registrarse' : 'Ingresar'}</button>
+              <button className="button button--secondary">{isSignUp ? 'Registrarse' : 'Ingresar'}</button>
               <p className="modal__body-footer">{isSignUp ? '¿Ya tienes una cuenta? ' : '¿Aún no tienes una cuenta? '}<span className="modal__body-footer-link" onClick={this.changeLogInSignUp}>{isSignUp ? '¡Ingresa ya!' : '¡Registrate!'}</span></p>
             </form>
           </div>
-        </div>
+        </section>
       </ReactModal>
     );
   }

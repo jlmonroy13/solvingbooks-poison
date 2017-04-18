@@ -3,7 +3,7 @@
   height: calc(100vh - 369px);
   padding: $half-spacing-unit $base-spacing-unit;
   position: relative;
-  @media #{$medium} {
+  @media #{$large} {
     height: calc(100vh - 164px);
     padding: $base-spacing-unit $base-spacing-unit*4;
   }
@@ -47,7 +47,7 @@
     top: -65px;
     right: $base-spacing-unit;
     left: initial;
-    @media #{$medium} {
+    @media #{$large} {
       left: $base-spacing-unit;
       right: initial;
       top: $base-spacing-unit;
@@ -56,9 +56,10 @@
       cursor: pointer;
       display: inline-block;
       margin-left: $half-spacing-unit;
-      @media #{$medium} {
+      @media #{$large} {
         display: block;
         margin-bottom: $half-spacing-unit;
+        margin-left: 0;
       }
     }
   }

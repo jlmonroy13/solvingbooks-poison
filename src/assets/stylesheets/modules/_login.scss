@@ -1,0 +1,11 @@
+.login {
+  &__button {
+    position: fixed;
+    top: $base-spacing-unit;
+    right: $base-spacing-unit;
+    display: none;
+    @media #{$large} {
+      display: block;
+    }
+  }
+}

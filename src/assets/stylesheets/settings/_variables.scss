@@ -163,10 +163,10 @@ $landscape:                       	"only screen and (orientation: landscape)";
 $portrait:                        	"only screen and (orientation: portrait)";
 
 
-$use-silent-classes:			false!default;
-$gutter:							$base-spacing-unit!default;
-$push:								false!default;
-$pull:								false!default;
+$use-silent-classes:			          false!default;
+$gutter:							              $base-spacing-unit!default;
+$push:								              false!default;
+$pull:								              false!default;
 
 $breakpoints: (
     'large' '(min-width: #{$screen-large})',

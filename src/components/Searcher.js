@@ -162,6 +162,7 @@ class Searcher extends Component {
                     disabled={exercises && exercises.length === 0}
                     onValueChange={this.onSelectedExercise}
                     value={exercise}
+                    className="header__input header__input--small"
                   />
                 </div>
               </div>
@@ -176,7 +177,9 @@ class Searcher extends Component {
                 <li className="user-dropdown__item" onClick={onLogOut} >Cerrar sesión</li>
               </ul>
             </div>
-          : ''}
+          : 
+            <span className="login__button button button--bordered">Ingresar</span>
+          }
         </form>
       </header>
     );

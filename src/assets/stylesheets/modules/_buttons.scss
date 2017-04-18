@@ -15,4 +15,34 @@
   }
 }
 
+.button--secondary {
+  color: $white;
+  background-color: $color-brand;
+  border-radius: $btn-border-radius;
+  border: solid 2px $color-brand;
+  font-weight: 700;
+  padding: $half-spacing-unit $half-spacing-unit;
+  line-height: 24px;
+  &:hover {
+    background-color: $white;
+    color: $color-brand;
+    @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.47));
+  }
+}
+
+.button--bordered {
+  @include rem(17);
+  color: $white;
+  border-radius: $btn-border-radius;
+  border: solid 2px rgba( #FFF, 0.6);
+  font-weight: 700;
+  padding: $half-spacing-unit $half-spacing-unit;
+  line-height: 24px;
+  &:hover {
+    background-color: $white;
+    color: $color-brand;
+    @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.47));
+  }
+}
+
 

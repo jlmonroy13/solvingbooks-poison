@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 
 const TextFieldGroup = ({ field, value, label, error, type, placeholder, onChange, disabled }) => {
 	return (
-		<div>
-			<label htmlFor={field} >{label}</label>
+		<div className="push-half--bottom">
+			<label htmlFor={field} className="sr-only">{label}</label>
 			<input
 				value={value}
 				onChange={onChange}
