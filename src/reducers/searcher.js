@@ -1,3 +1,4 @@
+const storageCounter = localStorage.getItem('counter');
 const initialState = {
 	imageUrl: 'empty',
 	solutionManual: {},
@@ -5,6 +6,7 @@ const initialState = {
 	chapter: '',
 	subchapter: '',
 	exercise: '',
+	numberOfsearches: Number(storageCounter) || 0,
 };
 
 export default function searcherReducer(state = initialState, action) {
@@ -23,6 +25,11 @@ export default function searcherReducer(state = initialState, action) {
 			return {
 				...state,
 				...action.payload,
+			};
+		case 'SET_NUMBER_OF_SEARCHES':
+			return {
+				...state,
+				numberOfsearches: action.payload,
 			};
 		default:
 			return state;

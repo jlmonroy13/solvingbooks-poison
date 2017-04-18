@@ -1,5 +1,6 @@
 const initialState = {
 	isModalOpen: false,
+	isUserLogged: false,
 };
 
 export default function authenticationReducer(state = initialState, action) {
@@ -9,10 +10,10 @@ export default function authenticationReducer(state = initialState, action) {
 				...state,
 				isModalOpen: action.payload,
 			};
-		case 'SET_USER_LOGGED':
+		case 'SET_IS_USER_LOGGED':
 			return {
 				...state,
-				userInfo: action.payload,
+				isUserLogged: action.payload,
 			};
 		default:
 			return state;

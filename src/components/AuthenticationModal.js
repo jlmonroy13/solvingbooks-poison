@@ -9,7 +9,6 @@ class AuthenticationModal extends React.Component {
     this.state = {
       showModal: false,
       authenticationForm: {
-        userName: '',
         email: '',
         password: '',
         passwordConfirmation: '',
@@ -30,19 +29,19 @@ class AuthenticationModal extends React.Component {
   onSubmitForm(e) {
     e.preventDefault();
     const {
-      authenticationForm: { userName, email, password, passwordConfirmation},
+      authenticationForm: { email, password, passwordConfirmation},
       isSignUp,
     } = this.state;
     const { onCreateUser, onLogIn } = this.props;
 
     if(isSignUp) {
-      if(!userName, !email, !password, !passwordConfirmation) {
+      if(!email, !password, !passwordConfirmation) {
         Alert.error(`Debes llenar todos los campos.`);
       } else if(password !== passwordConfirmation) {
         Alert.error(`Las contraseñas no coinciden.`);
       } else {
         const credentials = { email, password };
-        const profile = { username: userName, email };
+        const profile = { username: '', email };
         onCreateUser(credentials, profile);
       }
     } else {
@@ -85,19 +84,9 @@ class AuthenticationModal extends React.Component {
         <div className="modal__content">
           <div className="modal__header">
             <h2 className="modal__header-title">{`Antes debes ${authenticationTitle}`}</h2>
-            <span className="modal__btn-close" onClick={this.handleCloseModal}>&#120;</span>
           </div>
           <div className="modal__body">
             <form onSubmit={this.onSubmitForm} autoComplete="off">
-              { isSignUp ?
-                <TextFieldGroup
-                  value={this.state.authenticationForm.userName}
-                  onChange={this.onChangeAuthenticationForm}
-                  type="text"
-                  field="userName"
-                  label="Nombre de Usuario"
-                />
-              : ''}
               <TextFieldGroup
                 value={this.state.authenticationForm.email}
                 onChange={this.onChangeAuthenticationForm}

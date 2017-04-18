@@ -23,13 +23,18 @@ class Searcher extends Component {
     this.setImage = this.setImage.bind(this);
   }
 
+  componentDidMount() {
+    this.props.onAuthFirebaseListener();
+  }
+
   setImage() {
     const { exercise, exercises } = this.state;
-    const { onSetModalState, onSetStatusRequestFalse } = this.props;
+    const { onSetModalState, onSetStatusRequestFalse, isUserLogged, onAddNumberOfSearches, onSetImageUrl, numberOfsearches } = this.props;
     onSetStatusRequestFalse();
     const imageUrl = exercises[parseInt(exercise.value) - 1].imageUrl;
-    this.props.onSetImageUrl(imageUrl);
-    onSetModalState(true);
+    onSetImageUrl(imageUrl);
+    if(!isUserLogged && numberOfsearches>0 && imageUrl) onSetModalState(true);
+    if(imageUrl) onAddNumberOfSearches();
   }
 
   onSubmitSearchForm(e) {
@@ -109,7 +114,7 @@ class Searcher extends Component {
 
   render() {
     const { chapter, subchapter, exercise, subchapters, exercises } = this.state;
-    const { solutionManuals, solutionManual } = this.props;
+    const { solutionManuals, solutionManual, onLogOut, isUserLogged } = this.props;
     const { name, chapters } =  solutionManual;
     const bookName = name ? {label: name, value: name} : '';
 
@@ -163,13 +168,15 @@ class Searcher extends Component {
             </div>
           </div>
           <button className="button button--primary header__button">Buscar</button>
-          <div className="user-dropdown">
-            <span className="user-dropdown__avatar"></span>
-            <span className="icon icon--chevron user-dropdown__arrow"></span>
-            <ul className="user-dropdown__content">
-              <li className="user-dropdown__item">Cerrar sesión</li>
-            </ul>
-          </div>
+          { isUserLogged ?
+            <div className="user-dropdown">
+              <span className="user-dropdown__avatar" />
+              <span className="icon icon--chevron user-dropdown__arrow" />
+              <ul className="user-dropdown__content">
+                <li className="user-dropdown__item" onClick={onLogOut} >Cerrar sesión</li>
+              </ul>
+            </div>
+          : ''}
         </form>
       </header>
     );
@@ -178,6 +185,8 @@ class Searcher extends Component {
 
 Searcher.propTypes = {
   bookNameUrl: PropTypes.string,
+  isUserLogged: PropTypes.bool,
+  numberOfsearches: PropTypes.number,
   onSetImageUrl: PropTypes.func,
   onSetStatusRequestFalse: PropTypes.func,
   onSetStatusRequestTrue: PropTypes.func,
@@ -185,6 +194,9 @@ Searcher.propTypes = {
   onSetSolutionManual: PropTypes.func,
   onSetSelections: PropTypes.func,
   onSetModalState: PropTypes.func,
+  onAddNumberOfSearches: PropTypes.func,
+  onAuthFirebaseListener: PropTypes.func,
+  onLogOut: PropTypes.func,
   solutionManuals: PropTypes.array,
   solutionManualsObj: PropTypes.object,
   solutionManual: PropTypes.object,

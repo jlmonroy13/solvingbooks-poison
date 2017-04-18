@@ -20,6 +20,20 @@ const setSelections = obj => ({
 	payload: obj,
 });
 
+const setNumberOfSearches = number => ({
+	type: 'SET_NUMBER_OF_SEARCHES',
+	payload: number,
+});
+
+const addNumberOfSearches = () => {
+	return (dispatch, getState) => {
+		let { searcher: { numberOfsearches } } = getState();
+		numberOfsearches += 1;
+		localStorage.setItem('counter', numberOfsearches);
+		dispatch(setNumberOfSearches(numberOfsearches));
+	};
+};
+
 const getSolutionManual = (solutionManualId, callback) => {
 	return (dispatch, getState, getFirebase) => {
 		const firebase = getFirebase();
@@ -39,4 +53,5 @@ export {
   setSolutionManual,
   setSelections,
   getSolutionManual,
+  addNumberOfSearches,
 };

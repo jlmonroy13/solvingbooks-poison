@@ -32,6 +32,7 @@ const onEnterSearcher = store => {
     const solutionManualsArr = ObjectUtils.toArray(solutionManuals);
     const book = solutionManualsArr.filter((bookItem) => urlName === bookItem.urlName);
     if(pendingTasks === 0) dispatch(setStatusRequestTrue());
+
     dispatch(getSolutionManual(book[0].id, callback));
     dispatch(setSelections({
       bookName: book[0].name || '',

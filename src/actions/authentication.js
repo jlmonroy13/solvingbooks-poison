@@ -6,9 +6,9 @@ const setModalState = modalState => ({
 	payload: modalState,
 });
 
-const setUserLogged = userInfo => ({
-	type: 'SET_USER_LOGGED',
-	payload: userInfo,
+const setIsUserLogged = (status) => ({
+	type: 'SET_IS_USER_LOGGED',
+	payload: status,
 });
 
 const createUser = (credentials, profile) => {
@@ -19,10 +19,8 @@ const createUser = (credentials, profile) => {
 			.then(onSuccessCreateUser)
 			.catch(onErrorCreateUser);
 
-		function onSuccessCreateUser({ username, email }) {
-			const userInfo = { username, email };
+		function onSuccessCreateUser() {
 			dispatch(setStatusRequestFalse());
-			dispatch(setUserLogged(userInfo));
 			dispatch(setModalState(false));
 		}
 
@@ -33,6 +31,19 @@ const createUser = (credentials, profile) => {
 	};
 };
 
+const authFirebaseListener = () => {
+	return (dispatch, getState, getFirebase) => {
+		const firebase = getFirebase();
+		firebase.auth().onAuthStateChanged(firebaseUser => {
+			if(firebaseUser) {
+				dispatch(setIsUserLogged(true));
+			} else {
+				dispatch(setIsUserLogged(false));
+			}
+		});
+	};
+};
+
 const logIn = (credentials) => {
 	return (dispatch, getState, getFirebase) => {
 		dispatch(setStatusRequestTrue());
@@ -40,14 +51,6 @@ const logIn = (credentials) => {
 		firebase.login(credentials)
 			.then(onSuccessLogIn)
 			.catch(onErrorLogIn);
-
-		firebase.auth().onAuthStateChanged(firebaseUser => {
-			if(firebaseUser) {
-				alert('usuario loggeado');
-			} else {
-				alert('No hay gente loggeada');
-			}
-		});
 
 		function onSuccessLogIn() {
 			dispatch(setStatusRequestFalse());
@@ -61,8 +64,17 @@ const logIn = (credentials) => {
 	};
 };
 
+const logOut = () => {
+	return (dispatch, getState, getFirebase) => {
+		const firebase = getFirebase();
+		firebase.logout();
+	};
+};
+
 export {
 	setModalState,
 	createUser,
 	logIn,
+	logOut,
+	authFirebaseListener,
 };
