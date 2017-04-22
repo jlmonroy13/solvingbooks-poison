@@ -38,13 +38,13 @@
     margin: 0;
   }
   &__avatar {
+    @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.47));
     background-image: url('../images/avatar-default.jpg');
     background-position: center;
     background-size: cover;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: solid 1px #FFF;
     display: inline-block;
     vertical-align: middle;
   }
