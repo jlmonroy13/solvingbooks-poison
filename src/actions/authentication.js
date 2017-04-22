@@ -69,6 +69,18 @@ const logIn = (credentials) => {
 	};
 };
 
+const logInWithSocialNetworks = (socialNetwork) => {
+	return (dispatch, getState, getFirebase) => {
+		const firebase = getFirebase();
+		firebase.login({provider: socialNetwork, type: 'popup'})
+			.then(onSuccessLogIn);
+
+		function onSuccessLogIn() {
+			dispatch(setModalState(false));
+		}
+	};
+};
+
 const logOut = () => {
 	return (dispatch, getState, getFirebase) => {
 		const firebase = getFirebase();
@@ -83,4 +95,5 @@ export {
 	logOut,
 	authFirebaseListener,
 	setAuthBtnStatus,
+	logInWithSocialNetworks,
 };

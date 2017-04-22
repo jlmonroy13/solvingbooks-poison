@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AthenticationModal from '../components/AuthenticationModal';
-import { setModalState, createUser, logIn, setAuthBtnStatus } from '../actions/authentication';
+import { setModalState, createUser, logIn, setAuthBtnStatus, logInWithSocialNetworks } from '../actions/authentication';
 
 
 const mapStateToProps = (state) => {
@@ -20,6 +20,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onLogIn: (credentials) => {
     dispatch(logIn(credentials));
+  },
+  onLogInWithSocialNetworks: (credentials) => {
+    dispatch(logInWithSocialNetworks(credentials));
   },
   onSetAuthBtnStatus: (status) => {
     dispatch(setAuthBtnStatus(status));

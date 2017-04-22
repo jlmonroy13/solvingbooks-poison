@@ -8,4 +8,27 @@
       display: block;
     }
   }
+  &__separator {
+  	text-align: center;
+  	position: relative;
+  	@include rem(22, 'margin-top');
+  	&:after {
+  		background-color: rgba($color-text-body, 0.3);
+			content: '';
+			height: 2px;
+			position: absolute;
+			top: 12px;
+			right: -5px;
+			width: 45%;
+  	}
+  	&:before {
+  		background-color: rgba($color-text-body, 0.3);
+			content: '';
+			height: 2px;
+			position: absolute;
+			top: 12px;
+			left: -5px;
+			width: 45%;
+  	}
+  }
 }

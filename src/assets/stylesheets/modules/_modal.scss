@@ -44,7 +44,13 @@
         text-decoration: underline;
         color: $blue;
         cursor: pointer;
+        text-align: center;
+        display: block;
       }
     }
+  }
+  &__description {
+    text-align: center;
+    margin: $half-spacing-unit 0;
   }
 }

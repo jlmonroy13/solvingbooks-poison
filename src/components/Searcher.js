@@ -120,7 +120,7 @@ class Searcher extends Component {
 
   render() {
     const { chapter, subchapter, exercise, subchapters, exercises } = this.state;
-    const { solutionManuals, solutionManual, onLogOut, isUserLogged } = this.props;
+    const { solutionManuals, solutionManual, onLogOut, isUserLogged, photoUrl } = this.props;
     const { name, chapters } =  solutionManual;
     const bookName = name ? {label: name, value: name} : '';
 
@@ -177,7 +177,11 @@ class Searcher extends Component {
           <button className="button button--primary header__button">Buscar</button>
           { isUserLogged ?
             <div className="user-dropdown">
-              <span className="user-dropdown__avatar" />
+              { photoUrl ?
+                <span className="user-dropdown__avatar" style={{backgroundImage:`url(${photoUrl})`}}/>
+              :
+                <span className="user-dropdown__avatar" />
+              }
               <span className="icon icon--chevron user-dropdown__arrow" />
               <ul className="user-dropdown__content">
                 <li className="user-dropdown__item" onClick={onLogOut} >Cerrar sesión</li>
@@ -210,6 +214,7 @@ Searcher.propTypes = {
   solutionManuals: PropTypes.array,
   solutionManualsObj: PropTypes.object,
   solutionManual: PropTypes.object,
+  photoUrl: PropTypes.string,
 };
 
 export default Searcher;

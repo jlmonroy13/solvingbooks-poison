@@ -10,7 +10,11 @@ const mapStateToProps = (state) => {
     solutionManuals,
     searcher: { solutionManual, numberOfsearches },
     authentication: { isUserLogged },
+    firebase: { _root: { entries } },
   } = state;
+  const entries0 = entries[0];
+  const photoUrl = entries0[1] ? entries0[1].photoURL : '';
+
   const solutionManualsArr = ObjectUtils.toArray(solutionManuals);
 
   return {
@@ -19,6 +23,7 @@ const mapStateToProps = (state) => {
     solutionManual,
     isUserLogged,
     numberOfsearches,
+    photoUrl,
   };
 };
 

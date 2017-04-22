@@ -13,13 +13,14 @@ class AuthenticationModal extends React.Component {
         password: '',
         passwordConfirmation: '',
       },
-      isSignUp: true,
+      isSignUp: false,
     };
 
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onChangeAuthenticationForm = this.onChangeAuthenticationForm.bind(this);
     this.changeLogInSignUp = this.changeLogInSignUp.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.logInWithSocialNetworks = this.logInWithSocialNetworks.bind(this);
   }
 
   handleCloseModal() {
@@ -55,6 +56,11 @@ class AuthenticationModal extends React.Component {
     }
   }
 
+  logInWithSocialNetworks(socialNetwork) {
+    const { onLogInWithSocialNetworks } = this.props;
+    onLogInWithSocialNetworks(socialNetwork);
+  }
+
   onChangeAuthenticationForm(e) {
     const { state } = this;
     this.setState({
@@ -87,6 +93,11 @@ class AuthenticationModal extends React.Component {
             { authentication.isAuthBtnClicked ?
               <div>
                 <h1 className="modal__header-title">{isSignUp ? 'Registrate' : 'Inicia Sesión' }</h1>
+                <p className="modal__description">
+                  { isSignUp ?
+                    'Al registrarte podrás realizar busquedas ilimitadas totalmente gratis.'
+                  : 'Al iniciar sesión podrás realizar busquedas ilimitadas totalmente gratis.'}
+                </p>
                 <span className="modal__btn-close" onClick={this.handleCloseModal}>&#120;</span>
               </div>
             :
@@ -94,6 +105,19 @@ class AuthenticationModal extends React.Component {
             }
           </div>
           <div className="modal__body">
+            { !isSignUp ?
+              <div>
+                <button className="button button--auth button--fb" onClick={()=> { this.logInWithSocialNetworks('facebook'); }}>
+                  <span className="icon icon--facebook button__icon" />
+                  <span className="">Iniciar con Facebook</span>
+                </button>
+                <button className="button button--auth button--google" onClick={()=> { this.logInWithSocialNetworks('google'); }}>
+                  <span className="icon icon--google button__icon" /> 
+                  <span>Iniciar con Google</span>
+                </button>
+                <p className="login__separator">ó</p>
+              </div>
+            : null}
             <form onSubmit={this.onSubmitForm} autoComplete="off">
               <TextFieldGroup
                 value={this.state.authenticationForm.email}
@@ -121,8 +145,9 @@ class AuthenticationModal extends React.Component {
                  placeholder="Confirmar Contraseña"
                 />
               : ''}
-              <button className="button button--secondary">{isSignUp ? 'Registrarse' : 'Ingresar'}</button>
-              <p className="modal__body-footer">{isSignUp ? '¿Ya tienes una cuenta? ' : '¿Aún no tienes una cuenta? '}<span className="modal__body-footer-link" onClick={this.changeLogInSignUp}>{isSignUp ? '¡Ingresa ya!' : '¡Registrate!'}</span></p>
+              <button className="button button--secondary block-auto">{isSignUp ? 'Registrarse' : 'Ingresar'}</button>
+              <p className="modal__body-footer">{isSignUp ? '¿Ya tienes una cuenta? ' : ''}</p>
+              <span className="modal__body-footer-link" onClick={this.changeLogInSignUp}>{isSignUp ? '¡Ingresa ya!' : '¡Crea una nueva cuenta!'}</span>
             </form>
           </div>
         </section>
@@ -135,6 +160,7 @@ AuthenticationModal.propTypes = {
   onSetModalState: PropTypes.func.isRequired,
   onSetAuthBtnStatus: PropTypes.func,
   onLogIn: PropTypes.func.isRequired,
+  onLogInWithSocialNetworks: PropTypes.func.isRequired,
   onCreateUser: PropTypes.func.isRequired,
   authentication: PropTypes.object.isRequired,
 };

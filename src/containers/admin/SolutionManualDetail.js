@@ -18,7 +18,7 @@ const exercisesCounter = (solutionManual) => {
     }
   });
   return counter;
-}
+};
 
 const mapStateToProps = (state) => {
   const { solutionManuals, searcher: { solutionManual } } = state;
