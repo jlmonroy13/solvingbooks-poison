@@ -54,11 +54,11 @@ class Searcher extends Component {
   onSelectedBook(option) {
     if(!option) {
       this.props.onSetSolutionManual({});
-      this.setState({ chapter: '', subchapter: '', exercise: '', exercises: [] });
+      this.setState({ chapter: '' , subchapter: '', exercise: '', exercises: [] });
     } else {
       const bookName = option && option.label;
       const urlName = option && option.value;
-
+      this.setState({ chapter: '' , subchapter: '', exercise: '', exercises: [] });
       if (bookName) {
         browserHistory.push(`/libro/${urlName}`);
       }
