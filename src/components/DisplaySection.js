@@ -45,7 +45,7 @@ class DisplaySection extends Component {
 
     return (
       <section className="display-section">
-        <h1 className="sr-only">Display section</h1>
+        <h1 className="sr-only">Sección de visualización</h1>
         <div className="display-section-share">
           <FacebookShareButton
             url={`https://www.elsolucionario.io${pathname}`}

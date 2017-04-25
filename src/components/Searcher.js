@@ -126,18 +126,23 @@ class Searcher extends Component {
 
     return (
       <header className="header">
-        <Link to="/" className="header__logo">
-          <img src={require('../assets/images/logo-header.svg')} alt="El Solucionario"/>
-        </Link>
+        <h1>
+          <Link to="/" className="header__logo">
+            <img src={require('../assets/images/logo-header.svg')} alt="El Solucionario"/>
+          </Link>
+        </h1>
         <form className="search__form" onSubmit={this.onSubmitSearchForm}>
           <div>
             <div className="push-half--bottom">
-              <SimpleSelect
-                placeholder="Selecciona un libro"
-                options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
-                onValueChange={this.onSelectedBook}
-                value={bookName}
-              />
+              <nav>
+                <h1 className="sr-only">Navegación principal</h1>
+                <SimpleSelect
+                  placeholder="Selecciona un libro"
+                  options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
+                  onValueChange={this.onSelectedBook}
+                  value={bookName}
+                />
+              </nav>
             </div>
             <div className="push-half--bottom">
               <div className="grid">

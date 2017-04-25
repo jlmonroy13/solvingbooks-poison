@@ -43,11 +43,14 @@ class InitialSearch extends Component {
     return (
       <div className="landing-page__form">
         <form onSubmit={this.onSubmitSearchForm} autoComplete="off">
+        <nav>
+          <h1 className="sr-only">Navegación principal</h1>
           <SimpleSelect
             placeholder="Selecciona un libro"
             options={solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
             onValueChange={this.onSelectedBook}
           />
+        </nav>
           <div className="text--center">
             <button className="button button--primary landing-page__button">Buscar</button>
           </div>
