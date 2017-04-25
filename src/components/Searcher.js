@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { SimpleSelect } from 'react-selectize';
 import { browserHistory, Link } from 'react-router';
 import Alert from 'react-s-alert';
+import moment from 'moment-timezone';
 
 class Searcher extends Component {
   constructor() {
@@ -107,14 +108,20 @@ class Searcher extends Component {
   }
 
   onSelectedExercise(option) {
-    const { onSetSelections, onSetImageUrl, onSetStatusRequestTrue } = this.props;
+    const { onSetSelections, onSetImageUrl, onSetStatusRequestTrue, onSetUserSearch, solutionManual } = this.props;
+    const { chapter, subchapter } = this.state;
     const exercise = option && option.value;
+    const { name } =  solutionManual;
+
     onSetSelections({ exercise: option ? exercise : '' });
     this.setState({
       exercise: option ? {label: exercise, value: exercise} : '',
     });
     onSetImageUrl('loading');
     onSetStatusRequestTrue();
+    const sub = subchapter.value || '';
+    const date = moment.tz(moment.tz.guess()).format();
+    onSetUserSearch(name, chapter.value, sub, exercise, date);
     setTimeout(this.setImage, 100);
   }
 
@@ -212,6 +219,7 @@ Searcher.propTypes = {
   onSetSolutionManual: PropTypes.func,
   onSetSelections: PropTypes.func,
   onSetModalState: PropTypes.func,
+  onSetUserSearch: PropTypes.func,
   onAddNumberOfSearches: PropTypes.func,
   onAuthFirebaseListener: PropTypes.func,
   onSetAuthBtnStatus: PropTypes.func,
