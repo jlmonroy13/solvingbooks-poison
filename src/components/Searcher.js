@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import {Helmet} from "react-helmet";
 import { SimpleSelect } from 'react-selectize';
 import { browserHistory, Link } from 'react-router';
 import Alert from 'react-s-alert';
@@ -128,82 +129,89 @@ class Searcher extends Component {
   render() {
     const { chapter, subchapter, exercise, subchapters, exercises } = this.state;
     const { solutionManuals, solutionManual, onLogOut, isUserLogged, photoUrl } = this.props;
-    const { name, chapters } =  solutionManual;
+    const { name, chapters, metaDescription, keywords } =  solutionManual;
     const bookName = name ? {label: name, value: name} : '';
 
     return (
-      <header className="header">
-        <h1  className="header__logo">
-          <Link to="/">
-            <img src={require('../assets/images/logo-header.svg')} alt="El Solucionario"/>
-          </Link>
-        </h1>
-        <form className="search__form" onSubmit={this.onSubmitSearchForm}>
-          <div>
-            <div className="push-half--bottom">
-              <nav>
-                <h1 className="sr-only">Navegación principal</h1>
-                <SimpleSelect
-                  placeholder="Selecciona un libro"
-                  options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
-                  onValueChange={this.onSelectedBook}
-                  value={bookName}
-                />
-              </nav>
-            </div>
-            <div className="push-half--bottom">
-              <div className="grid">
-                <div className="grid__item medium--two-fifths">
+      <div>
+        <Helmet>
+          <title>{ `Solucionario - ${name}` }</title>
+          <meta name="description" content={ metaDescription } />
+          <meta name="keywords" content={ keywords } />
+        </Helmet>
+        <header className="header">
+          <h1  className="header__logo">
+            <Link to="/">
+              <img src={require('../assets/images/logo-header.svg')} alt="El Solucionario"/>
+            </Link>
+          </h1>
+          <form className="search__form" onSubmit={this.onSubmitSearchForm}>
+            <div>
+              <div className="push-half--bottom">
+                <nav>
+                  <h1 className="sr-only">Navegación principal</h1>
                   <SimpleSelect
-                    placeholder="Capítulo"
-                    className="header__input"
-                    options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: (`${chapter.number.toString()} - ${chapter.name}`)}))}
-                    onValueChange={this.onSelectedChapter}
-                    disabled={!bookName}
-                    value={chapter}
+                    placeholder="Selecciona un libro"
+                    options={solutionManuals && solutionManuals.map(book => ({label: book.name, value: book.urlName}))}
+                    onValueChange={this.onSelectedBook}
+                    value={bookName}
                   />
-                </div>
-                <div className="grid__item medium--two-fifths">
-                  <SimpleSelect
-                    placeholder="Subcapítulo"
-                    className="header__input"
-                    options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: (`${subchapter.number.toString()} - ${subchapter.name}`)}))}
-                    disabled={!chapter || !subchapters}
-                    onValueChange={this.onSelectedSubchapter}
-                    value={subchapter}
-                  />
-                </div>
-                <div className="grid__item medium--one-fifth">
-                  <SimpleSelect
-                    placeholder="Ejercicio"
-                    options={exercises && exercises.map(exercise => ({label: exercise.number.toString(), value: exercise.number.toString()}))}
-                    disabled={exercises && exercises.length === 0}
-                    onValueChange={this.onSelectedExercise}
-                    value={exercise}
-                    className="header__input header__input--small"
-                  />
+                </nav>
+              </div>
+              <div className="push-half--bottom">
+                <div className="grid">
+                  <div className="grid__item medium--two-fifths">
+                    <SimpleSelect
+                      placeholder="Capítulo"
+                      className="header__input"
+                      options={chapters && chapters.map(chapter => ({label: (`${chapter.number.toString()} - ${chapter.name}`), value: (`${chapter.number.toString()} - ${chapter.name}`)}))}
+                      onValueChange={this.onSelectedChapter}
+                      disabled={!bookName}
+                      value={chapter}
+                    />
+                  </div>
+                  <div className="grid__item medium--two-fifths">
+                    <SimpleSelect
+                      placeholder="Subcapítulo"
+                      className="header__input"
+                      options={subchapters && subchapters.map(subchapter => ({label: (`${subchapter.number.toString()} - ${subchapter.name}`), value: (`${subchapter.number.toString()} - ${subchapter.name}`)}))}
+                      disabled={!chapter || !subchapters}
+                      onValueChange={this.onSelectedSubchapter}
+                      value={subchapter}
+                    />
+                  </div>
+                  <div className="grid__item medium--one-fifth">
+                    <SimpleSelect
+                      placeholder="Ejercicio"
+                      options={exercises && exercises.map(exercise => ({label: exercise.number.toString(), value: exercise.number.toString()}))}
+                      disabled={exercises && exercises.length === 0}
+                      onValueChange={this.onSelectedExercise}
+                      value={exercise}
+                      className="header__input header__input--small"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <button className="button button--primary header__button">Buscar</button>
-          { isUserLogged ?
-            <div className="user-dropdown">
-              { photoUrl ?
-                <span className="user-dropdown__avatar" style={{backgroundImage:`url(${photoUrl})`}}/>
-              :
-                <span className="user-dropdown__avatar" />
-              }
-              <span className="icon icon--chevron user-dropdown__arrow" />
-              <ul className="user-dropdown__content">
-                <li className="user-dropdown__item" onClick={onLogOut} >Cerrar sesión</li>
-              </ul>
-            </div>
-          :
-            <span className="login__button button button--bordered" onClick={this.onOpenModal}>Ingresar</span>
-          }
-        </form>
-      </header>
+            <button className="button button--primary header__button">Buscar</button>
+            { isUserLogged ?
+              <div className="user-dropdown">
+                { photoUrl ?
+                  <span className="user-dropdown__avatar" style={{backgroundImage:`url(${photoUrl})`}}/>
+                :
+                  <span className="user-dropdown__avatar" />
+                }
+                <span className="icon icon--chevron user-dropdown__arrow" />
+                <ul className="user-dropdown__content">
+                  <li className="user-dropdown__item" onClick={onLogOut} >Cerrar sesión</li>
+                </ul>
+              </div>
+            :
+              <span className="login__button button button--bordered" onClick={this.onOpenModal}>Ingresar</span>
+            }
+          </form>
+        </header>
+      </div>
     );
   }
 }
