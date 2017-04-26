@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import Searcher from '../components/Searcher';
 import { setImageUrl, setSelections, getSolutionManual, setSolutionManual, addNumberOfSearches } from '../actions/searcher';
 import { setStatusRequestFalse, setStatusRequestTrue } from '../actions/spinner';
+import { setUserSearch } from '../actions/user';
 import { setModalState, logOut, authFirebaseListener, setAuthBtnStatus } from '../actions/authentication';
 import ObjectUtils from '../utils/object';
 
@@ -60,6 +61,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSetAuthBtnStatus: (status) => {
     dispatch(setAuthBtnStatus(status));
+  },
+  onSetUserSearch: (bookName, chapter, subchapter, exercise, date) => {
+    dispatch(setUserSearch(bookName, chapter, subchapter, exercise, date));
   },
 });
 
