@@ -7,7 +7,7 @@ const HomePage = () => (
       <img src={require('../assets/images/logo.svg')} alt="El Solucionario" className="landing-page__logo"/>
     </h1>
     <div className="text--center">
-      <p className="landing-page__legend">Todas las respuestas en un solo lugar</p>
+      <p className="landing-page__legend">Encuentra ejercicios resueltos de los libros de ingeniería que necesitas</p>
     </div>
     <InitialSearchContainer />
   </div>
