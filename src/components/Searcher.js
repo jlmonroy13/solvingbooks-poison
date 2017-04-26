@@ -133,8 +133,8 @@ class Searcher extends Component {
 
     return (
       <header className="header">
-        <h1>
-          <Link to="/" className="header__logo">
+        <h1  className="header__logo">
+          <Link to="/">
             <img src={require('../assets/images/logo-header.svg')} alt="El Solucionario"/>
           </Link>
         </h1>

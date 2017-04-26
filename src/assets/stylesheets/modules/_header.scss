@@ -9,6 +9,7 @@
     display: block;
     text-align: center;
     margin-bottom: $half-spacing-unit;
+    margin-top: 0;
     @media #{$large} {
       position: absolute;
       left: $base-spacing-unit;
