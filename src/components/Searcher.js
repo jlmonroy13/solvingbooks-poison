@@ -129,15 +129,15 @@ class Searcher extends Component {
   render() {
     const { chapter, subchapter, exercise, subchapters, exercises } = this.state;
     const { solutionManuals, solutionManual, onLogOut, isUserLogged, photoUrl } = this.props;
-    const { name, chapters, metaDescription, keywords } =  solutionManual;
+    const { name, chapters, metaDescription, keywords, pageTitle } =  solutionManual;
     const bookName = name ? {label: name, value: name} : '';
 
     return (
       <div>
         <Helmet>
-          <title>{ `Solucionario - ${name}` }</title>
-          <meta name="description" content={ metaDescription } />
-          <meta name="keywords" content={ keywords } />
+          <title>{`${pageTitle} | El Solucionario`}</title>
+          <meta name="description" content={metaDescription} />
+          <meta name="keywords" content={keywords} />
         </Helmet>
         <header className="header">
           <h1  className="header__logo">
